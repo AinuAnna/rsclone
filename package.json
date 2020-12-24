@@ -8,7 +8,7 @@
     "build": "webpack",
     "style": "sass --watch ./src/sass/style.scss ./src/sass/style.css",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
+    "lint:fix": "eslint ./src --fix --color",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage --colors"
