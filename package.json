@@ -11,7 +11,9 @@
     "lint:fix": "eslint ./src --fix --color",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage --colors"
+    "test:coverage": "jest --coverage --colors",
+    "dev": "webpack --mode development",
+    "watch": "webpack --mode development --watch"
   },
   "repository": {
     "type": "git",
