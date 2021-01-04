@@ -1,11 +1,12 @@
 import './sass/style.scss';
 import './utils/FirebaseDB/FirebaseDB';
 import './utils/FirebaseAuth/FirebaseAuth';
+import './components/Admin/Admin';
 
 function ToggleMenuButton() {
-  const triger = document.querySelectorAll('.toggle');
+  const trigger = document.querySelectorAll('.toggle');
 
-  triger.forEach((x) =>
+  trigger.forEach((x) =>
     x.addEventListener('click', () => {
       const sideBar = document.querySelector('.sidebar');
       sideBar.classList.toggle('collapsed');
