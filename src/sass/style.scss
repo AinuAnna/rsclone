@@ -1,67 +1,86 @@
+@import './sidenav.scss';
 * {
-  margin: 0 auto;
-  width: 1920px;
-  font-family: 'Open Sans', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 body {
-  position: relative;
-}
-*,
-::before,
-::after,
-:active {
-  transition: 0.3s;
-}
-a {
-  text-decoration: none;
-  outline: none;
-}
-button,
-button:hover,
-button:active {
-  padding: 0 0 0 0;
-  outline: none;
-}
-/* HEADER */
-.header {
-  left: 375px;
-  top: 40px;
-  position: absolute;
-  display: flex;
-  justify-content: space-between;
-  background-color: #e4edf4;
-}
-/* HEADER LOGO */
-.subtitle {
-  font-size: 24px;
-  line-height: 1.2;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  margin: 0;
+  line-height: 1.5;
   font-weight: 400;
-  letter-spacing: -0.04em;
-  color: #669ae8;
-  text-transform: capitalize;
-  padding: 0 0 0 0;
-  margin: 0 0 0 0;
+  background: #eef2f7;
 }
-/* NAV */
-.navigation {
+header,
+footer {
   display: flex;
+  justify-content: center;
   align-items: center;
-  font-size: 14px;
-  line-height: 1.2;
-  font-weight: 300;
+  font-size: 15px;
 }
-.item {
-  margin: 0 30px 0 0;
-  color: #669ae8;
+header {
+  justify-content: space-between;
+  padding: 10px 12px 10px;
+  background: white;
+  border-bottom: 1px solid #98a6ad;
+}
+section {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex: auto;
+  flex: auto;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  min-height: 0;
+  min-height: 100vh;
+}
+.logo {
+  margin-left: 35px;
   text-decoration: none;
-  text-transform: capitalize;
-  &:hover {
-    color: #4e58b7;
-  }
-  &:active {
-    color: #669ae8;
+  .subtitle {
+    color: #98a6ad;
+    &:hover {
+      color: #f49344;
+    }
   }
 }
-.last {
-  margin: 0 60px 0 0;
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: calc(100vh - 117px);
+  margin: 0.5rem 0;
+}
+
+/* FOOTER */
+footer {
+  justify-content: space-between;
+  border-top: 1px solid #98a6ad;
+  padding: 10px 12px 10px;
+  ul {
+    margin: 0;
+    padding: 4px;
+  }
+  li {
+    display: inline;
+    margin-right: 5px;
+    padding: 3px;
+  }
+
+  a {
+    color: #98a6ad;
+    text-decoration: none;
+
+    &:hover {
+      color: #f49344;
+    }
+  }
+  .footer__RS-logo {
+    width: 5rem;
+    height: 2rem;
+    padding: 2px;
+  }
+  .footer__RS-logo:hover {
+    opacity: 0.8;
+  }
 }
