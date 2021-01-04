@@ -1,4 +1,6 @@
 import './sass/style.scss';
+import './utils/FirebaseDB/FirebaseDB';
+import './utils/FirebaseAuth/FirebaseAuth';
 
 function ToggleMenuButton() {
   const triger = document.querySelectorAll('.toggle');
