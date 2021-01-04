@@ -102,3 +102,5 @@ export function deleteItems(classItem, id) {
 // }
 
 console.log(getData('Users', usersArray));
+
+export { usersArray };
