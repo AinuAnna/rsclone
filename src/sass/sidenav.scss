@@ -36,7 +36,7 @@ aside {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 11px 0px 4px 0px;
+  padding: 11px 0px 17px 0px;
   color: #ffffff;
   font-size: 18px;
   border-bottom: 1px solid #f49344;
@@ -50,7 +50,7 @@ aside {
 }
 .openbtn {
   position: absolute;
-  top: 7px;
+  top: 11px;
   cursor: pointer;
 }
 .bar1,
@@ -61,4 +61,59 @@ aside {
   background-color: #f49344;
   margin: 6px 0;
   transition: 0.4s;
+}
+
+.dropdown {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: rgba(0, 0, 0, 0.65);
+  font-size: 14px;
+  font-variant: tabular-nums;
+  line-height: 1.5;
+  list-style: none;
+  -webkit-font-feature-settings: 'tnum';
+  font-feature-settings: 'tnum', 'tnum';
+  position: absolute;
+  z-index: 1050;
+  display: block;
+}
+.dropdown-menu-container {
+  right: 20px;
+  top: 68px;
+}
+.dropdown-menu {
+  position: relative;
+  margin: 0;
+  padding: 4px 0;
+  text-align: left;
+  list-style-type: none;
+  background-color: #fff;
+  background-clip: padding-box;
+  border-radius: 4px;
+  outline: none;
+  -webkit-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  -webkit-transform: translateZ(0);
+}
+.dropdown-hidden,
+.dropdown-menu-hidden {
+  display: none;
+}
+.dropdown-menu-item {
+  clear: both;
+  margin: 0;
+  padding: 5px 12px;
+  color: rgba(0, 0, 0, 0.65);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+  white-space: nowrap;
+  cursor: pointer;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+.dropdown-menu-item:hover {
+  background-color: #e6f7ff;
 }

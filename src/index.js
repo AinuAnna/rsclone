@@ -9,6 +9,12 @@ function ToggleMenuButton() {
       sider.classList.toggle('collapsed');
     })
   );
+  const dropdown = document.querySelector('.layout-header-right');
+
+  dropdown.addEventListener('click', () => {
+    const menu = document.querySelector('.dropdown');
+    menu.classList.toggle('dropdown-hidden');
+  });
 }
 
 ToggleMenuButton();
