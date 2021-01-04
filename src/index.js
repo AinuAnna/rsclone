@@ -5,8 +5,8 @@ function ToggleMenuButton() {
 
   triger.forEach((x) =>
     x.addEventListener('click', () => {
-      const sider = document.querySelector('.sidebar');
-      sider.classList.toggle('collapsed');
+      const sidebar = document.querySelector('.sidebar');
+      sidebar.classList.toggle('collapsed');
     })
   );
   const dropdown = document.querySelector('.layout-header-right');
