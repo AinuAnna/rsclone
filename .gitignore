@@ -3,3 +3,7 @@ node_modules
 
 # Dist & tests
 test
+
+# webstorm files
+./idea/
+.idea
