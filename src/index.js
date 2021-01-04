@@ -1,12 +1,14 @@
 import './sass/style.scss';
 
 function ToggleMenuButton() {
-  const buttons = global.document.querySelectorAll('.toggle');
+  const triger = document.querySelectorAll('.toggle');
 
-  buttons.forEach((el) =>
-    el.addEventListener('click', function () {
-      this.parentElement.classList.toggle('change');
+  triger.forEach((x) =>
+    x.addEventListener('click', () => {
+      const sider = document.querySelector('.sider');
+      sider.classList.toggle('collapsed');
     })
   );
 }
+
 ToggleMenuButton();
