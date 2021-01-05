@@ -1,10 +1,6 @@
 import './sass/style.scss';
-import './utils/FirebaseDB/FirebaseDB';
 import './utils/FirebaseAuth/FirebaseAuth';
 import Admin from './components/Admin/Admin';
-import RequestForBD from './requestForBD';
-
-const admin = new Admin();
 
 function ToggleMenuButton() {
   const trigger = document.querySelectorAll('.toggle');
@@ -22,11 +18,8 @@ function ToggleMenuButton() {
     menu.classList.toggle('dropdown-hidden');
   });
 }
-function startApp() {
-  RequestForBD.getUsers().then((data) => {
-    admin.setData(data);
-  });
-}
+
+const admin = new Admin();
+admin.render();
 
 ToggleMenuButton();
-startApp();

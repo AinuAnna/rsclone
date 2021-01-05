@@ -1,9 +1,7 @@
-table {
+.table {
   border-spacing: 0 10px;
-  width: 900px;
-  padding: 20px;
+  width: 100%;
   background-color: #ffffff;
-  margin: 3%;
 }
 thead {
   tr {
@@ -18,15 +16,11 @@ tbody {
     border-bottom: 1px solid #d1cfd7;
   }
   td {
-    vertical-align: middle;
-    padding: 10px;
     font-size: 14px;
-    text-align: center;
     border-bottom: 1px solid #d1cfd7;
   }
   .table__action {
     a {
-      padding: 0.3rem;
       text-decoration: none;
       &:hover {
         opacity: 0.6;
