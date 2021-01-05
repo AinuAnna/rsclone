@@ -9,7 +9,9 @@ export default class RequestForBD {
     const users = await usersArray;
     return users.map((el) => ({
       fullName: el.fullName,
+      id: el.id,
       mail: el.mail,
+      password: el.password,
       type: el.type,
       description: el.description,
     }));
