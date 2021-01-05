@@ -1,7 +1,5 @@
 import './Admin.scss';
 
-// const data = usersArray;
-// console.log(data);
 export default class Admin {
   // eslint-disable-next-line class-methods-use-this
   setData(users) {
