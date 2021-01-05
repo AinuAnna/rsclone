@@ -6,7 +6,7 @@ import '@firebase/firestore';
 import '@firebase/auth';
 
 const usersArray = [];
-
+export { usersArray };
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
@@ -46,6 +46,20 @@ export function addDataToDB(eventElement, table, dataObject) {
 }
 
 /**
+ * Update data to Firebase
+ * @param {eventElement} - element where will be called click/submit event.
+ * @param {table} - table where will be added data.
+ * @param {id} - id of element which need to update.
+ * @param {dataObject} - data object which will be added to Firebase: method with structure need to take from Firebase.utils.js.
+ */
+export function updateDataInDB(eventElement, table, id, dataObject) {
+  eventElement.addEventListener('click', (e) => {
+    e.preventDefault();
+    db.collection(table).doc(id).update(dataObject);
+  });
+}
+
+/**
  * Delete item from Firebase
  * @param {eventElement} - element where will be called click/submit event.
  * @param {table} - here is table where will be remooved an item.
@@ -53,7 +67,7 @@ export function addDataToDB(eventElement, table, dataObject) {
  */
 export function deleteItem(eventElement, table, id) {
   eventElement.addEventListener('click', () => {
-    db.collection(table).dic(id).delete();
+    db.collection(table).doc(id).delete();
   });
 }
 
