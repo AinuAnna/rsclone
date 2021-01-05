@@ -6,7 +6,7 @@ export default class Admin {
     const deleteButton = document.querySelectorAll('.delete');
     deleteButton.forEach((e) => {
       e.addEventListener('click', function () {
-        const result = confirm('Want to delete?');
+        const result = confirm('Вы хотите удалить данного пользователя?');
         if (result) {
           const a = this.closest('tr');
           a.parentElement.removeChild(a);
@@ -17,13 +17,14 @@ export default class Admin {
 
   // eslint-disable-next-line class-methods-use-this
   setData(users) {
-    document.getElementById('table__users').innerHTML = `<table class="table__users">
-<thead>
+    document.getElementById('table__users').innerHTML = `<div class="table-responsive-md">
+    <table class="table">
+    <thead>
   <tr>
     <th>Name</th>
     <th>ID</th>
     <th>E-mail</th>
-    <th>Paasword</th>
+    <th>Password</th>
     <th>Role</th>
     <th>Description</th>
     <th>Actions</th>
@@ -48,7 +49,8 @@ export default class Admin {
       )
       .join('')}
 </tbody>
-</table>
+    </table>
+  </div>
 `;
     this.deleteUser();
   }
