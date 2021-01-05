@@ -5,8 +5,6 @@ import firebaseConfig from './FirebaseDB.constants';
 import '@firebase/firestore';
 import '@firebase/auth';
 
-const usersArray = [];
-export { usersArray };
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
@@ -15,7 +13,8 @@ const db = firebase.firestore();
  * @param {table} - name of table from firebase https://console.firebase.google.com/project/rsclone-8fee8/firestore/data~2FUsers~2FEkGveQJ1jdNb6xJauWEy.
  * @param {list} - arrayList where data from Firebase will be saved.
  */
-export function getData(table, list) {
+export function getData(table) {
+  const list = [];
   db.collection(table)
     .get()
     .then((snapshot) => {
@@ -29,7 +28,7 @@ export function getData(table, list) {
       // eslint-disable-next-line no-alert
       alert(`Data base is not available: ${err}`);
     });
-  return usersArray;
+  return list;
 }
 
 /**
@@ -101,4 +100,6 @@ export function deleteItems(classItem, id) {
 //   });
 // }
 
-console.log(getData('Users', usersArray));
+const usersArray = getData('Users');
+
+export { usersArray };
