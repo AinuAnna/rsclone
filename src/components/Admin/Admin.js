@@ -1,18 +1,29 @@
 import './Admin.scss';
+import { Modal } from '../../../node_modules/bootstrap';
 import FirebaseDB from '../../utils/FirebaseDB/FirebaseDB';
 
 export default class Admin {
   constructor() {
     this.addUser();
+    this.editUser();
+    this.deleteUser();
   }
 
   // eslint-disable-next-line class-methods-use-this
   deleteUser() {
+    const deleteModal = new Modal(document.getElementById('deleteUserModal'), {});
     const exampleModal = document.getElementById('deleteUserModal');
     exampleModal.addEventListener('show.bs.modal', (event) => {
-      const buttonDelete = event.relatedTarget;
-      const user = buttonDelete.getAttribute('data-bs-username');
-      const userId = buttonDelete.getAttribute('data-bs-userid');
+      const button = event.relatedTarget;
+      const user = button.getAttribute('data-bs-username');
+      const userId = button.getAttribute('data-bs-userid');
+      const deleteYesBtn = document.querySelector('#delete-user-yes');
+      deleteYesBtn.addEventListener('click', () => {
+        const firebaseDB = new FirebaseDB();
+        firebaseDB.deleteItem('Users', userId);
+        this.render();
+        deleteModal.hide();
+      });
     });
   }
 
@@ -70,7 +81,6 @@ export default class Admin {
     </table>
   </div>
 `;
-    this.deleteUser();
   }
 
   render() {
