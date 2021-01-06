@@ -1,0 +1,41 @@
+.logo {
+  .subtitle {
+    color: #98a6ad;
+    &:hover {
+      color: #f49344;
+    }
+  }
+}
+.container {
+  height: 100%;
+}
+.mb-3 {
+  margin: 3%;
+}
+footer {
+  padding: 1rem 0.875rem;
+  border-top: 1px solid #98a6ad;
+  li {
+    display: inline-block;
+    margin-right: 0.5rem;
+  }
+  .text-right {
+    text-align: right;
+  }
+  a {
+    color: #98a6ad;
+    text-decoration: none;
+
+    &:hover {
+      color: #f49344;
+    }
+  }
+  .footer__RS-logo {
+    width: 5rem;
+    height: 2rem;
+    padding: 2px;
+  }
+  .footer__RS-logo:hover {
+    opacity: 0.8;
+  }
+}
