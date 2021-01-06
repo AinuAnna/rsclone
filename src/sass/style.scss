@@ -5,6 +5,7 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
 @import './main.scss';
+
 :root {
   --bs-blue: #f49344;
   --bs-indigo: #6610f2;
@@ -2561,8 +2562,8 @@ fieldset:disabled .btn {
 .btn-primary:focus,
 .btn-primary:hover {
   color: #000;
-  background-color: #5c93e3;
-  border-color: #518be1;
+  background-color: #a8d2a0;
+  border-color: #a8d2a0;
 }
 .btn-check:focus + .btn-primary,
 .btn-primary:focus {
@@ -2574,8 +2575,8 @@ fieldset:disabled .btn {
 .btn-primary:active,
 .show > .btn-primary.dropdown-toggle {
   color: #000;
-  background-color: #669ae5;
-  border-color: #518be1;
+  background-color: #a8d2a0;
+  border-color: #a8d2a0;
 }
 .btn-check:active + .btn-primary:focus,
 .btn-check:checked + .btn-primary:focus,
@@ -12038,7 +12039,7 @@ body[data-theme='dark'] .sidebar-link:hover {
   color: rgba(233, 236, 239, 0.75);
 }
 body[data-theme='light'] .sidebar-link:hover {
-  color: #518be1;
+  color: #a8d2a0;
 }
 body[data-theme='dark'] .sidebar-link:hover {
   background: #121923;
@@ -12058,7 +12059,7 @@ body[data-theme='dark'] .sidebar-link:hover svg {
 }
 body[data-theme='light'] .sidebar-link:hover i,
 body[data-theme='light'] .sidebar-link:hover svg {
-  color: #518be1;
+  color: #a8d2a0;
 }
 .sidebar-item.active .sidebar-link:hover,
 .sidebar-item.active > .sidebar-link {
@@ -12072,7 +12073,7 @@ body[data-theme='dark'] .sidebar-item.active > .sidebar-link {
 }
 body[data-theme='light'] .sidebar-item.active .sidebar-link:hover,
 body[data-theme='light'] .sidebar-item.active > .sidebar-link {
-  color: #518be1;
+  color: #a8d2a0;
 }
 body[data-theme='dark'] .sidebar-item.active .sidebar-link:hover,
 body[data-theme='dark'] .sidebar-item.active > .sidebar-link {
@@ -12102,7 +12103,7 @@ body[data-theme='light'] .sidebar-item.active .sidebar-link:hover i,
 body[data-theme='light'] .sidebar-item.active .sidebar-link:hover svg,
 body[data-theme='light'] .sidebar-item.active > .sidebar-link i,
 body[data-theme='light'] .sidebar-item.active > .sidebar-link svg {
-  color: #518be1;
+  color: #a8d2a0;
 }
 .sidebar-dropdown .sidebar-link {
   padding: 0.625rem 1.5rem 0.625rem 3.25rem;
@@ -12140,7 +12141,7 @@ body[data-theme='dark'] .sidebar-dropdown .sidebar-item .sidebar-link:hover {
   color: #e9ecef;
 }
 body[data-theme='light'] .sidebar-dropdown .sidebar-item .sidebar-link:hover {
-  color: #518be1;
+  color: #a8d2a0;
 }
 body[data-theme='dark'] .sidebar-dropdown .sidebar-item .sidebar-link:hover,
 body[data-theme='light'] .sidebar-dropdown .sidebar-item .sidebar-link:hover {
@@ -12152,12 +12153,12 @@ body[data-theme='light'] .sidebar-dropdown .sidebar-item .sidebar-link:hover {
 .sidebar-dropdown .sidebar-item.active .sidebar-link {
   font-weight: 400;
   border-left: 0;
-  color: #518be1;
+  color: #a8d2a0;
   background: transparent;
 }
 body[data-theme='dark'] .sidebar-dropdown .sidebar-item.active .sidebar-link,
 body[data-theme='light'] .sidebar-dropdown .sidebar-item.active .sidebar-link {
-  color: #518be1;
+  color: #a8d2a0;
 }
 body[data-theme='dark'] .sidebar-dropdown .sidebar-item.active .sidebar-link,
 body[data-theme='light'] .sidebar-dropdown .sidebar-item.active .sidebar-link {

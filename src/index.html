@@ -146,17 +146,17 @@
             <!-- Modal DELETE-->
             <div
               class="modal fade"
-              id="staticBackdrop"
+              id="deleteUserModal"
               data-bs-backdrop="static"
               data-bs-keyboard="false"
               tabindex="-1"
-              aria-labelledby="staticBackdropLabel"
+              aria-labelledby="deleteUserModalLabel"
               aria-hidden="true"
             >
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Удаление пользователя</h5>
+                    <h5 class="modal-title" id="deleteUserModalLabel">Удаление пользователя</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">Вы действительно хотите удалить этого пользователя?</div>
@@ -165,41 +165,47 @@
                     <button type="button" class="btn btn-primary" id = "delete-user-yes">Да</button>
                   </div>
                 </div>
-              </div>
+              </div></div>
                <!-- Modal ADD-->
             <div
             class="modal fade"
-            id="staticBackdrop"
+            id="addUserModal"
             data-bs-backdrop="static"
             data-bs-keyboard="false"
             tabindex="-1"
-            aria-labelledby="staticBackdropLabel"
+            aria-labelledby="addUserModalLabel"
             aria-hidden="true"
           >
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="staticBackdropLabel">Добавление пользователя</h5>
+                  <h5 class="modal-title" id="addUserModalLabel">Добавление пользователя</h5>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="mb-3">
-                  <label for="exampleInputEmail1" class="form-label">ФИО</label>
-                  <input type="name" class="form-control" id="exampleInputEmail1">
-                </div>
-                <div class="mb-3">
-                  <label for="exampleInputEmail1" class="form-label">Эл.Почта</label>
-                  <input type="email" class="form-control" id="exampleInputEmail1">
-                </div>
-                <div class="mb-3">
-                  <label for="exampleInputPassword1" class="form-label">Пароль</label>
-                  <input type="password" class="form-control" id="exampleInputPassword1">
-                </div>
-                <div class="mb-3">
-                  <label for="exampleInputEmail1" class="form-label">Эл.Почта</label>
-                  <input type="email" class="form-control" id="exampleInputEmail1">
-                </div>
                
-                <div class="modal-body">Сохранить данные?</div>
+                <div class="modal-body">
+                  <div class="mb-3">
+                    <label for="exampleInputName" class="form-label">ФИО</label>
+                    <input type="text" class="form-control" id="exampleInputName">
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputEmail" class="form-label">Эл.Почта</label>
+                    <input type="email" class="form-control" id="exampleInputEmail">
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputPassword" class="form-label">Пароль</label>
+                    <input type="password" class="form-control" id="exampleInputPassword">
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputRole" class="form-label">Роль</label>
+                    <input type="text" class="form-control" id="exampleInputRole">
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputDescription" class="form-label">Описание</label>
+                    <input type="text" class="form-control" id="exampleInputDescription">
+                  </div>
+                  <div>Сохранить данные?</div>
+                  </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Нет</button>
                   <button type="button" class="btn btn-primary">Да</button>
@@ -207,7 +213,57 @@
               </div>
             </div>
             </div>
-          </div>
+              <!-- Modal EDIT-->
+            <div
+            class="modal fade"
+            id="editUserModal"
+            data-bs-backdrop="static"
+            data-bs-keyboard="false"
+            tabindex="-1"
+            aria-labelledby="editUserModalLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="editUserModalLabel">Редактирование пользователя</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+               
+                <div class="modal-body">
+                  <div class="mb-3">
+                    <label for="exampleInputName" class="form-label">ФИО</label>
+                    <input type="text" class="form-control" id="exampleInputName">
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputEmail" class="form-label">Эл.Почта</label>
+                    <input type="email" class="form-control" id="exampleInputEmail">
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputPassword" class="form-label">Пароль</label>
+                    <input type="password" class="form-control" id="exampleInputPassword">
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputRole" class="form-label">Роль</label>
+                    <input type="text" class="form-control" id="exampleInputRole">
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputDescription" class="form-label">Описание</label>
+                    <input type="text" class="form-control" id="exampleInputDescription">
+                  </div>
+                  <div>Сохранить изменения?</div>
+                  </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Нет</button>
+                  <button type="button" class="btn btn-primary">Да</button>
+                </div>
+              </div>
+            </div>
+            </div>
+          
+          <a href="#" data-bs-toggle="modal" data-bs-target="#addUserModal" class="btn btn-primary">
+            Добавить пользователя
+          </a>
         </main>
 
         <footer class="footer">
@@ -240,9 +296,5 @@
       </div>
     </div>
   </body>
-  <script
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
-    crossorigin="anonymous"
-  ></script>
+  
 </html>
