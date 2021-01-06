@@ -77,10 +77,8 @@ export default class FirebaseDB {
    * @param {table} - here is table where will be remooved an item.
    * @param {id} - id of element (you shouod render to HTML data from firebase with ID - object with data and ID for each element is used in getData method)
    */
-  deleteItem(eventElement, table, id) {
-    eventElement.addEventListener('click', () => {
-      db.collection(table).doc(id).delete();
-    });
+  deleteItem(table, id) {
+    db.collection(table).doc(id).delete();
   }
 
   /**
