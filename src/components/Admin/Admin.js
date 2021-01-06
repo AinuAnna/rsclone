@@ -1,5 +1,5 @@
 import './Admin.scss';
-import { Modal } from '../../../node_modules/bootstrap';
+import { Modal } from 'bootstrap';
 import FirebaseDB from '../../utils/FirebaseDB/FirebaseDB';
 
 export default class Admin {

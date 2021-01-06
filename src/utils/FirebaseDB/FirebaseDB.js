@@ -50,11 +50,12 @@ export default class FirebaseDB {
    * @param {table} - table where will be added data.
    * @param {dataObject} - data object which will be added to Firebase: method with structure need to take from Firebase.utils.js.
    */
-  addDataToDB(eventElement, table, dataObject) {
-    eventElement.addEventListener('submit', (e) => {
-      e.preventDefault();
-      db.collection(this.table).add(dataObject);
-    });
+  addDataToDB(table, dataObject) {
+    // eventElement.addEventListener('submit', (e) => {
+    //   e.preventDefault();
+    //   db.collection(this.table).add(dataObject);
+    // });
+    db.collection(this.table).add(dataObject);
   }
 
   /**
@@ -64,11 +65,12 @@ export default class FirebaseDB {
    * @param {id} - id of element which need to update.
    * @param {dataObject} - data object which will be added to Firebase: method with structure need to take from Firebase.utils.js.
    */
-  updateDataInDB(eventElement, table, id, dataObject) {
-    eventElement.addEventListener('click', (e) => {
-      e.preventDefault();
-      db.collection(table).doc(id).update(dataObject);
-    });
+  updateDataInDB(table, id, dataObject) {
+    // eventElement.addEventListener('click', (e) => {
+    //   e.preventDefault();
+    //   db.collection(table).doc(id).update(dataObject);
+    // });
+    db.collection(table).doc(id).update(dataObject);
   }
 
   /**
