@@ -55,7 +55,7 @@ export default class FirebaseDB {
     //   e.preventDefault();
     //   db.collection(this.table).add(dataObject);
     // });
-    db.collection(this.table).add(dataObject);
+    db.collection(table).add(dataObject);
   }
 
   /**

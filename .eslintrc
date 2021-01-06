@@ -3,6 +3,7 @@
   "plugins": ["eslint-plugin-prettier"],
   "rules": {
     "no-console": 2,
+    "no-plusplus": "off",
     "prettier/prettier": [
       "error",
       {
