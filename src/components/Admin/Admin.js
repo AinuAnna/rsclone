@@ -1,6 +1,8 @@
 import './Admin.scss';
 import { Modal } from 'bootstrap';
-import FirebaseDB from '../../utils/FirebaseDB/FirebaseDB';
+import { db, FirebaseDB } from '../../utils/FirebaseDB/FirebaseDB';
+import '@firebase/firestore';
+
 import {
   addInputName,
   addInputEmail,
@@ -10,6 +12,9 @@ import {
   editInputEmail,
   editInputRole,
   editInputDescription,
+  deleteYesBtn,
+  addYesBtn,
+  editYesBtn,
 } from './Admin.utils';
 
 export default class Admin {
@@ -20,6 +25,7 @@ export default class Admin {
     this.addUser();
     this.id = null;
     this.updateUser();
+    this.listenerUsers();
     this.firebaseDB = new FirebaseDB();
   }
 
@@ -30,7 +36,6 @@ export default class Admin {
     deleteUserModal.addEventListener('show.bs.modal', (deleteEvent) => {
       const button = deleteEvent.relatedTarget;
       const userId = button.getAttribute('data-bs-userid');
-      const deleteYesBtn = document.querySelector('#delete-user-yes');
       deleteYesBtn.addEventListener('click', () => {
         this.firebaseDB.deleteItem('Users', userId);
         deleteUserModalPopUp.hide();
@@ -52,7 +57,6 @@ export default class Admin {
 
   addUser() {
     const addUserModalPopUp = new Modal(document.getElementById('addUserModal'), {});
-    const addYesBtn = document.querySelector('#add-user-yes');
     addYesBtn.addEventListener('click', (e) => {
       e.preventDefault();
       const FULL_NAME = addInputName.value;
@@ -98,7 +102,6 @@ export default class Admin {
 
   updateUser() {
     const editUserModalPopUp = new Modal(document.getElementById('editUserModal'), {});
-    const editYesBtn = document.querySelector('#edit-user-yes');
 
     editYesBtn.addEventListener('click', () => {
       const FULL_NAME = editInputName.value;
@@ -115,6 +118,18 @@ export default class Admin {
       this.firebaseDB.updateDataInDB('Users', this.id, EDITED_USER);
       editUserModalPopUp.hide();
       this.render();
+    });
+  }
+
+  listenerUsers() {
+    db.collection('Users').onSnapshot((snapshot) => {
+      snapshot.docChanges().forEach((change) => {
+        if (change.type === 'added') {
+          this.render();
+        } else if (change.type === 'removed') {
+          this.render();
+        }
+      });
     });
   }
 
@@ -156,8 +171,7 @@ export default class Admin {
   }
 
   render() {
-    const firebaseDB = new FirebaseDB();
-    firebaseDB.getUsers().then((data) => {
+    this.firebaseDB.getUsers().then((data) => {
       this.setData(data);
     });
   }

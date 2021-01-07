@@ -8,6 +8,10 @@ const editInputEmail = document.querySelector('#editInputEmail');
 const editInputRole = document.querySelector('#editInputRole');
 const editInputDescription = document.querySelector('#editInputDescription');
 
+const deleteYesBtn = document.querySelector('#delete-user-yes');
+const addYesBtn = document.querySelector('#add-user-yes');
+const editYesBtn = document.querySelector('#edit-user-yes');
+
 export {
   addInputName,
   addInputEmail,
@@ -17,4 +21,7 @@ export {
   editInputEmail,
   editInputRole,
   editInputDescription,
+  deleteYesBtn,
+  addYesBtn,
+  editYesBtn,
 };
