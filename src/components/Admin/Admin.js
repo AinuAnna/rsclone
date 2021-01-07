@@ -9,7 +9,8 @@ import {
   editInputName,
   editInputEmail,
   editInputRole,
-  editInputDescription } from './Admin.utils';
+  editInputDescription,
+} from './Admin.utils';
 
 export default class Admin {
   constructor() {
