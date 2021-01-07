@@ -15,7 +15,7 @@ import {
   deleteYesBtn,
   addYesBtn,
   editYesBtn,
-} from './Admin.utils';
+} from './Admin.constants';
 
 export default class Admin {
   constructor() {
