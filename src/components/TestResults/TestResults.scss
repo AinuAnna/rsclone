@@ -1,0 +1,30 @@
+.table {
+  border-spacing: 0 10px;
+  width: 100%;
+  background-color: #ffffff;
+}
+thead {
+  tr {
+    color: #6c757d;
+    font-size: 15px;
+  }
+}
+tbody {
+  tr {
+    color: #6c757d;
+    font-size: 13px;
+    border-bottom: 1px solid #d1cfd7;
+  }
+  td {
+    font-size: 14px;
+    border-bottom: 1px solid #d1cfd7;
+  }
+  .table__action {
+    a {
+      text-decoration: none;
+      &:hover {
+        opacity: 0.6;
+      }
+    }
+  }
+}
