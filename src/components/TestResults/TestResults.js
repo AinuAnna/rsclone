@@ -6,8 +6,10 @@ const firebase = new FirebaseDB();
 
 export default class TestResults extends UI {
   renderM() {
+    const wrapper = UI.renderElement(this.rootNode, 'div', null, ['class', 'test-results__wrapper']);
     const tableTitles = ['Тема', 'Тест', 'Отметка'];
-    const container = UI.renderElement(this.rootNode, 'div', null, ['class', 'table-responsive-md']);
+    UI.renderElement(wrapper, 'h2', 'Результаты тестов', ['class', 'test-results__title']);
+    const container = UI.renderElement(wrapper, 'div', null, ['class', 'table-responsive-md']);
     const table = UI.renderElement(container, 'table', null, ['class', 'table']);
     const thead = UI.renderElement(table, 'thead');
     const trh = UI.renderElement(thead, 'tr');
