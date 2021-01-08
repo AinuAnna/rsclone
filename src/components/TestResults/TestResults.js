@@ -1,6 +1,6 @@
 import './TestResults.scss';
 import UI from '../UIclass/UIclass';
-import FirebaseDB from '../../utils/FirebaseDB/FirebaseDB';
+import { FirebaseDB } from '../../utils/FirebaseDB/FirebaseDB';
 
 const firebase = new FirebaseDB();
 
