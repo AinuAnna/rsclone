@@ -1,10 +1,16 @@
 import './StudentProfile.scss';
 import UI from '../UIclass/UIclass';
-// import FirebaseDB from '../../utils/FirebaseDB/FirebaseDB';
+import { FirebaseDB } from '../../utils/FirebaseDB/FirebaseDB';
 
-// const firebase = new FirebaseDB();
+const firebase = new FirebaseDB();
 
 export default class StudentProfile extends UI {
+  constructor() {
+    super();
+    this.submitInfoOnHandler = this.submitInfoOnHandler.bind(this);
+    this.submitPasswordOnHandler = this.submitPasswordOnHandler.bind(this);
+  }
+
   renderM() {
     const wrapper = UI.renderElement(this.rootNode, 'div', null, ['class', 'student-profile__wrapper']);
     UI.renderElement(wrapper, 'h2', 'Мой профиль', ['class', 'student-profile__title']);
@@ -12,7 +18,7 @@ export default class StudentProfile extends UI {
     const left = UI.renderElement(container, 'div', null, ['class', 'student-profile__left']);
     const right = UI.renderElement(container, 'div', null, ['class', 'student-profile__right']);
 
-    UI.renderElement(right, 'span', 'Фото профиля', ['class', 'student-profile__info-title']);
+    UI.renderElement(right, 'span', 'Фото профиля', ['class', 'student-profile__photo-title']);
     UI.renderElement(
       right,
       'img',
@@ -24,40 +30,88 @@ export default class StudentProfile extends UI {
       ]
     );
 
-    const formData = UI.renderElement(left, 'form', null, ['class', 'student-profile__info-form']);
+    this.formData = UI.renderElement(
+      left,
+      'form',
+      null,
+      ['class', 'student-profile__info-form'],
+      ['id', 'student-profile__info-form']
+    );
 
     const arrInfo = [
-      ['Имя пользователя', 'Анна Андреевна Терешко'],
-      ['Эл. Почта', 'exapmle@gmail.com'],
-      ['Роль', 'Студент'],
+      ['Имя пользователя', 'name', this.studentInfo.fullName],
+      ['Эл. Почта', 'mail', this.studentInfo.mail],
+      ['Роль', 'role', this.studentInfo.type],
     ];
 
-    arrInfo.forEach((el) => {
-      UI.renderElement(formData, 'span', el[0], ['class', 'student-profile__info-title']);
-      UI.renderElement(formData, 'input', el[1], ['class', 'student-profile__input']);
+    this.inputsInfo = arrInfo.map((el) => {
+      UI.renderElement(this.formData, 'span', el[0], ['class', 'student-profile__info-title']);
+      return UI.renderElement(
+        this.formData,
+        'input',
+        null,
+        ['class', 'student-profile__input'],
+        ['data-type', el[1]],
+        ['value', el[2]]
+      );
     });
 
-    UI.renderElement(formData, 'button', 'Обновить данные', ['class', 'btn btn-primary']);
+    UI.renderElement(this.formData, 'button', 'Обновить данные', ['class', 'btn btn-primary'], ['type', 'submit']);
 
-    const formPassword = UI.renderElement(left, 'form', null, ['class', 'student-profile__password-form']);
+    this.formPassword = UI.renderElement(
+      left,
+      'form',
+      null,
+      ['class', 'student-profile__password-form'],
+      ['id', 'student-profile__password-form']
+    );
 
-    const arrPassword = ['Старый пароль', 'Новый пароль'];
+    const arrPassword = [
+      ['prev', 'Старый пароль'],
+      ['new', 'Новый пароль'],
+    ];
 
-    arrPassword.forEach((title) => {
-      UI.renderElement(formPassword, 'span', title, ['class', 'student-profile__info-title']);
-      UI.renderElement(formPassword, 'input', '', ['class', 'student-profile__input']);
+    this.inputsPassword = arrPassword.map((el) => {
+      UI.renderElement(this.formPassword, 'span', el[1], ['class', 'student-profile__info-title']);
+      return UI.renderElement(this.formPassword, 'input', '', ['class', 'student-profile__input'], ['data-type', el[0]]);
     });
 
-    UI.renderElement(formPassword, 'button', 'Обновить данные', ['class', 'btn btn-primary']);
+    UI.renderElement(this.formPassword, 'button', 'Обновить данные', ['class', 'btn btn-primary'], ['type', 'submit']);
+
+    this.formPassword.addEventListener('submit', this.submitPasswordOnHandler);
+    this.formData.addEventListener('submit', this.submitInfoOnHandler);
   }
 
-  render(rootNode, idUser) {
+  submitInfoOnHandler(event) {
+    event.preventDefault();
+    const newFields = {
+      fullName: this.inputsInfo.find(({ dataset }) => dataset.type === 'name').value,
+      mail: this.inputsInfo.find(({ dataset }) => dataset.type === 'mail').value,
+      type: this.inputsInfo.find(({ dataset }) => dataset.type === 'role').value,
+    };
+    // do smth with new fields
+    // console.log(newFields);
+  }
+
+  submitPasswordOnHandler(event) {
+    event.preventDefault();
+    const infoPassword = {};
+    infoPassword[this.inputsPassword[0].dataset.type] = this.inputsPassword[0].value;
+    infoPassword[this.inputsPassword[1].dataset.type] = this.inputsPassword[1].value;
+    // do smth with new fields
+    // console.log(infoPassword);
+  }
+
+  setData(data) {
+    this.studentInfo = data.find(({ id }) => id === this.userId);
+  }
+
+  render(rootNode, userId) {
     this.rootNode = rootNode;
-    this.idUser = idUser;
-    this.renderM();
-    // firebase.getData('TestResults').then((data) => {
-    //   this.setData(data, idUser);
-    //   this.renderM();
-    // });
+    this.userId = userId;
+    firebase.getData('Users').then((data) => {
+      this.setData(data);
+      this.renderM();
+    });
   }
 }

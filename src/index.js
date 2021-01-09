@@ -8,4 +8,4 @@ import StudentProfile from './components/StudentProfile/StudentProfile';
 // admin.render();
 
 const st = new StudentProfile();
-st.render(document.getElementById('table__users', 123));
+st.render(document.getElementById('table__users'), '544tvGg7MrAno1wxXc8Z');
