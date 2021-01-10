@@ -73,7 +73,13 @@ export default class StudentProfile extends UI {
 
     this.inputsPassword = arrPassword.map((el) => {
       UI.renderElement(this.formPassword, 'span', el[1], ['class', 'student-profile__info-title']);
-      return UI.renderElement(this.formPassword, 'input', '', ['class', 'student-profile__input'], ['data-type', el[0]]);
+      return UI.renderElement(
+        this.formPassword,
+        'input',
+        '',
+        ['class', 'student-profile__input'],
+        ['data-type', el[0]]
+      );
     });
 
     UI.renderElement(this.formPassword, 'button', 'Обновить данные', ['class', 'btn btn-primary'], ['type', 'submit']);
