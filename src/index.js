@@ -5,7 +5,7 @@ import Admin from './components/Admin/Admin';
 import './events';
 
 const admin = new Admin();
-admin.render();
+admin.render(document.getElementById('table__users'));
 
 // const rez = new TestResults();
 // rez.render(document.getElementById('table__users'), 'f0Ld29L3o6G9PU7GKmT6');
