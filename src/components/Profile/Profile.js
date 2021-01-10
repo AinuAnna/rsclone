@@ -1,10 +1,10 @@
-import './StudentProfile.scss';
+import './Profile.scss';
 import UI from '../UIclass/UIclass';
 import { FirebaseDB } from '../../utils/FirebaseDB/FirebaseDB';
 
 const firebase = new FirebaseDB();
 
-export default class StudentProfile extends UI {
+export default class Profile extends UI {
   constructor() {
     super();
     this.submitInfoOnHandler = this.submitInfoOnHandler.bind(this);
