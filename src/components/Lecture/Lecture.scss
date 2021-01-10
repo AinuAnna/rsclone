@@ -1,0 +1,33 @@
+.lecture{
+  &__wrapper{
+    min-height: 100vh;
+    margin: 10px 5px;
+    display: flex;
+  ;
+    //background-color: #fff;
+  }
+  &__container{
+    margin: auto;
+  }
+  &__l-arrow{
+    margin-top: 40vh;
+    height: 80px;
+    transform: rotate(180deg);
+    cursor: pointer;
+  }
+  &__r-arrow{
+    height: 80px;
+    margin-top: 40vh;
+    cursor: pointer;
+  }
+  &__r-arrow, &__l-arrow{
+    @media (max-width: 600px) {
+      height: 40px;
+    }
+  }
+  &__btn-go-test{
+    display: block;
+    margin: 20px auto;
+    min-width: 200px;
+  }
+}
