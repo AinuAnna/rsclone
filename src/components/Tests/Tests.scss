@@ -1,0 +1,28 @@
+.tests {
+  &__wrapper {
+    padding: 16px 0 64px 32px;
+    background-color: #fff;
+  }
+  &__title {
+    color: #6c757d;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 49px;
+    text-align: left;
+    margin-bottom: 26px;
+  }
+  &__container {
+    @media (max-width: 600px) {
+      flex-wrap: wrap;
+      flex-direction: column-reverse;
+      align-items: start;
+    }
+    display: flex;
+
+    &__button {
+      max-width: 203px;
+      padding: 10px 22px;
+    }
+  }
+}
