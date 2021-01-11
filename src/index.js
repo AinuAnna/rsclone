@@ -2,6 +2,7 @@ import './sass/style.scss';
 import './utils/FirebaseAuth/FirebaseAuth';
 // import Admin from './components/Admin/Admin';
 import Tests from './components/Tests/Tests';
+// import TestsAdmin from './components/TestsAdmin/TestsAdmin';
 // import TestResults from './components/TestResults/TestResults';
 import './events';
 // import Lecture from './components/Lecture/Lecture';
@@ -13,7 +14,9 @@ import './events';
 // const admin = new Admin(document.getElementById('table__users'));
 // admin.render();
 const tests = new Tests();
-tests.render(document.getElementById('table__users'), '544tvGg7MrAno1wxXc8Z');
+tests.render(document.getElementById('table__users'));
+// const testsAdmin = new TestsAdmin();
+// testsAdmin.render(document.getElementById('table__users'));
 
 // const str =
 //   '\n' +
