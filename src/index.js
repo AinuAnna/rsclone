@@ -13,8 +13,8 @@ import './events';
 
 // const admin = new Admin(document.getElementById('table__users'));
 // admin.render();
-const tests = new Tests();
-tests.render(document.getElementById('table__users'));
+const tests = new Tests(document.getElementById('table__users'));
+tests.render();
 // const testsAdmin = new TestsAdmin();
 // testsAdmin.render(document.getElementById('table__users'));
 

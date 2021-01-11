@@ -19,10 +19,27 @@
       align-items: start;
     }
     display: flex;
-
     &__button {
       max-width: 203px;
       padding: 10px 22px;
     }
+  }
+  &__btn-go {
+    display: block;
+    margin: 20px auto;
+    min-width: 200px;
+  }
+  &__divInputs {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  &__buttonDiv {
+    margin: 20px;
+  }
+  &__label {
+    margin-left: 20px;
+  }
+  &__label-list {
+    margin-left: 20px;
   }
 }
