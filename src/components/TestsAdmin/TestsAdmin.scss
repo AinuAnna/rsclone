@@ -46,14 +46,11 @@
   &__btn-del-test,
   &__svg-button-del {
     cursor: pointer;
+    padding-left: 10px;
     &:hover {
       opacity: 0.6;
     }
   }
-}
-.input-group
-  > :not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback) {
-  margin-left: 10px;
 }
 a:not([href]):not([class]),
 a:not([href]):not([class]) {
