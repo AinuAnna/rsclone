@@ -11,19 +11,12 @@ const db = firebase.firestore();
 export class FirebaseDB {
   constructor() {
     this.usersArray = [];
-    this.testsArray = [];
     this.getUsers();
-    this.getTests();
   }
 
   async getUsers() {
     this.usersArray = await this.getData('Users');
     return this.usersArray;
-  }
-
-  async getTests() {
-    this.testsArray = await this.getCollection('Tests');
-    return this.testsArray;
   }
 
   /**
@@ -42,20 +35,6 @@ export class FirebaseDB {
           dataObject.id = doc.id;
           list.push(dataObject);
         });
-      });
-    return list;
-  }
-
-  async getCollection(table) {
-    const list = [];
-    await db
-      .collection(table)
-      .doc('6O4M9DQPWn7n9eaePtEr')
-      .collection('1')
-      .get()
-      .then((snapshot) => {
-        const values = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-        list.push(values);
       });
     return list;
   }
