@@ -140,7 +140,7 @@
         <main class="container">
           <div class="container-fluid p-0">
             <div id="table__users"></div>
-            <!-- Modal DELETE-->
+            <!-- Modal DELETE USER-->
             <div
               class="modal fade"
               id="deleteUserModal"
@@ -163,6 +163,29 @@
                   </div>
                 </div>
               </div></div>
+               <!-- Modal DELETE TEST-->
+            <div
+            class="modal fade"
+            id="deleteTestModal"
+            data-bs-backdrop="static"
+            data-bs-keyboard="false"
+            tabindex="-1"
+            aria-labelledby="deleteTestModalLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="deleteTestModalLabel">Удаление теста</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">Вы действительно хотите удалить этот тест?</div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Нет</button>
+                  <button type="button" class="btn btn-primary" id="delete-test-yes">Да</button>
+                </div>
+              </div>
+            </div></div>
                <!-- Modal ADD-->
             <div
             class="modal fade"
