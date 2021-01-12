@@ -120,10 +120,7 @@ export default class TestsAdmin extends UI {
     const divColMB3 = UI.renderElement(divCol3, 'div', null, ['class', 'mb-0']);
     this.addInputOption(divColMB3);
 
-    const addOptionBtn = UI.renderElement(divCol3, 'button', 'Добавить вариант ответа', [
-      'class',
-      'btn btn-primary tests-admin__add-option',
-    ]);
+    const addOptionBtn = UI.renderElement(divCol3, 'button', '+', ['class', 'btn btn-primary tests-admin__add-option']);
 
     addOptionBtn.addEventListener('click', () => {
       this.addInputOption(divColMB3);
@@ -137,10 +134,7 @@ export default class TestsAdmin extends UI {
     const divColMB4 = UI.renderElement(divCol4, 'div', null, ['class', 'mb-0']);
     this.addInputOption(divColMB4);
 
-    const addAnswerBtn = UI.renderElement(divCol4, 'button', 'Добавить верный ответ', [
-      'class',
-      'btn btn-primary tests-admin__add-option',
-    ]);
+    const addAnswerBtn = UI.renderElement(divCol4, 'button', '+', ['class', 'btn btn-primary tests-admin__add-option']);
 
     addAnswerBtn.addEventListener('click', () => {
       this.addInputAnswer(divColMB4);
