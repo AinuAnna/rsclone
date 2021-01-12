@@ -44,17 +44,20 @@ export default class TestsAdmin extends UI {
     ]);
     const divCol3 = UI.renderElement(optionAdd, 'div', null, ['class', 'col-md']);
     const divColMB3 = UI.renderElement(divCol3, 'div', null, ['class', 'mb-0']);
-    const divInputGroup = UI.renderElement(divColMB3, 'div', null, ['class', 'input-group']);
-    const divInputText = UI.renderElement(divInputGroup, 'div', null, ['class', 'input-group-text']);
-    const optionalInput = UI.renderElement(divInputText, 'input', null, ['type', 'checkbox']);
-    const optionalInputText = UI.renderElement(divInputGroup, 'input', null, ['class', 'form-control']);
-    UI.renderElement(
+    this.addInput(divColMB3);
+
+    const addAnswerBtn = UI.renderElement(
       divCol3,
       'button',
       'Добавить вариант ответа',
       ['class', 'btn btn-primary tests-admin__add-option'],
       ['type', 'submit']
     );
+
+    addAnswerBtn.addEventListener('click', () => {
+      this.addInput(divColMB3);
+    });
+
     UI.renderElement(
       titleAddTests,
       'button',
@@ -73,6 +76,13 @@ export default class TestsAdmin extends UI {
 
   setData(tests) {
     this.testsArray = tests.flat().map((el) => el);
+  }
+
+  addInput(parent) {
+    const divInputGroup = UI.renderElement(parent, 'div', null, ['class', 'input-group']);
+    const divInputText = UI.renderElement(divInputGroup, 'div', null, ['class', 'input-group-text']);
+    const optionalInput = UI.renderElement(divInputText, 'input', null, ['type', 'checkbox']);
+    const optionalInputText = UI.renderElement(divInputGroup, 'input', null, ['class', 'form-control']);
   }
 
   render() {
