@@ -79,7 +79,7 @@ export default class TestsAdmin extends UI {
     ]);
     const divCol3 = UI.renderElement(optionAdd, 'div', null, ['class', 'col-md']);
     const divColMB3 = UI.renderElement(divCol3, 'div', null, ['class', 'mb-0']);
-    this.addInput(divColMB3);
+    this.addInputOption(divColMB3);
 
     const addAnswerBtn = UI.renderElement(
       divCol3,
@@ -90,11 +90,11 @@ export default class TestsAdmin extends UI {
     );
 
     addAnswerBtn.addEventListener('click', () => {
-      this.addInput(divColMB3);
+      this.addInputOption(divColMB3);
     });
   }
 
-  addInput(parent) {
+  addInputOption(parent) {
     const divInputGroup = UI.renderElement(parent, 'div', null, ['class', 'input-group']);
     const divInputText = UI.renderElement(divInputGroup, 'div', null, ['class', 'input-group-text']);
     const optionalInput = UI.renderElement(divInputText, 'input', null, ['type', 'checkbox']);

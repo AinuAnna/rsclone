@@ -35,11 +35,11 @@ export default class Tests extends UI {
   }
 
   setData(tests) {
-    this.testsArray = tests.flat().map((el) => el);
+    this.testsArray = tests;
   }
 
   render() {
-    this.firebaseDB.getTests().then((data) => {
+    this.firebaseDB.getData().then((data) => {
       this.setData(data);
       this.renderM();
     });
