@@ -4,7 +4,7 @@ import './TestsAdmin.scss';
 import { Modal } from 'bootstrap';
 import UI from '../UIclass/UIclass';
 import { FirebaseDB, db } from '../../utils/FirebaseDB/FirebaseDB';
-import deleteYesBtn from './TestsAdmin.constants';
+import deleteGroupTestsYesBtn from './TestsAdmin.constants';
 import '@firebase/firestore';
 
 export default class TestsAdmin extends UI {
@@ -12,19 +12,25 @@ export default class TestsAdmin extends UI {
     super();
     this.rootNode = rootNode;
     this.id = null;
-    this.deleteGroupTest();
+    this.groupTests = null;
+    this.deleteTest();
     this.listenerTests();
     this.firebaseDB = new FirebaseDB();
   }
 
-  deleteGroupTest() {
+  deleteTest() {
     const deleteTestModalPopUp = new Modal(document.getElementById('deleteTestModal'), {});
     const deleteTestModal = document.getElementById('deleteTestModal');
     deleteTestModal.addEventListener('show.bs.modal', (deleteEvent) => {
       const button = deleteEvent.relatedTarget;
       const testId = button.getAttribute('data-bs-testid');
-      deleteYesBtn.addEventListener('click', () => {
-        this.firebaseDB.deleteItem('Tests', testId);
+      const { testsArray } = this.firebaseDB;
+      const removedTestTitle = testsArray.filter((item) => item.id === testId)[0].title;
+      deleteGroupTestsYesBtn.addEventListener('click', () => {
+        const filteredGroupTests = testsArray.filter((item) => item.title === removedTestTitle);
+        filteredGroupTests.forEach((test) => {
+          this.firebaseDB.deleteItem('Tests', test.id);
+        });
         deleteTestModalPopUp.hide();
         this.render();
       });
@@ -125,27 +131,15 @@ export default class TestsAdmin extends UI {
     addOptionBtn.addEventListener('click', () => {
       this.addInputOption(divColMB3);
     });
-
-    const answerAdd = UI.renderElement(parent, 'div', 'Введите верный(ые) ответ(ы):', [
-      'class',
-      'tests-admin__items-add-option',
-    ]);
-    const divCol4 = UI.renderElement(answerAdd, 'div', null, ['class', 'col-md']);
-    const divColMB4 = UI.renderElement(divCol4, 'div', null, ['class', 'mb-0']);
-    this.addInputAnswer(divColMB4);
-
-    const addAnswerBtn = UI.renderElement(divCol4, 'button', '+', ['class', 'btn btn-primary tests-admin__add-option']);
-
-    addAnswerBtn.addEventListener('click', () => {
-      this.addInputAnswer(divColMB4);
-    });
   }
 
   addInputOption(parent) {
-    const divInputGroup1 = UI.renderElement(parent, 'div', null, ['class', 'input-group inputRemoveOption']);
-    UI.renderElement(divInputGroup1, 'input', null, ['class', 'form-control option-input'], ['required', '']);
+    const divInputGroup = UI.renderElement(parent, 'div', null, ['class', 'input-group inputRemoveOption']);
+    const divInputText = UI.renderElement(divInputGroup, 'div', null, ['class', 'input-group-text']);
+    const optionalInput = UI.renderElement(divInputText, 'input', null, ['type', 'checkbox']);
+    const optionalInputText = UI.renderElement(divInputGroup, 'input', null, ['class', 'form-control option-input']);
     const svgButtonDelete1 = UI.renderElement(
-      divInputGroup1,
+      divInputGroup,
       'a',
       `<svg width="16" height="16" viewBox="0 0 21 23" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M6.3 4.75V2.5C6.3 1.67157 6.9268 1 7.7 1H13.3C14.0732 1 14.7 1.67157 14.7 2.5V4.75M0 5.5H21M2.1 5.5V20.5C2.1 21.3284 2.7268 22 3.5 22H17.5C18.2732 22 18.9 21.3284 18.9 20.5V5.5M10.5 10.75V18.25M6.3 13.75V18.25M14.7 13.75V18.25" stroke="#F49344"/>
@@ -158,29 +152,13 @@ export default class TestsAdmin extends UI {
     });
   }
 
-  addInputAnswer(parent) {
-    const divInputGroup2 = UI.renderElement(parent, 'div', null, ['class', 'input-group inputRemoveAnswer']);
-    UI.renderElement(divInputGroup2, 'input', null, ['class', 'form-control answer-input'], ['required', '']);
-    const svgButtonDelete2 = UI.renderElement(
-      divInputGroup2,
-      'a',
-      `<svg width="16" height="16" viewBox="0 0 21 23" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M6.3 4.75V2.5C6.3 1.67157 6.9268 1 7.7 1H13.3C14.0732 1 14.7 1.67157 14.7 2.5V4.75M0 5.5H21M2.1 5.5V20.5C2.1 21.3284 2.7268 22 3.5 22H17.5C18.2732 22 18.9 21.3284 18.9 20.5V5.5M10.5 10.75V18.25M6.3 13.75V18.25M14.7 13.75V18.25" stroke="#F49344"/>
-      </svg> `,
-      ['class', 'tests-admin__svg-button-del']
-    );
-    svgButtonDelete2.addEventListener('click', (event) => {
-      const cont = event.target.closest('.inputRemoveAnswer');
-      parent.removeChild(cont);
-    });
-  }
-
   setData(tests) {
     this.testsArray = tests;
   }
 
   render() {
-    this.firebaseDB.getData('Tests').then((data) => {
+    this.firebaseDB.getTests().then((data) => {
+      this.groupTests = data;
       const uniqueTestsCollections = [...new Map(data.map((item) => [item.title, item])).values()];
       this.setData(uniqueTestsCollections);
       this.rootNode.innerHTML = '';

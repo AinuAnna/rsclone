@@ -1,3 +1,3 @@
-const deleteYesBtn = document.querySelector('#delete-test-yes');
+const deleteGroupTestsYesBtn = document.querySelector('#delete-test-yes');
 
-export default deleteYesBtn;
+export default deleteGroupTestsYesBtn;
