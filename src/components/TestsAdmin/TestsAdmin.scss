@@ -45,4 +45,10 @@
   .col-md {
     margin-bottom: 20px;
   }
+  &__svg-button-del {
+    margin-left: 20px;
+    &:hover {
+      opacity: 0.6;
+    }
+  }
 }

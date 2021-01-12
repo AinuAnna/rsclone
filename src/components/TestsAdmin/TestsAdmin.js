@@ -18,7 +18,19 @@ export default class TestsAdmin extends UI {
       const div = UI.renderElement(listTitle, 'div', null, ['data-id', id], ['class', 'tests-admin__div']);
       const ul = UI.renderElement(div, 'ul', null, ['class', 'tests-admin__ul']);
       const a = UI.renderElement(ul, 'a', null, ['class', 'tests-admin__a'], ['href', '#']);
-      UI.renderElement(a, 'li', title, ['class', 'tests-admin__li']);
+      const li = UI.renderElement(a, 'li', title, ['class', 'tests-admin__li']);
+      const svgButtonDelete = UI.renderElement(
+        li,
+        'a',
+        `<svg width="16" height="16" viewBox="0 0 21 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M6.3 4.75V2.5C6.3 1.67157 6.9268 1 7.7 1H13.3C14.0732 1 14.7 1.67157 14.7 2.5V4.75M0 5.5H21M2.1 5.5V20.5C2.1 21.3284 2.7268 22 3.5 22H17.5C18.2732 22 18.9 21.3284 18.9 20.5V5.5M10.5 10.75V18.25M6.3 13.75V18.25M14.7 13.75V18.25" stroke="#F49344"/>
+        </svg> `,
+        ['data-bs-toggle', 'modal'],
+        ['href', '#'],
+        ['data-bs-target', '#deleteUserModal'],
+        ['data-bs-userid', id],
+        ['class', 'tests-admin__svg-button-del']
+      );
     });
 
     const container2 = UI.renderElement(wrapper, 'div', null, ['class', 'tests-admin__container']);
