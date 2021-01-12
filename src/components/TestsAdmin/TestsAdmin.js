@@ -12,12 +12,12 @@ export default class TestsAdmin extends UI {
     super();
     this.rootNode = rootNode;
     this.id = null;
-    this.deleteTest();
+    this.deleteGroupTest();
     this.listenerTests();
     this.firebaseDB = new FirebaseDB();
   }
 
-  deleteTest() {
+  deleteGroupTest() {
     const deleteTestModalPopUp = new Modal(document.getElementById('deleteTestModal'), {});
     const deleteTestModal = document.getElementById('deleteTestModal');
     deleteTestModal.addEventListener('show.bs.modal', (deleteEvent) => {
@@ -77,14 +77,14 @@ export default class TestsAdmin extends UI {
       divColMB2,
       'input',
       null,
-      ['class', 'form-control'],
+      ['class', 'form-control title-test-input'],
       ['type', 'text'],
       ['required', '']
     );
 
     const addQuestionBtn = UI.renderElement(titleAdd, 'button', 'Добавить вопрос', [
       'class',
-      'btn btn-primary tests-admin__add-option',
+      'btn btn-primary tests-admin__add-option add-question-btn',
     ]);
 
     addQuestionBtn.addEventListener('click', () => {
@@ -95,7 +95,7 @@ export default class TestsAdmin extends UI {
       divForm,
       'button',
       'Добавить тест',
-      ['class', 'btn btn-primary tests-admin__btn-go'],
+      ['class', 'btn btn-primary tests-admin__btn-go add-test-btn'],
       ['type', 'submit']
     );
   }
@@ -108,7 +108,7 @@ export default class TestsAdmin extends UI {
       divColMB2,
       'input',
       null,
-      ['class', 'form-control'],
+      ['class', 'form-control question-input'],
       ['type', 'text'],
       ['required', '']
     );
@@ -132,7 +132,7 @@ export default class TestsAdmin extends UI {
     ]);
     const divCol4 = UI.renderElement(answerAdd, 'div', null, ['class', 'col-md']);
     const divColMB4 = UI.renderElement(divCol4, 'div', null, ['class', 'mb-0']);
-    this.addInputOption(divColMB4);
+    this.addInputAnswer(divColMB4);
 
     const addAnswerBtn = UI.renderElement(divCol4, 'button', '+', ['class', 'btn btn-primary tests-admin__add-option']);
 
@@ -142,16 +142,10 @@ export default class TestsAdmin extends UI {
   }
 
   addInputOption(parent) {
-    const divInputGroup = UI.renderElement(parent, 'div', null, ['class', 'input-group inputRemoveOption']);
-    const optionalInputText = UI.renderElement(
-      divInputGroup,
-      'input',
-      null,
-      ['class', 'form-control'],
-      ['required', '']
-    );
+    const divInputGroup1 = UI.renderElement(parent, 'div', null, ['class', 'input-group inputRemoveOption']);
+    UI.renderElement(divInputGroup1, 'input', null, ['class', 'form-control option-input'], ['required', '']);
     const svgButtonDelete1 = UI.renderElement(
-      divInputGroup,
+      divInputGroup1,
       'a',
       `<svg width="16" height="16" viewBox="0 0 21 23" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M6.3 4.75V2.5C6.3 1.67157 6.9268 1 7.7 1H13.3C14.0732 1 14.7 1.67157 14.7 2.5V4.75M0 5.5H21M2.1 5.5V20.5C2.1 21.3284 2.7268 22 3.5 22H17.5C18.2732 22 18.9 21.3284 18.9 20.5V5.5M10.5 10.75V18.25M6.3 13.75V18.25M14.7 13.75V18.25" stroke="#F49344"/>
@@ -165,16 +159,10 @@ export default class TestsAdmin extends UI {
   }
 
   addInputAnswer(parent) {
-    const divInputGroup = UI.renderElement(parent, 'div', null, ['class', 'input-group inputRemoveAnswer']);
-    const optionalInputText = UI.renderElement(
-      divInputGroup,
-      'input',
-      null,
-      ['class', 'form-control'],
-      ['required', '']
-    );
+    const divInputGroup2 = UI.renderElement(parent, 'div', null, ['class', 'input-group inputRemoveAnswer']);
+    UI.renderElement(divInputGroup2, 'input', null, ['class', 'form-control answer-input'], ['required', '']);
     const svgButtonDelete2 = UI.renderElement(
-      divInputGroup,
+      divInputGroup2,
       'a',
       `<svg width="16" height="16" viewBox="0 0 21 23" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M6.3 4.75V2.5C6.3 1.67157 6.9268 1 7.7 1H13.3C14.0732 1 14.7 1.67157 14.7 2.5V4.75M0 5.5H21M2.1 5.5V20.5C2.1 21.3284 2.7268 22 3.5 22H17.5C18.2732 22 18.9 21.3284 18.9 20.5V5.5M10.5 10.75V18.25M6.3 13.75V18.25M14.7 13.75V18.25" stroke="#F49344"/>
@@ -193,7 +181,8 @@ export default class TestsAdmin extends UI {
 
   render() {
     this.firebaseDB.getData('Tests').then((data) => {
-      this.setData(data);
+      const uniqueTestsCollections = [...new Map(data.map((item) => [item.title, item])).values()];
+      this.setData(uniqueTestsCollections);
       this.rootNode.innerHTML = '';
       this.renderM();
     });
