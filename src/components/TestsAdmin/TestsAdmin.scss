@@ -43,7 +43,9 @@
   &__add-option {
     margin-top: 20px;
   }
+  &__btn-del-test,
   &__svg-button-del {
+    cursor: pointer;
     &:hover {
       opacity: 0.6;
     }
@@ -56,4 +58,7 @@
 a:not([href]):not([class]),
 a:not([href]):not([class]) {
   margin-left: 10px;
+  &:hover {
+    opacity: 0.6;
+  }
 }

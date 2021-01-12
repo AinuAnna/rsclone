@@ -3,15 +3,18 @@
 import './TestsAdmin.scss';
 import { Modal } from 'bootstrap';
 import UI from '../UIclass/UIclass';
-import { FirebaseDB } from '../../utils/FirebaseDB/FirebaseDB';
+import { FirebaseDB, db } from '../../utils/FirebaseDB/FirebaseDB';
 import deleteYesBtn from './TestsAdmin.constants';
+import '@firebase/firestore';
 
-const firebase = new FirebaseDB();
 export default class TestsAdmin extends UI {
   constructor(rootNode) {
     super();
     this.rootNode = rootNode;
+    this.id = null;
     this.deleteTest();
+    this.listenerTests();
+    this.firebaseDB = new FirebaseDB();
   }
 
   deleteTest() {
@@ -19,11 +22,23 @@ export default class TestsAdmin extends UI {
     const deleteTestModal = document.getElementById('deleteTestModal');
     deleteTestModal.addEventListener('show.bs.modal', (deleteEvent) => {
       const button = deleteEvent.relatedTarget;
-      const testId = button.getAttribute('data-bs-testId');
+      const testId = button.getAttribute('data-bs-testid');
       deleteYesBtn.addEventListener('click', () => {
         this.firebaseDB.deleteItem('Tests', testId);
         deleteTestModalPopUp.hide();
         this.render();
+      });
+    });
+  }
+
+  listenerTests() {
+    db.collection('Tests').onSnapshot((snapshot) => {
+      snapshot.docChanges().forEach((change) => {
+        if (change.type === 'added') {
+          this.render();
+        } else if (change.type === 'removed') {
+          this.render();
+        }
       });
     });
   }
@@ -46,7 +61,7 @@ export default class TestsAdmin extends UI {
         </svg> `,
         ['data-bs-toggle', 'modal'],
         ['data-bs-target', '#deleteTestModal'],
-        ['data-bs-testId', id]
+        ['data-bs-testid', id]
       );
     });
     const form = UI.renderElement(wrapper, 'form', null, ['class', 'tests-admin__container needs-validation']);
@@ -183,8 +198,9 @@ export default class TestsAdmin extends UI {
   }
 
   render() {
-    firebase.getData('Tests').then((data) => {
+    this.firebaseDB.getData('Tests').then((data) => {
       this.setData(data);
+      this.rootNode.innerHTML = '';
       this.renderM();
     });
   }
