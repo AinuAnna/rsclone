@@ -3,7 +3,7 @@ import './utils/FirebaseAuth/FirebaseAuth';
 // import Admin from './components/Admin/Admin';
 // import Tests from './components/Tests/Tests';
 import TestsAdmin from './components/TestsAdmin/TestsAdmin';
-import LectureAdmin from './components/LectureAdmin/LectureAdmin';
+// import LectureAdmin from './components/LectureAdmin/LectureAdmin';
 // import TestResults from './components/TestResults/TestResults';
 import './events';
 // import Lecture from './components/Lecture/Lecture';
