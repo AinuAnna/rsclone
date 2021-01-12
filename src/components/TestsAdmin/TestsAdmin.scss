@@ -32,11 +32,17 @@
   &__items-add {
     margin: 20px;
   }
+  &__items-add-option {
+    margin-left: 40px;
+  }
   &__divInputs {
     margin-top: 20px;
     margin-bottom: 20px;
   }
   &__add-option {
     margin-top: 20px;
+  }
+  .col-md {
+    margin-bottom: 20px;
   }
 }

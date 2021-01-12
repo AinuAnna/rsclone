@@ -31,16 +31,39 @@ export default class TestsAdmin extends UI {
       'class',
       'tests-admin__items-add',
     ]);
-    const divCol1 = UI.renderElement(titleAdd, 'div', null, ['class', 'col-md']);
-    const divColMB1 = UI.renderElement(divCol1, 'div', null, ['class', 'mb-0']);
-    const titleInput = UI.renderElement(divColMB1, 'input', null, ['class', 'form-control'], ['type', 'text']);
-    const questionAdd = UI.renderElement(titleAddTests, 'div', 'Введите вопрос:', ['class', 'tests-admin__items-add']);
+    const divCol2 = UI.renderElement(titleAdd, 'div', null, ['class', 'col-md']);
+    const divColMB2 = UI.renderElement(divCol2, 'div', null, ['class', 'mb-0']);
+    const addTitleInput = UI.renderElement(divColMB2, 'input', null, ['class', 'form-control'], ['type', 'text']);
+
+    const addQuestionBtn = UI.renderElement(
+      titleAdd,
+      'button',
+      'Добавить вопрос',
+      ['class', 'btn btn-primary tests-admin__add-option'],
+      ['type', 'submit']
+    );
+
+    addQuestionBtn.addEventListener('click', () => {
+      this.addQuestion(titleAdd);
+    });
+
+    UI.renderElement(
+      this.rootNode,
+      'button',
+      'Добавить тест',
+      ['class', 'btn btn-primary tests-admin__btn-go'],
+      ['type', 'submit']
+    );
+  }
+
+  addQuestion(parent) {
+    const questionAdd = UI.renderElement(parent, 'div', 'Введите вопрос:', ['class', 'tests-admin__items-add']);
     const divCol2 = UI.renderElement(questionAdd, 'div', null, ['class', 'col-md']);
     const divColMB2 = UI.renderElement(divCol2, 'div', null, ['class', 'mb-0']);
     const questionInput = UI.renderElement(divColMB2, 'input', null, ['class', 'form-control'], ['type', 'text']);
-    const optionAdd = UI.renderElement(titleAddTests, 'div', 'Введите варианты ответов:', [
+    const optionAdd = UI.renderElement(parent, 'div', 'Введите варианты ответов:', [
       'class',
-      'tests-admin__items-add',
+      'tests-admin__items-add-option',
     ]);
     const divCol3 = UI.renderElement(optionAdd, 'div', null, ['class', 'col-md']);
     const divColMB3 = UI.renderElement(divCol3, 'div', null, ['class', 'mb-0']);
@@ -57,25 +80,6 @@ export default class TestsAdmin extends UI {
     addAnswerBtn.addEventListener('click', () => {
       this.addInput(divColMB3);
     });
-
-    UI.renderElement(
-      titleAddTests,
-      'button',
-      'Добавить вопрос',
-      ['class', 'btn btn-primary tests-admin__add-option'],
-      ['type', 'submit']
-    );
-    UI.renderElement(
-      this.rootNode,
-      'button',
-      'Добавить тест',
-      ['class', 'btn btn-primary tests-admin__btn-go'],
-      ['type', 'submit']
-    );
-  }
-
-  setData(tests) {
-    this.testsArray = tests.flat().map((el) => el);
   }
 
   addInput(parent) {
@@ -85,8 +89,12 @@ export default class TestsAdmin extends UI {
     const optionalInputText = UI.renderElement(divInputGroup, 'input', null, ['class', 'form-control']);
   }
 
+  setData(tests) {
+    this.testsArray = tests;
+  }
+
   render() {
-    firebase.getTests('Tests').then((data) => {
+    firebase.getData('Tests').then((data) => {
       this.setData(data);
       this.renderM();
     });
