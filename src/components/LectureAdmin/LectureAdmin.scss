@@ -1,4 +1,4 @@
-.tests-admin {
+.lecture-admin {
   &__wrapper {
     padding: 16px 0 64px 32px;
     background-color: #fff;
@@ -30,6 +30,9 @@
     min-width: 200px;
   }
   &__items-add {
+    margin: 20px;
+  }
+  &__list-title {
     margin: 20px;
   }
   &__divInputs {
