@@ -93,7 +93,7 @@ export default class TestsAdmin extends UI {
       this.addInputOption(divColMB3);
     });
 
-    const answerAdd = UI.renderElement(parent, 'div', 'Введите варианты ответов:', [
+    const answerAdd = UI.renderElement(parent, 'div', 'Введите верные ответы:', [
       'class',
       'tests-admin__items-add-option',
     ]);
@@ -104,7 +104,7 @@ export default class TestsAdmin extends UI {
     const addAnswerBtn = UI.renderElement(
       divCol4,
       'button',
-      'Добавить вариант ответа',
+      'Добавить верный ответ',
       ['class', 'btn btn-primary tests-admin__add-option'],
       ['type', 'submit']
     );
