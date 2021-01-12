@@ -125,31 +125,13 @@ export default class TestsAdmin extends UI {
     addOptionBtn.addEventListener('click', () => {
       this.addInputOption(divColMB3);
     });
-
-    const answerAdd = UI.renderElement(parent, 'div', 'Введите верный(ые) ответ(ы):', [
-      'class',
-      'tests-admin__items-add-option',
-    ]);
-    const divCol4 = UI.renderElement(answerAdd, 'div', null, ['class', 'col-md']);
-    const divColMB4 = UI.renderElement(divCol4, 'div', null, ['class', 'mb-0']);
-    this.addInputOption(divColMB4);
-
-    const addAnswerBtn = UI.renderElement(divCol4, 'button', '+', ['class', 'btn btn-primary tests-admin__add-option']);
-
-    addAnswerBtn.addEventListener('click', () => {
-      this.addInputAnswer(divColMB4);
-    });
   }
 
   addInputOption(parent) {
     const divInputGroup = UI.renderElement(parent, 'div', null, ['class', 'input-group inputRemoveOption']);
-    const optionalInputText = UI.renderElement(
-      divInputGroup,
-      'input',
-      null,
-      ['class', 'form-control'],
-      ['required', '']
-    );
+    const divInputText = UI.renderElement(divInputGroup, 'div', null, ['class', 'input-group-text']);
+    const optionalInput = UI.renderElement(divInputText, 'input', null, ['type', 'checkbox']);
+    const optionalInputText = UI.renderElement(divInputGroup, 'input', null, ['class', 'form-control']);
     const svgButtonDelete1 = UI.renderElement(
       divInputGroup,
       'a',
@@ -160,29 +142,6 @@ export default class TestsAdmin extends UI {
     );
     svgButtonDelete1.addEventListener('click', (event) => {
       const cont = event.target.closest('.inputRemoveOption');
-      parent.removeChild(cont);
-    });
-  }
-
-  addInputAnswer(parent) {
-    const divInputGroup = UI.renderElement(parent, 'div', null, ['class', 'input-group inputRemoveAnswer']);
-    const optionalInputText = UI.renderElement(
-      divInputGroup,
-      'input',
-      null,
-      ['class', 'form-control'],
-      ['required', '']
-    );
-    const svgButtonDelete2 = UI.renderElement(
-      divInputGroup,
-      'a',
-      `<svg width="16" height="16" viewBox="0 0 21 23" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M6.3 4.75V2.5C6.3 1.67157 6.9268 1 7.7 1H13.3C14.0732 1 14.7 1.67157 14.7 2.5V4.75M0 5.5H21M2.1 5.5V20.5C2.1 21.3284 2.7268 22 3.5 22H17.5C18.2732 22 18.9 21.3284 18.9 20.5V5.5M10.5 10.75V18.25M6.3 13.75V18.25M14.7 13.75V18.25" stroke="#F49344"/>
-      </svg> `,
-      ['class', 'tests-admin__svg-button-del']
-    );
-    svgButtonDelete2.addEventListener('click', (event) => {
-      const cont = event.target.closest('.inputRemoveAnswer');
       parent.removeChild(cont);
     });
   }
