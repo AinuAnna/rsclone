@@ -1,12 +1,43 @@
 import './LectureAdmin.scss';
+import { Modal } from 'bootstrap';
 import UI from '../UIclass/UIclass';
-import { FirebaseDB } from '../../utils/FirebaseDB/FirebaseDB';
+import { db, FirebaseDB } from '../../utils/FirebaseDB/FirebaseDB';
 
-const firebase = new FirebaseDB();
+import deleteLectureYesBtn from './LectureAdmin.constants';
+
 export default class LectureAdmin extends UI {
   constructor(rootNode) {
     super();
     this.rootNode = rootNode;
+    this.deleteLecture();
+    this.listenerLectures();
+    this.firebaseDB = new FirebaseDB();
+  }
+
+  deleteLecture() {
+    const deleteLectureModalPopUp = new Modal(document.getElementById('deleteLectureModal'), {});
+    const deleteLectureModal = document.getElementById('deleteLectureModal');
+    deleteLectureModal.addEventListener('show.bs.modal', (deleteEvent) => {
+      const button = deleteEvent.relatedTarget;
+      const lectureId = button.getAttribute('data-bs-lectureid');
+      deleteLectureYesBtn.addEventListener('click', () => {
+        this.firebaseDB.deleteItem('Lecture', lectureId);
+        deleteLectureModalPopUp.hide();
+        this.render();
+      });
+    });
+  }
+
+  listenerLectures() {
+    db.collection('Lecture').onSnapshot((snapshot) => {
+      snapshot.docChanges().forEach((change) => {
+        if (change.type === 'added') {
+          this.render();
+        } else if (change.type === 'removed') {
+          this.render();
+        }
+      });
+    });
   }
 
   renderM() {
@@ -28,6 +59,16 @@ export default class LectureAdmin extends UI {
         const ul1 = UI.renderElement(div1, 'ul', null, ['class', 'lecture-admin__ul']);
         const a1 = UI.renderElement(ul1, 'a', null, ['class', 'lecture-admin__a'], ['href', '#']);
         UI.renderElement(a1, 'li', value, ['class', 'lecture-admin__li']);
+        const svgButtonDelete = UI.renderElement(
+          ul1,
+          'a',
+          `<svg width="16" height="16" viewBox="0 0 21 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6.3 4.75V2.5C6.3 1.67157 6.9268 1 7.7 1H13.3C14.0732 1 14.7 1.67157 14.7 2.5V4.75M0 5.5H21M2.1 5.5V20.5C2.1 21.3284 2.7268 22 3.5 22H17.5C18.2732 22 18.9 21.3284 18.9 20.5V5.5M10.5 10.75V18.25M6.3 13.75V18.25M14.7 13.75V18.25" stroke="#F49344"/>
+            </svg> `,
+          ['data-bs-toggle', 'modal'],
+          ['data-bs-target', '#deleteLectureModal'],
+          ['data-bs-lectureid', id]
+        );
       });
     });
     const form = UI.renderElement(wrapper, 'form', null, ['class', 'tests-admin__container needs-validation']);
@@ -78,7 +119,9 @@ export default class LectureAdmin extends UI {
       'button',
       'Добавить лекцию',
       ['class', 'btn btn-primary lecture-admin__btn-go'],
-      ['type', 'submit']
+      ['type', 'submit'],
+      ['data-bs-toggle', 'modal'],
+      ['data-bs-target', '#addLectureModal']
     );
   }
 
@@ -87,8 +130,9 @@ export default class LectureAdmin extends UI {
   }
 
   render() {
-    firebase.getData('Lecture').then((data) => {
+    this.firebaseDB.getData('Lecture').then((data) => {
       this.setData(data);
+      this.rootNode.innerHTML = '';
       this.renderM();
     });
   }

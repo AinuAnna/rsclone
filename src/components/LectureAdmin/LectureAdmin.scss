@@ -22,7 +22,11 @@
       max-width: 203px;
       padding: 10px 22px;
     }
+    ul {
+      display: flex;
+    }
   }
+
   &__btn-go {
     display: block;
     margin: 20px auto;
@@ -40,5 +44,12 @@
   }
   &__add-option {
     margin-top: 20px;
+  }
+}
+a:not([href]):not([class]),
+a:not([href]):not([class]) {
+  margin-left: 10px;
+  &:hover {
+    opacity: 0.6;
   }
 }

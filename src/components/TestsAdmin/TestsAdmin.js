@@ -163,7 +163,9 @@ export default class TestsAdmin extends UI {
       'button',
       'Добавить тест',
       ['class', 'btn btn-primary tests-admin__btn-go add-test-btn'],
-      ['type', 'submit']
+      ['type', 'submit'],
+      ['data-bs-toggle', 'modal'],
+      ['data-bs-target', '#addTestModal']
     );
 
     addTest.addEventListener('click', (e) => {
