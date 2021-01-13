@@ -90,6 +90,7 @@ export default class TestsAdmin extends UI {
     addQuestionBtn.addEventListener('click', () => {
       this.addQuestion(titleAdd);
     });
+
     const divForm = UI.renderElement(form, 'div', null, ['class', 'tests-admin__container']);
     UI.renderElement(
       divForm,
@@ -124,6 +125,13 @@ export default class TestsAdmin extends UI {
 
     addOptionBtn.addEventListener('click', () => {
       this.addInputOption(divColMB3);
+    });
+    const addQuestionBtn2 = UI.renderElement(parent, 'button', 'Добавить вопрос', [
+      'class',
+      'btn btn-primary tests-admin__add-option',
+    ]);
+    addQuestionBtn2.addEventListener('click', () => {
+      this.addQuestion(parent);
     });
   }
 
