@@ -6,7 +6,13 @@ import UI from '../UIclass/UIclass';
 import { FirebaseDB, db } from '../../utils/FirebaseDB/FirebaseDB';
 import '@firebase/firestore';
 
-import { deleteGroupTestsYesBtn, getTitle, getQuestionInputs, getOptionInputs } from './TestsAdmin.constants';
+import {
+  deleteGroupTestsYesBtn,
+  getTitle,
+  getQuestionInputs,
+  getOptionInputs,
+  getCheckboxOptions,
+} from './TestsAdmin.constants';
 
 export default class TestsAdmin extends UI {
   constructor(rootNode) {
@@ -19,7 +25,6 @@ export default class TestsAdmin extends UI {
     this.addGroupTests = null;
     this.deleteTest();
     this.listenerTests();
-    // this.addTest();
     this.firebaseDB = new FirebaseDB();
   }
 
@@ -198,7 +203,34 @@ export default class TestsAdmin extends UI {
       });
 
       /* Get array of correct options to question splitted by number of questions */
-      debugger;
+      const correctAnswersForAllQuestions = [];
+      QTY_QUESTIONS.forEach((question) => {
+        const correctAnswersForQuestion = [];
+        getCheckboxOptions().forEach((checkbox) => {
+          if (checkbox.classList[1] === question.questionNumber && checkbox.checked === true) {
+            correctAnswersForQuestion.push(checkbox.classList[2]);
+          }
+        });
+        correctAnswersForAllQuestions.push(correctAnswersForQuestion.join(','));
+      });
+
+      /* generate array of */
+      const TESTS = [];
+      for (let i = 0; i < QTY_QUESTIONS.length; i++) {
+        const testObj = {
+          title: QUESTION_TITLE,
+          question: QTY_QUESTIONS[i].questionValue,
+          option: uniqueSplittedQuestionOptions[i].split(','),
+          answer: correctAnswersForAllQuestions[i].split(','),
+        };
+
+        TESTS.push(testObj);
+      }
+
+      /* add tests to DB */
+      TESTS.forEach((test) => {
+        this.firebaseDB.addDataToDB('Tests', test);
+      });
     });
   }
 
@@ -246,7 +278,7 @@ export default class TestsAdmin extends UI {
       'input',
       null,
       ['type', 'checkbox'],
-      ['class', `${this.checkboxNumber}`]
+      ['class', `checkbox-option question${this.number} ${this.checkboxNumber}`]
     );
     const optionalInputText = UI.renderElement(
       divInputGroup,
@@ -264,6 +296,7 @@ export default class TestsAdmin extends UI {
       ['class', 'tests-admin__svg-button-del']
     );
     svgButtonDelete1.addEventListener('click', (event) => {
+      this.checkboxNumber--;
       const cont = event.target.closest('.inputRemoveOption');
       parent.removeChild(cont);
     });

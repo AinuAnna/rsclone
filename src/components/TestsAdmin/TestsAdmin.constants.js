@@ -15,7 +15,9 @@ function getOptionInputs() {
   return optionInputs;
 }
 
-const addQuestBtn = document.querySelector('.add-question-btn');
-const addTestBtn = document.querySelector('.add-test-btn');
+function getCheckboxOptions() {
+  const checkboxOptions = document.querySelectorAll('.checkbox-option');
+  return checkboxOptions;
+}
 
-export { deleteGroupTestsYesBtn, getTitle, getQuestionInputs, getOptionInputs, addQuestBtn, addTestBtn };
+export { deleteGroupTestsYesBtn, getTitle, getQuestionInputs, getOptionInputs, getCheckboxOptions };
