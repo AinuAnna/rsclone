@@ -69,7 +69,7 @@ export default class TestsAdmin extends UI {
       const ul = UI.renderElement(div, 'ul', null, ['class', 'tests-admin__ul']);
       const a = UI.renderElement(ul, 'a', null, ['class', 'tests-admin__a'], ['href', '#']);
       const li = UI.renderElement(a, 'li', title, ['class', 'tests-admin__li']);
-      const svgButtonDelete = UI.renderElement(
+      UI.renderElement(
         li,
         'a',
         `<svg width="16" height="16" viewBox="0 0 21 23" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -95,7 +95,7 @@ export default class TestsAdmin extends UI {
     // container for oll inputs in tests add
     const divTitleTestInput = UI.renderElement(titleAdd, 'div', null, ['class', 'col-md-cont']);
     const divInputQuestion = UI.renderElement(divTitleTestInput, 'div', null, ['class', 'col-md']);
-    const addTitleInput = UI.renderElement(
+    UI.renderElement(
       divInputQuestion,
       'input',
       null,
@@ -112,7 +112,7 @@ export default class TestsAdmin extends UI {
     ]);
     const divCol2questionAdd = UI.renderElement(questionAdd, 'div', null, ['class', 'col-md']);
     const divColMB2questionAdd = UI.renderElement(divCol2questionAdd, 'div', null, ['class', 'mb-0']);
-    const questionInput = UI.renderElement(
+    UI.renderElement(
       divColMB2questionAdd,
       'input',
       null,
@@ -245,7 +245,7 @@ export default class TestsAdmin extends UI {
       'tests-admin__items-add',
     ]);
     const divColQuestion = UI.renderElement(questionAdd, 'div', null, ['class', 'col-md']);
-    const questionInput = UI.renderElement(
+    UI.renderElement(
       divColQuestion,
       'input',
       null,
@@ -275,14 +275,14 @@ export default class TestsAdmin extends UI {
   addInputOption(parent) {
     const divInputGroup = UI.renderElement(parent, 'div', null, ['class', 'input-group inputRemoveOption']);
     const divInputText = UI.renderElement(divInputGroup, 'div', null, ['class', 'input-group-text']);
-    const optionalInput = UI.renderElement(
+    UI.renderElement(
       divInputText,
       'input',
       null,
       ['type', 'checkbox'],
       ['class', `checkbox-option question${this.number} ${this.checkboxNumber}`]
     );
-    const optionalInputText = UI.renderElement(
+    UI.renderElement(
       divInputGroup,
       'input',
       null,
