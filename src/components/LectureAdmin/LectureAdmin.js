@@ -17,50 +17,64 @@ export default class LectureAdmin extends UI {
       'class',
       'lecture-admin__list-main-title',
     ]);
-    const listTitle = UI.renderElement(listMainTitle, 'div', 'Раздел:', ['class', 'lecture-admin__list-title']);
+    const listTitle = UI.renderElement(listMainTitle, 'div', null, ['class', 'lecture-admin__list-title']);
+    const ol = UI.renderElement(listTitle, 'ol', null, ['class', 'lecture-admin__ul']);
     this.lecturesArray.forEach(({ id, title, subtitle }) => {
       const div = UI.renderElement(listTitle, 'div', null, ['data-id', id], ['class', 'lecture-admin__div']);
-      const ul = UI.renderElement(div, 'ul', null, ['class', 'lecture-admin__ul']);
-      const a = UI.renderElement(ul, 'a', null, ['class', 'lecture-admin__a'], ['href', '#']);
+      const a = UI.renderElement(ol, 'a', null, ['class', 'lecture-admin__a'], ['href', '#']);
       UI.renderElement(a, 'li', title, ['class', 'lecture-admin__li']);
-      const listSubtitle = UI.renderElement(listMainTitle, 'div', 'Тема:', ['class', 'lecture-admin__list-title']);
-      const div1 = UI.renderElement(listSubtitle, 'div', null, ['data-id', id], ['class', 'lecture-admin__div']);
-      const ul1 = UI.renderElement(div1, 'ul', null, ['class', 'lecture-admin__ul']);
-      const a1 = UI.renderElement(ul1, 'a', null, ['class', 'lecture-admin__a'], ['href', '#']);
-      UI.renderElement(a1, 'li', subtitle, ['class', 'lecture-admin__li']);
+      subtitle.forEach((value) => {
+        const div1 = UI.renderElement(ol, 'div', null, ['data-id', id], ['class', 'lecture-admin__div']);
+        const ul1 = UI.renderElement(div1, 'ul', null, ['class', 'lecture-admin__ul']);
+        const a1 = UI.renderElement(ul1, 'a', null, ['class', 'lecture-admin__a'], ['href', '#']);
+        UI.renderElement(a1, 'li', value, ['class', 'lecture-admin__li']);
+      });
     });
-
-    const container2 = UI.renderElement(wrapper, 'div', null, ['class', 'lecture-admin__container']);
-    const titleAddTests = UI.renderElement(container2, 'div', 'Добавление лекций:', [
-      'class',
-      'lecture-admin__title-add',
-    ]);
+    const form = UI.renderElement(wrapper, 'form', null, ['class', 'tests-admin__container needs-validation']);
+    const titleAddTests = UI.renderElement(form, 'div', 'Добавление лекций:', ['class', 'lecture-admin__title-add']);
 
     const titleAdd = UI.renderElement(titleAddTests, 'div', 'Введите название раздела:', [
       'class',
-      'lecture-admin__items-add',
+      'lecture-admin__items-add ',
     ]);
-    const divCol1 = UI.renderElement(titleAdd, 'div', null, ['class', 'col-md']);
-    const divColMB1 = UI.renderElement(divCol1, 'div', null, ['class', 'mb-0']);
-    const titleInput = UI.renderElement(divColMB1, 'input', null, ['class', 'form-control'], ['type', 'text']);
+    const divColTitleInput = UI.renderElement(titleAdd, 'div', null, ['class', 'col-md']);
+    const divColMBTitleInput = UI.renderElement(divColTitleInput, 'div', null, ['class', 'mb-0']);
+    const titleInput = UI.renderElement(
+      divColMBTitleInput,
+      'input',
+      null,
+      ['class', 'form-control'],
+      ['type', 'text'],
+      ['required', '']
+    );
     const titleAdd2 = UI.renderElement(titleAddTests, 'div', 'Введите название лекции:', [
       'class',
       'lecture-admin__items-add',
     ]);
-    const divCol2 = UI.renderElement(titleAdd2, 'div', null, ['class', 'col-md']);
-    const divColMB2 = UI.renderElement(divCol2, 'div', null, ['class', 'mb-0']);
-    const titleInput2 = UI.renderElement(divColMB2, 'input', null, ['class', 'form-control'], ['type', 'text']);
+    const divColDoc = UI.renderElement(titleAdd2, 'div', null, ['class', 'col-md']);
+    const divColMBDoc = UI.renderElement(divColDoc, 'div', null, ['class', 'mb-0']);
+    const titleInput2 = UI.renderElement(
+      divColMBDoc,
+      'input',
+      null,
+      ['class', 'form-control'],
+      ['type', 'text'],
+      ['required', '']
+    );
     const questionAdd = UI.renderElement(titleAddTests, 'div', 'Добавьте документ:', [
       'class',
       'lecture-admin__items-add',
     ]);
-    const divCol3 = UI.renderElement(questionAdd, 'div', null, ['class', 'col-md']);
-    const divColMB3 = UI.renderElement(divCol3, 'div', null, ['class', 'mb-0']);
-    const divInputGroup = UI.renderElement(divColMB3, 'div', null, ['class', 'input-group']);
-    const divInputText = UI.renderElement(divInputGroup, 'div', null, ['class', 'input-group-text']);
-    const optionalInput = UI.renderElement(divInputText, 'input', null, ['type', 'file']);
+    const optionalInput = UI.renderElement(
+      questionAdd,
+      'input',
+      null,
+      ['class', 'form-control form-control-lg'],
+      ['type', 'file'],
+      ['required', '']
+    );
     UI.renderElement(
-      this.rootNode,
+      titleAddTests,
       'button',
       'Добавить лекцию',
       ['class', 'btn btn-primary lecture-admin__btn-go'],
@@ -69,7 +83,7 @@ export default class LectureAdmin extends UI {
   }
 
   setData(tests) {
-    this.lecturesArray = tests.flat().map((el) => el);
+    this.lecturesArray = tests;
   }
 
   render() {
