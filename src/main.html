@@ -7,10 +7,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+    integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
   </head>
 
-  <body class="grey lighten-3"">
-
+  <body data-theme="default" data-layout="fluid">
+    <div class="wrapper">
     <!-- NAVBAR -->
     <nav class="z-depth-0 grey lighten-4">
       <div class="nav-wrapper container">
@@ -24,11 +26,29 @@
             <li class="logged-in" style="display: none;">
               <a href="#" class="grey-text" id="logout">Logout</a>
             </li>
-            <li class="logged-in" style="display: none;">
+            <!-- <li class="logged-in" style="display: none;">
               <a href="#" class="grey-text modal-trigger" data-target="modal-create">Create Guide</a>
+            </li> -->
+            
+            <li class="logged-out" style="display: none;">
+              <a href="#" class="grey-text ">Главная</a>
+              <!-- логично то, что видим когда открываем страницу -->
+            </li>
+            <li class="logged-out" style="display: none;">
+              <a href="#" class="grey-text ">Личный кабинет</a>
+              <!-- переход в личный кабинет, если зарегестрирован или вошел, если нет, поля регестрации -->
+            </li>
+            <li class="logged-out" style="display: none;">
+              <a href="#" class="grey-text " >Лекции</a>
+              <!-- страница со списком лекций, при нажатии переход на лекцию -->
+            </li>
+            <li class="logged-out" style="display: none;">
+              <a href="#" class="grey-text " >Тесты</a>
+              <!-- страница со списком тестов, при нажатии переход на тест -->
             </li>
             <li class="logged-out" style="display: none;">
               <a href="#" class="grey-text modal-trigger" data-target="modal-login">Login</a>
+              <!-- при нажатии на логин, как и на сигн ап, котрывается попап(или страница, надо решить), после нажатия на который мы попадаем в личный кабинет -->
             </li>
             <li class="logged-out" style="display: none;">
               <a href="#" class="grey-text modal-trigger" data-target="modal-signup">Sign up</a>
@@ -74,7 +94,8 @@
       </div>
     </div>
   
-    <!-- ACCOUNT MODAL -->
+    <!-- ACCOUNT MODAL
+    вместо этой штуки - раздел Профиль(открывается страничка полностью, не модальное окно) -->
     <div id="modal-account" class="modal">
       <div class="modal-content center-align">
         <h4>Account details</h4><br />
@@ -82,7 +103,8 @@
       </div>
     </div>
   
-    <!-- CREATE GUIDE MODAL -->
+    <!-- CREATE GUIDE MODAL
+    вообще не нужна нам, убрать отсюда и из классов, где вызывается -->
     <div id="modal-create" class="modal">
       <div class="modal-content">
         <h4>Create Guide</h4><br />
@@ -100,28 +122,44 @@
       </div>
     </div>
   
-    <!-- GUIDE LIST -->
+    <!-- GUIDE LIST
+    тоже самое, не нужно -->
     <div class="container" style="margin-top: 40px;">
       <ul class="collapsible z-depth-0 guides" style="border: none;">
-        <!-- <li>
-          <div class="collapsible-header grey lighten-4">Guide title</div>
-          <div class="collapsible-body white">Lorem ipsum dolor sit amet.</div>
-        </li>
-        <li>
-          <div class="collapsible-header grey lighten-4">Guide title</div>
-          <div class="collapsible-body white"><span>Lorem ipsum dolor sit amet.</span></div>
-        </li>
-        <li>
-          <div class="collapsible-header grey lighten-4">Guide title</div>
-          <div class="collapsible-body white"><span>Lorem ipsum dolor sit amet.</span></div>
-        </li>
-        <li>
-          <div class="collapsible-header grey lighten-4">Guide title</div>
-          <div class="collapsible-body white"><span>Lorem ipsum dolor sit amet.</span></div>
-        </li> -->
       </ul>
     </div>
-    
+    <main class="container">
+      <div class="container-fluid p-0">
+      </div>
+        </main>
+    <footer class="footer">
+      <div class="container-fluid">
+        <div class="row text-muted">
+          <div class="col-6 text-left">
+            <p class="mb-0">
+              <a href="https://rs.school/js/">
+                <img
+                  src="./assets/icon/rs_school_js.svg"
+                  alt="RS-Sсhool"
+                  class="footer__RS-logo"
+                  width="100"
+                  height="50"
+                />
+              </a>
+            </p>
+          </div>
+          <div class="col-6 text-right">
+            <ul class="list-inline">
+              <li><a href="https://github.com/AinuAnna">Терешко Анна</a></li>
+              <li><a href="https://github.com/dimit999">Ананьев Дмитрий</a></li>
+              <li><a href="https://github.com/tv-dem">Демчук Татьяна</a></li>
+              <li><a href="https://github.com/spaceragga">Михальченко Иван</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+</div>
     <!-- Compiled and minified JavaScript -->
     <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-auth.js"></script>
@@ -149,7 +187,9 @@
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="../src/utils/Authorization/auth.js"></script>
-    <script src="../src/utils/Authorization/index.js"></script>
+    <script src="../src/utils/Authorization/index.js"></script> 
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
   </body>
 
 </html>
