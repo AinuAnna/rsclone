@@ -1,9 +1,10 @@
 import './LectureAdmin.scss';
 import { Modal } from 'bootstrap';
 import UI from '../UIclass/UIclass';
-import { db, FirebaseDB } from '../../utils/FirebaseDB/FirebaseDB';
+import { FirebaseDB, db } from '../../utils/FirebaseDB/FirebaseDB';
+import '@firebase/firestore';
 
-import deleteLectureYesBtn from './LectureAdmin.constants';
+import { deleteLectureYesBtn, getSectionInput, getLectionInput, getFilePathInput } from './LectureAdmin.constants';
 
 export default class LectureAdmin extends UI {
   constructor(rootNode) {
@@ -20,8 +21,33 @@ export default class LectureAdmin extends UI {
     deleteLectureModal.addEventListener('show.bs.modal', (deleteEvent) => {
       const button = deleteEvent.relatedTarget;
       const lectureId = button.getAttribute('data-bs-lectureid');
+
+      const lectionTitle = deleteEvent.relatedTarget.closest('a').parentNode.childNodes[0].children[0].innerText;
+
       deleteLectureYesBtn.addEventListener('click', () => {
-        this.firebaseDB.deleteItem('Lecture', lectureId);
+        this.lecturesArray.forEach(({ id, title, subtitle, text }) => {
+          if (id === lectureId) {
+            const indexOfTitle = subtitle.indexOf(lectionTitle);
+            subtitle.splice(indexOfTitle, 1);
+            const arraySubtitle = subtitle;
+
+            text.splice(indexOfTitle, 1);
+            const arrayPath = text;
+
+            const lectionObj = {
+              title,
+              subtitle: arraySubtitle,
+              text: arrayPath,
+            };
+            this.firebaseDB.updateDataInDB('Lecture', lectureId, lectionObj);
+            this.render();
+
+            if (subtitle.length === 0) {
+              this.firebaseDB.deleteItem('Lecture', lectureId);
+            }
+          }
+        });
+
         deleteLectureModalPopUp.hide();
         this.render();
       });
@@ -51,7 +77,7 @@ export default class LectureAdmin extends UI {
     const listTitle = UI.renderElement(listMainTitle, 'div', null, ['class', 'lecture-admin__list-title']);
     const ol = UI.renderElement(listTitle, 'ol', null, ['class', 'lecture-admin__ul']);
     this.lecturesArray.forEach(({ id, title, subtitle }) => {
-      const div = UI.renderElement(listTitle, 'div', null, ['data-id', id], ['class', 'lecture-admin__div']);
+      UI.renderElement(listTitle, 'div', null, ['data-id', id], ['class', 'lecture-admin__div']);
       const a = UI.renderElement(ol, 'a', null, ['class', 'lecture-admin__a'], ['href', '#']);
       UI.renderElement(a, 'li', title, ['class', 'lecture-admin__li']);
       subtitle.forEach((value) => {
@@ -59,7 +85,9 @@ export default class LectureAdmin extends UI {
         const ul1 = UI.renderElement(div1, 'ul', null, ['class', 'lecture-admin__ul']);
         const a1 = UI.renderElement(ul1, 'a', null, ['class', 'lecture-admin__a'], ['href', '#']);
         UI.renderElement(a1, 'li', value, ['class', 'lecture-admin__li']);
-        const svgButtonDelete = UI.renderElement(
+
+        /* svgButtonDelete */
+        UI.renderElement(
           ul1,
           'a',
           `<svg width="16" height="16" viewBox="0 0 21 23" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -80,11 +108,13 @@ export default class LectureAdmin extends UI {
     ]);
     const divColTitleInput = UI.renderElement(titleAdd, 'div', null, ['class', 'col-md']);
     const divColMBTitleInput = UI.renderElement(divColTitleInput, 'div', null, ['class', 'mb-0']);
-    const titleInput = UI.renderElement(
+
+    /* section Input */
+    UI.renderElement(
       divColMBTitleInput,
       'input',
       null,
-      ['class', 'form-control'],
+      ['class', 'form-control section-input'],
       ['type', 'text'],
       ['required', '']
     );
@@ -94,35 +124,80 @@ export default class LectureAdmin extends UI {
     ]);
     const divColDoc = UI.renderElement(titleAdd2, 'div', null, ['class', 'col-md']);
     const divColMBDoc = UI.renderElement(divColDoc, 'div', null, ['class', 'mb-0']);
-    const titleInput2 = UI.renderElement(
+
+    /* lection Input */
+    UI.renderElement(
       divColMBDoc,
       'input',
       null,
-      ['class', 'form-control'],
+      ['class', 'form-control lection-input'],
       ['type', 'text'],
       ['required', '']
     );
-    const questionAdd = UI.renderElement(titleAddTests, 'div', 'Добавьте документ:', [
+    const documentAdd = UI.renderElement(titleAddTests, 'div', 'Добавьте документ:', [
       'class',
       'lecture-admin__items-add',
     ]);
-    const optionalInput = UI.renderElement(
-      questionAdd,
+
+    /* file path Input */
+    UI.renderElement(
+      documentAdd,
       'input',
       null,
-      ['class', 'form-control form-control-lg'],
+      ['class', 'form-control form-control-lg file-path'],
       ['type', 'file'],
       ['required', '']
     );
-    UI.renderElement(
+    const addLection = UI.renderElement(
       titleAddTests,
       'button',
       'Добавить лекцию',
-      ['class', 'btn btn-primary lecture-admin__btn-go'],
+      ['class', 'btn btn-primary lecture-admin__btn-go add-lection-btn'],
       ['type', 'submit'],
       ['data-bs-toggle', 'modal'],
       ['data-bs-target', '#addLectureModal']
     );
+
+    addLection.addEventListener('click', (e) => {
+      e.preventDefault();
+      const sectionTitle = getSectionInput();
+      const lectionTitle = getLectionInput();
+      const filePath = getFilePathInput();
+
+      /* add lection to DB */
+      const arrayTitleLections = [];
+
+      this.lecturesArray.forEach(({ title }) => {
+        arrayTitleLections.push(title);
+      });
+
+      if (arrayTitleLections.includes(sectionTitle.value)) {
+        this.lecturesArray.forEach(({ id, title, subtitle, text }) => {
+          if (title === sectionTitle.value) {
+            subtitle.push(lectionTitle.value);
+            const arraySubtitle = subtitle;
+
+            text.push(filePath.value);
+            const arrayPath = text;
+
+            const lectionObj = {
+              title: sectionTitle.value,
+              subtitle: arraySubtitle,
+              text: arrayPath,
+            };
+            this.firebaseDB.updateDataInDB('Lecture', id, lectionObj);
+            this.render();
+          }
+        });
+      } else {
+        const lectionObj = {
+          title: sectionTitle.value,
+          subtitle: [lectionTitle.value],
+          text: [filePath.value],
+        };
+        this.firebaseDB.addDataToDB('Lecture', lectionObj);
+      }
+    });
   }
 
   setData(tests) {

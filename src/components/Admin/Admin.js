@@ -19,13 +19,13 @@ import {
   editYesBtn,
 } from './Admin.constants';
 
-port default class Admin extends UI {
-  consuctor(rootNode) {
-  super();
-    thisootNode = rootNode;
-    thisetAddUserPopUp();
-    th.getEditUserPopUp();
-  this.deleteUser();
+export default class Admin extends UI {
+  constructor(rootNode) {
+    super();
+    this.rootNode = rootNode;
+    this.etAddUserPopUp();
+    this.getEditUserPopUp();
+    this.deleteUser();
     this.addUser();
     this.id = null;
     this.updateUser();
