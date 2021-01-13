@@ -11,12 +11,19 @@ const db = firebase.firestore();
 export class FirebaseDB {
   constructor() {
     this.usersArray = [];
+    this.testsArray = [];
+    this.itemByID = {};
     this.getUsers();
   }
 
   async getUsers() {
     this.usersArray = await this.getData('Users');
     return this.usersArray;
+  }
+
+  async getTests() {
+    this.testsArray = await this.getData('Tests');
+    return this.testsArray;
   }
 
   /**
@@ -37,6 +44,24 @@ export class FirebaseDB {
         });
       });
     return list;
+  }
+
+  /**
+   * Get data by ID from Firebase
+   * @param {table} - name of table from firebase https://console.firebase.google.com/project/rsclone-8fee8/firestore/data~2FUsers~2FEkGveQJ1jdNb6xJauWEy.
+   * @param {id} - id of item from UI.
+   */
+  async getDataById(table, id) {
+    let item = {};
+    await db
+      .collection(table)
+      .doc(id)
+      .get()
+      .then((snapshot) => {
+        item = snapshot.data();
+        this.itemByID = item;
+      });
+    return item;
   }
 
   /**

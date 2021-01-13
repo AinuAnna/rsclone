@@ -7,11 +7,23 @@ import { FirebaseDB, db } from '../../utils/FirebaseDB/FirebaseDB';
 import deleteYesBtn from './TestsAdmin.constants';
 import '@firebase/firestore';
 
+import {
+  deleteGroupTestsYesBtn,
+  getTitle,
+  getQuestionInputs,
+  getOptionInputs,
+  getCheckboxOptions,
+} from './TestsAdmin.constants';
+
 export default class TestsAdmin extends UI {
   constructor(rootNode) {
     super();
     this.rootNode = rootNode;
     this.id = null;
+    this.number = 1;
+    this.checkboxNumber = 1;
+    this.groupTests = null;
+    this.addGroupTests = null;
     this.deleteTest();
     this.listenerTests();
     this.firebaseDB = new FirebaseDB();
@@ -23,8 +35,13 @@ export default class TestsAdmin extends UI {
     deleteTestModal.addEventListener('show.bs.modal', (deleteEvent) => {
       const button = deleteEvent.relatedTarget;
       const testId = button.getAttribute('data-bs-testid');
-      deleteYesBtn.addEventListener('click', () => {
-        this.firebaseDB.deleteItem('Tests', testId);
+      const { testsArray } = this.firebaseDB;
+      const removedTestTitle = testsArray.filter((item) => item.id === testId)[0].title;
+      deleteGroupTestsYesBtn.addEventListener('click', () => {
+        const filteredGroupTests = testsArray.filter((item) => item.title === removedTestTitle);
+        filteredGroupTests.forEach((test) => {
+          this.firebaseDB.deleteItem('Tests', test.id);
+        });
         deleteTestModalPopUp.hide();
         this.render();
       });
@@ -64,74 +81,213 @@ export default class TestsAdmin extends UI {
         ['data-bs-testid', id]
       );
     });
+
+    // container with button add test
     const form = UI.renderElement(wrapper, 'form', null, ['class', 'tests-admin__container needs-validation']);
+
+    // container with fields(title test, question, option)
     const titleAddTests = UI.renderElement(form, 'div', 'Добавление тестов:', ['class', 'tests-admin__title-add']);
 
     const titleAdd = UI.renderElement(titleAddTests, 'div', 'Введите название теста:', [
       'class',
       'tests-admin__items-add',
     ]);
-    const divCol2 = UI.renderElement(titleAdd, 'div', null, ['class', 'col-md']);
-    const divColMB2 = UI.renderElement(divCol2, 'div', null, ['class', 'mb-0']);
+
+    // container for oll inputs in tests add
+    const divTitleTestInput = UI.renderElement(titleAdd, 'div', null, ['class', 'col-md-cont']);
+    const divInputQuestion = UI.renderElement(divTitleTestInput, 'div', null, ['class', 'col-md']);
     const addTitleInput = UI.renderElement(
-      divColMB2,
+      divInputQuestion,
       'input',
       null,
-      ['class', 'form-control'],
+      ['class', 'form-control title-test-input'],
       ['type', 'text'],
       ['required', '']
     );
 
-    const addQuestionBtn = UI.renderElement(titleAdd, 'button', 'Добавить вопрос', [
+    const divInputQuestionCont = UI.renderElement(divTitleTestInput, 'div', null, ['class', 'col-md']);
+    // container for question
+    const questionAdd = UI.renderElement(divInputQuestionCont, 'div', 'Введите вопрос:', [
+      'class',
+      'tests-admin__items-add',
+    ]);
+    const divCol2questionAdd = UI.renderElement(questionAdd, 'div', null, ['class', 'col-md']);
+    const divColMB2questionAdd = UI.renderElement(divCol2questionAdd, 'div', null, ['class', 'mb-0']);
+    const questionInput = UI.renderElement(
+      divColMB2questionAdd,
+      'input',
+      null,
+      ['class', `form-control question-input question${this.number}`],
+      ['type', 'text'],
+      ['required', '']
+    );
+    // container for option
+    const optionAdd = UI.renderElement(divInputQuestionCont, 'div', 'Введите варианты ответов:', [
+      'class',
+      'tests-admin__items-add-option',
+    ]);
+    const divColoptionAdd = UI.renderElement(optionAdd, 'div', null, ['class', 'col-md']);
+    const divColMBoptionAdd = UI.renderElement(divColoptionAdd, 'div', null, ['class', 'mb-0']);
+    this.addInputOption(divColMBoptionAdd);
+    // container for button add option
+    const addOptionBtn = UI.renderElement(optionAdd, 'button', '+', [
       'class',
       'btn btn-primary tests-admin__add-option',
     ]);
 
-    addQuestionBtn.addEventListener('click', () => {
-      this.addQuestion(titleAdd);
+    addOptionBtn.addEventListener('click', () => {
+      this.checkboxNumber++;
+      this.addInputOption(divColMBoptionAdd);
     });
+
+    // container for button add question
+    const addQuestionBtn = UI.renderElement(titleAddTests, 'button', 'Добавить вопрос', [
+      'class',
+      'btn btn-primary tests-admin__add-option add-question-btn',
+    ]);
+
+    // limit for buttons(9 fields)
+    let limit = 0;
+    addQuestionBtn.addEventListener('click', () => {
+      if (limit < 8) {
+        this.addQuestion(divTitleTestInput, this.number);
+        limit++;
+      } else {
+        this.hidden = true;
+      }
+    });
+
+    // button add test submit
     const divForm = UI.renderElement(form, 'div', null, ['class', 'tests-admin__container']);
-    UI.renderElement(
+    const addTest = UI.renderElement(
       divForm,
       'button',
       'Добавить тест',
-      ['class', 'btn btn-primary tests-admin__btn-go'],
+      ['class', 'btn btn-primary tests-admin__btn-go add-test-btn'],
       ['type', 'submit']
     );
+
+    addTest.addEventListener('click', (e) => {
+      e.preventDefault();
+      const QUESTION_TITLE = getTitle().value;
+      const QTY_QUESTIONS = [];
+      const allQuestionOptions = [];
+      const uniqueSplittedQuestionOptions = [];
+      let questionOptionObj = {};
+      let questionsObj = {};
+
+      /* Get array of values from question inputs */
+      getQuestionInputs().forEach((questionInputItem) => {
+        questionsObj = {
+          questionNumber: questionInputItem.classList[2],
+          questionValue: questionInputItem.value,
+        };
+        QTY_QUESTIONS.push(questionsObj);
+      });
+
+      /* Get array of values from option inputs */
+      getOptionInputs().forEach((optionInputItem) => {
+        questionOptionObj = {
+          questionNumber: optionInputItem.classList[2],
+          optionValue: optionInputItem.value,
+        };
+        allQuestionOptions.push(questionOptionObj);
+      });
+
+      /* Get array of options splitted by number of questions */
+      QTY_QUESTIONS.forEach((question) => {
+        const uniqueQuestionOptions = allQuestionOptions.filter(
+          (option) => option.questionNumber === question.questionNumber
+        );
+        const uniqueOption = uniqueQuestionOptions.map((option) => option.optionValue).join(',');
+        uniqueSplittedQuestionOptions.push(uniqueOption);
+      });
+
+      /* Get array of correct options to question splitted by number of questions */
+      const correctAnswersForAllQuestions = [];
+      QTY_QUESTIONS.forEach((question) => {
+        const correctAnswersForQuestion = [];
+        getCheckboxOptions().forEach((checkbox) => {
+          if (checkbox.classList[1] === question.questionNumber && checkbox.checked === true) {
+            correctAnswersForQuestion.push(checkbox.classList[2]);
+          }
+        });
+        correctAnswersForAllQuestions.push(correctAnswersForQuestion.join(','));
+      });
+
+      /* generate array of */
+      const TESTS = [];
+      for (let i = 0; i < QTY_QUESTIONS.length; i++) {
+        const testObj = {
+          title: QUESTION_TITLE,
+          question: QTY_QUESTIONS[i].questionValue,
+          option: uniqueSplittedQuestionOptions[i].split(','),
+          answer: correctAnswersForAllQuestions[i].split(','),
+        };
+
+        TESTS.push(testObj);
+      }
+
+      /* add tests to DB */
+      TESTS.forEach((test) => {
+        this.firebaseDB.addDataToDB('Tests', test);
+      });
+    });
   }
 
   addQuestion(parent) {
-    const questionAdd = UI.renderElement(parent, 'div', 'Введите вопрос:', ['class', 'tests-admin__items-add']);
-    const divCol2 = UI.renderElement(questionAdd, 'div', null, ['class', 'col-md']);
-    const divColMB2 = UI.renderElement(divCol2, 'div', null, ['class', 'mb-0']);
+    this.number++;
+    this.checkboxNumber = 1;
+    const divInputQuestion = UI.renderElement(parent, 'div', null, ['class', 'col-md']);
+    const questionAdd = UI.renderElement(divInputQuestion, 'div', 'Введите вопрос:', [
+      'class',
+      'tests-admin__items-add',
+    ]);
+    const divColQuestion = UI.renderElement(questionAdd, 'div', null, ['class', 'col-md']);
     const questionInput = UI.renderElement(
-      divColMB2,
+      divColQuestion,
       'input',
       null,
-      ['class', 'form-control'],
+      ['class', `form-control question-input question${this.number}`],
       ['type', 'text'],
       ['required', '']
     );
-    const optionAdd = UI.renderElement(parent, 'div', 'Введите варианты ответов:', [
+    const optionAdd = UI.renderElement(divInputQuestion, 'div', 'Введите варианты ответов:', [
       'class',
       'tests-admin__items-add-option',
     ]);
-    const divCol3 = UI.renderElement(optionAdd, 'div', null, ['class', 'col-md']);
-    const divColMB3 = UI.renderElement(divCol3, 'div', null, ['class', 'mb-0']);
-    this.addInputOption(divColMB3);
+    const divColoptionAdd = UI.renderElement(optionAdd, 'div', null, ['class', 'col-md']);
+    const divColMBoptionAdd = UI.renderElement(divColoptionAdd, 'div', null, ['class', 'mb-0']);
+    this.addInputOption(divColMBoptionAdd);
 
-    const addOptionBtn = UI.renderElement(divCol3, 'button', '+', ['class', 'btn btn-primary tests-admin__add-option']);
+    const addOptionBtn = UI.renderElement(divColoptionAdd, 'button', '+', [
+      'class',
+      'btn btn-primary tests-admin__add-option add-option',
+    ]);
 
     addOptionBtn.addEventListener('click', () => {
-      this.addInputOption(divColMB3);
+      this.checkboxNumber++;
+      this.addInputOption(divColMBoptionAdd);
     });
   }
 
   addInputOption(parent) {
     const divInputGroup = UI.renderElement(parent, 'div', null, ['class', 'input-group inputRemoveOption']);
     const divInputText = UI.renderElement(divInputGroup, 'div', null, ['class', 'input-group-text']);
-    const optionalInput = UI.renderElement(divInputText, 'input', null, ['type', 'checkbox']);
-    const optionalInputText = UI.renderElement(divInputGroup, 'input', null, ['class', 'form-control']);
+    const optionalInput = UI.renderElement(
+      divInputText,
+      'input',
+      null,
+      ['type', 'checkbox'],
+      ['class', `checkbox-option question${this.number} ${this.checkboxNumber}`]
+    );
+    const optionalInputText = UI.renderElement(
+      divInputGroup,
+      'input',
+      null,
+      ['class', `form-control option-input question${this.number}`],
+      ['required', '']
+    );
     const svgButtonDelete1 = UI.renderElement(
       divInputGroup,
       'a',
@@ -141,6 +297,7 @@ export default class TestsAdmin extends UI {
       ['class', 'tests-admin__svg-button-del']
     );
     svgButtonDelete1.addEventListener('click', (event) => {
+      this.checkboxNumber--;
       const cont = event.target.closest('.inputRemoveOption');
       parent.removeChild(cont);
     });
@@ -151,8 +308,10 @@ export default class TestsAdmin extends UI {
   }
 
   render() {
-    this.firebaseDB.getData('Tests').then((data) => {
-      this.setData(data);
+    this.firebaseDB.getTests().then((data) => {
+      this.groupTests = data;
+      const uniqueTestsCollections = [...new Map(data.map((item) => [item.title, item])).values()];
+      this.setData(uniqueTestsCollections);
       this.rootNode.innerHTML = '';
       this.renderM();
     });
