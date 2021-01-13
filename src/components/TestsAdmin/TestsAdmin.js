@@ -81,6 +81,33 @@ export default class TestsAdmin extends UI {
       ['type', 'text'],
       ['required', '']
     );
+    const questionAdd = UI.renderElement(divCol2, 'div', 'Введите вопрос:', ['class', 'tests-admin__items-add']);
+    const divCol2Question = UI.renderElement(questionAdd, 'div', null, ['class', 'col-md']);
+    const divColMB2Question = UI.renderElement(divCol2Question, 'div', null, ['class', 'mb-0']);
+    const questionInput = UI.renderElement(
+      divColMB2Question,
+      'input',
+      null,
+      ['class', 'form-control'],
+      ['type', 'text'],
+      ['required', '']
+    );
+    const optionAdd = UI.renderElement(divCol2, 'div', 'Введите варианты ответов:', [
+      'class',
+      'tests-admin__items-add-option',
+    ]);
+    const divCol3Question = UI.renderElement(optionAdd, 'div', null, ['class', 'col-md']);
+    const divColMB3Question = UI.renderElement(divCol3Question, 'div', null, ['class', 'mb-0']);
+    this.addInputOption(divColMB3Question);
+
+    const addOptionBtn = UI.renderElement(divCol3Question, 'button', '+', [
+      'class',
+      'btn btn-primary tests-admin__add-option',
+    ]);
+
+    addOptionBtn.addEventListener('click', () => {
+      this.addInputOption(divColMB3Question);
+    });
 
     const addQuestionBtn = UI.renderElement(titleAdd, 'button', 'Добавить вопрос', [
       'class',
@@ -103,10 +130,10 @@ export default class TestsAdmin extends UI {
 
   addQuestion(parent) {
     const questionAdd = UI.renderElement(parent, 'div', 'Введите вопрос:', ['class', 'tests-admin__items-add']);
-    const divCol2 = UI.renderElement(questionAdd, 'div', null, ['class', 'col-md']);
-    const divColMB2 = UI.renderElement(divCol2, 'div', null, ['class', 'mb-0']);
+    const divCol2Question = UI.renderElement(questionAdd, 'div', null, ['class', 'col-md']);
+    const divColMB2Question = UI.renderElement(divCol2Question, 'div', null, ['class', 'mb-0']);
     const questionInput = UI.renderElement(
-      divColMB2,
+      divColMB2Question,
       'input',
       null,
       ['class', 'form-control'],
