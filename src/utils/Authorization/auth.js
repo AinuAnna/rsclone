@@ -8,11 +8,45 @@
 // const auth = firebase.auth();
 
 // add firebase data/guides
+/*
+// add admin cloud function
+const adminForm = document.querySelector('.admin-actions');
+adminForm.addEventListener('submit', (e) => {
+  e.preventDefault();
 
+  // const adminEmail = document.querySelector('#admin-email').value;
+  // const addAdminRole = functions.httpsCallable('addAdminRole');
+  // addAdminRole({ email: adminEmail }).then(result => {
+  //   console.log(result);
+  // });
+
+  // auth.then((cred) =>
+  //   db
+  //     .collection('UsersBio')
+  //     .doc(cred.user.uid)
+  //     .set({
+  //       status: document.querySelector('#admin-email').value,
+  //     })
+  // );
+  const user = firebase.auth().currentUser;
+  console.log(user);
+  // user
+  //   .updateProfile({
+  //     displayName: 'Admin',
+  //   })
+  //   .then(() => {
+  //     // Update successful.
+  //   })
+  //   .catch((error) => {
+  //     // An error happened.
+  //   });
+});
+*/
 // listen for auth status changes
-auth.onAuthStateChanged(user => {
+auth.onAuthStateChanged((user) => {
   if (user) {
-    db.collection('Guides').onSnapshot(snapshot => {
+    db.collection('Guides').onSnapshot(
+      (snapshot) => {
         setupGuides(snapshot.docs);
         setupUI(user);
       },
@@ -55,14 +89,20 @@ signupForm.addEventListener('submit', (e) => {
 
   console.log(email, password);
 
-  // sign up the user
-  auth.createUserWithEmailAndPassword(email, password).then((cred) => {
-    console.log(cred.user);
-    // close the signup modal & reset form
-    const modal = document.querySelector('#modal-signup');
-    M.Modal.getInstance(modal).close();
-    signupForm.reset();
-  });
+  // sign up the user & add firestore data
+  auth
+    .createUserWithEmailAndPassword(email, password)
+    .then((cred) =>
+      db.collection('UsersBio').doc(cred.user.uid).set({
+        bio: signupForm['signup-bio'].value,
+      })
+    )
+    .then(() => {
+      // close the signup modal & reset form
+      const modal = document.querySelector('#modal-signup');
+      M.Modal.getInstance(modal).close();
+      signupForm.reset();
+    });
 });
 
 // logout
