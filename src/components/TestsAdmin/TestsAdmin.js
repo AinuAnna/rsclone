@@ -4,6 +4,7 @@ import './TestsAdmin.scss';
 import { Modal } from 'bootstrap';
 import UI from '../UIclass/UIclass';
 import { FirebaseDB, db } from '../../utils/FirebaseDB/FirebaseDB';
+import deleteYesBtn from './TestsAdmin.constants';
 import '@firebase/firestore';
 
 import {
