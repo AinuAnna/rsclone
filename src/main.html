@@ -102,31 +102,13 @@
         <div class="account-details"></div>
       </div>
     </div>
-  
-    <!-- CREATE GUIDE MODAL
-    вообще не нужна нам, убрать отсюда и из классов, где вызывается -->
+
     <div id="modal-create" class="modal">
       <div class="modal-content">
         <h4>Create Guide</h4><br />
         <form id="create-form">
-          <div class="input-field">
-            <input type="text" id="title" required>
-            <label for="title">Guide Title</label>
-          </div>
-          <div class="input-field">
-            <textarea id="content" class="materialize-textarea" required></textarea>
-            <label for="content">Guide Content</label>
-          </div>
-          <button class="btn yellow darken-2 z-depth-0">Create</button>
         </form>
       </div>
-    </div>
-  
-    <!-- GUIDE LIST
-    тоже самое, не нужно -->
-    <div class="container" style="margin-top: 40px;">
-      <ul class="collapsible z-depth-0 guides" style="border: none;">
-      </ul>
     </div>
     <main class="container">
       <div class="container-fluid p-0">
@@ -159,34 +141,6 @@
             </div>
           </div>
         </footer>
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-firestore.js"></script>
-    <script>
-      // Initialize Firebase
-      const firebaseConfig = {
-        apiKey: 'AIzaSyDNs0n7GYZIl3PAk7HpxsER66AVZPyrl18',
-        authDomain: 'rsclone-8fee8.firebaseapp.com',
-        projectId: 'rsclone-8fee8',
-        storageBucket: 'rsclone-8fee8.appspot.com',
-        messagingSenderId: '136908602011',
-        appId: '1:136908602011:web:de6b7cfdd486208bd0643e',
-        measurementId: 'G-D8427FL6MX',
-      };
-
-      firebase.initializeApp(firebaseConfig);
-  
-      // make auth and firestore references
-      const auth = firebase.auth();
-      const db = firebase.firestore();
-  
-      // update firestore settings
-      db.settings({ timestampsInSnapshots: true });
-    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script src="../src/utils/Authorization/auth.js"></script>
-    <script src="../src/utils/Authorization/index.js"></script> 
   </body>
-
 </html>

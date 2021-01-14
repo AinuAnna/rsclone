@@ -1,11 +1,16 @@
+/* eslint-disable class-methods-use-this */
 /* eslint-disable no-console */
-// import { firebase } from '@firebase/app';
-// import firebaseConfig from '../FirebaseDB/FirebaseDB.constants';
-// import '@firebase/firestore';
-// import '@firebase/auth';
+import { firebase } from '@firebase/app';
+import firebaseConfig from '../FirebaseDB/FirebaseDB.constants';
+import '@firebase/firestore';
+import '@firebase/auth';
 
-// firebase.initializeApp(firebaseConfig);
-// const auth = firebase.auth();
+// update firesto
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+const auth = firebase.auth();
+db.settings({ timestampsInSnapshots: true });
+// make auth and firestore references
 
 // add firebase data/guides
 /*
@@ -44,90 +49,152 @@ adminForm.addEventListener('submit', (e) => {
 */
 // listen for auth status changes
 
-auth.onAuthStateChanged((user) => {
-  if (user) {
-    db.collection('Guides').onSnapshot(
-      (snapshot) => {
-        setupGuides(snapshot.docs);
-        setupUI(user);
-      },
-      (err) => console.log(err.message)
-    );
-  } else {
-    setupUI();
-    setupGuides([]);
+export default class Auth {
+  AuthStateChanged() {
+    // const guideList = document.querySelector('.guides');
+    const loggedOutLinks = document.querySelectorAll('.logged-out');
+    const loggedInLinks = document.querySelectorAll('.logged-in');
+    const accountDetails = document.querySelector('.account-details');
+
+    const setupUI = (user) => {
+      if (user) {
+        // account info
+        db.collection('UsersBio')
+          .doc(user.uid)
+          .get()
+          .then((doc) => {
+            const html = `
+        <div>Logged in as ${user.email}</div>
+        <div>${doc.data().bio}</div>
+      `;
+            accountDetails.innerHTML = html;
+          });
+        // toggle user UI elements
+        loggedInLinks.forEach((item) => (item.style.display = 'block'));
+        loggedOutLinks.forEach((item) => (item.style.display = 'none'));
+      } else {
+        // clear account info
+        accountDetails.innerHTML = '';
+        // toggle user elements
+        loggedInLinks.forEach((item) => (item.style.display = 'none'));
+        loggedOutLinks.forEach((item) => (item.style.display = 'block'));
+      }
+    };
+
+    // setup guides
+    // const setupGuides = (data) => {
+    //   if (data.length) {
+    //     let html = '';
+    //     data.forEach((doc) => {
+    //       const guide = doc.data();
+    //       const li = `
+    //     <li>
+    //       <div class="collapsible-header grey lighten-4"> ${guide.title} </div>
+    //       <div class="collapsible-body white"> ${guide.content} </div>
+    //     </li>
+    //   `;
+    //       html += li;
+    //     });
+    //     guideList.innerHTML = html;
+    //   } else {
+    //     guideList.innerHTML = '<h5 class="center-align">Login to view guides</h5>';
+    //   }
+    // };
+
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        db.collection('Guides').onSnapshot(
+          (snapshot) => {
+            // setupGuides(snapshot.docs);
+            setupUI(user);
+          },
+          (err) => console.log(err.message)
+        );
+      } else {
+        setupUI();
+        // setupGuides([]);
+      }
+    });
+
+    // create new guide
+    const createForm = document.querySelector('#create-form');
+    createForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      db.collection('Guides')
+        .add({
+          title: createForm.title.value,
+          content: createForm.content.value,
+        })
+        .then(() => {
+          // close the create modal & reset form
+          const modal = document.querySelector('#modal-create');
+          M.Modal.getInstance(modal).close();
+          createForm.reset();
+        })
+        .catch((err) => {
+          console.log(err.message);
+        });
+    });
+
+    // signup
+    const signupForm = document.querySelector('#signup-form');
+    signupForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      // get user info
+      const email = signupForm['signup-email'].value;
+      const password = signupForm['signup-password'].value;
+
+      console.log(email, password);
+
+      // sign up the user & add firestore data
+      auth
+        .createUserWithEmailAndPassword(email, password)
+        .then((cred) =>
+          db.collection('UsersBio').doc(cred.user.uid).set({
+            bio: signupForm['signup-bio'].value,
+          })
+        )
+        .then(() => {
+          // close the signup modal & reset form
+          const modal = document.querySelector('#modal-signup');
+          M.Modal.getInstance(modal).close();
+          signupForm.reset();
+        });
+    });
+
+    // logout
+    const logout = document.querySelector('#logout');
+    logout.addEventListener('click', (e) => {
+      e.preventDefault();
+      auth.signOut();
+    });
+
+    // login
+    const loginForm = document.querySelector('#login-form');
+    loginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      // get user info
+      const email = loginForm['login-email'].value;
+      const password = loginForm['login-password'].value;
+
+      // log the user in
+      auth.signInWithEmailAndPassword(email, password).then((cred) => {
+        console.log(cred.user);
+        // close the signup modal & reset form
+        const modal = document.querySelector('#modal-login');
+        M.Modal.getInstance(modal).close();
+        loginForm.reset();
+      });
+    });
+    // setup materialize components
+    document.addEventListener('DOMContentLoaded', () => {
+      const modals = document.querySelectorAll('.modal');
+      M.Modal.init(modals);
+
+      const items = document.querySelectorAll('.collapsible');
+      M.Collapsible.init(items);
+    });
   }
-});
-
-// create new guide
-const createForm = document.querySelector('#create-form');
-createForm.addEventListener('submit', (e) => {
-  e.preventDefault();
-  db.collection('Guides')
-    .add({
-      title: createForm.title.value,
-      content: createForm.content.value,
-    })
-    .then(() => {
-      // close the create modal & reset form
-      const modal = document.querySelector('#modal-create');
-      M.Modal.getInstance(modal).close();
-      createForm.reset();
-    })
-    .catch((err) => {
-      console.log(err.message);
-    });
-});
-
-// signup
-const signupForm = document.querySelector('#signup-form');
-signupForm.addEventListener('submit', (e) => {
-  e.preventDefault();
-
-  // get user info
-  const email = signupForm['signup-email'].value;
-  const password = signupForm['signup-password'].value;
-
-  console.log(email, password);
-
-  // sign up the user & add firestore data
-  auth
-    .createUserWithEmailAndPassword(email, password)
-    .then((cred) =>
-      db.collection('UsersBio').doc(cred.user.uid).set({
-        bio: signupForm['signup-bio'].value,
-      })
-    )
-    .then(() => {
-      // close the signup modal & reset form
-      const modal = document.querySelector('#modal-signup');
-      M.Modal.getInstance(modal).close();
-      signupForm.reset();
-    });
-});
-
-// logout
-const logout = document.querySelector('#logout');
-logout.addEventListener('click', (e) => {
-  e.preventDefault();
-  auth.signOut();
-});
-
-// login
-const loginForm = document.querySelector('#login-form');
-loginForm.addEventListener('submit', (e) => {
-  e.preventDefault();
-
-  // get user info
-  const email = loginForm['login-email'].value;
-  const password = loginForm['login-password'].value;
-
-  // log the user in
-  auth.signInWithEmailAndPassword(email, password).then((cred) => {
-    console.log(cred.user);
-    // close the signup modal & reset form
-    const modal = document.querySelector('#modal-login');
-    M.Modal.getInstance(modal).close();
-    loginForm.reset();
-  });
-});
+}

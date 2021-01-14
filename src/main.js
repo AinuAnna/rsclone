@@ -1,3 +1,5 @@
 import './sass/style.scss';
-// import './utils/Authorization/auth';
-// import './utils/Authorization/index';
+import Auth from './utils/Authorization/auth';
+
+const auth = new Auth();
+auth.AuthStateChanged();

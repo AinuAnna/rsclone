@@ -2,7 +2,8 @@
   "name": "rsclone",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "app": "index.js",
+  "main": "main.js",
   "scripts": {
     "start": "webpack serve",
     "build": "webpack",
