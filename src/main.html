@@ -7,18 +7,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
-    integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
   </head>
 
   <body data-theme="default" data-layout="fluid">
-    <div class="wrapper">
     <!-- NAVBAR -->
-    <nav class="z-depth-0 grey lighten-4">
-      <div class="nav-wrapper container">
-        <a href="#" class="brand-logo">
-          <img src="./assets/icon/rs_school_js.svg" style="width: 50px; margin-top: 10px;">
-        </a>
+    <nav class="navbar navbar-expand navbar-light navbar-bg">
+      <div class="navbar-collapse collapse">
         <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li class="logged-in" style="display: none;">
               <a href="#" class="grey-text modal-trigger" data-target="modal-account">Account</a>
@@ -26,10 +20,7 @@
             <li class="logged-in" style="display: none;">
               <a href="#" class="grey-text" id="logout">Logout</a>
             </li>
-            <!-- <li class="logged-in" style="display: none;">
-              <a href="#" class="grey-text modal-trigger" data-target="modal-create">Create Guide</a>
-            </li> -->
-            
+          
             <li class="logged-out" style="display: none;">
               <a href="#" class="grey-text ">Главная</a>
               <!-- логично то, что видим когда открываем страницу -->
@@ -57,6 +48,11 @@
         </ul>
       </div>
     </nav>
+    <div class="col-md-5 p-lg-5 mx-auto my-5">
+      <h1 class="display-4 ">Математическое моделирование</h1>
+      <p class="lead ">And an even wittier subheading to boot. Jumpstart your marketing efforts with this example based on Apple's marketing pages.</p>
+      <button class="btn btn-pill btn-primary" href="#">Начать</button>
+    </div>
   
     <!-- SIGN UP MODAL -->
     <div id="modal-signup" class="modal">
@@ -106,94 +102,45 @@
         <div class="account-details"></div>
       </div>
     </div>
-  
-    <!-- CREATE GUIDE MODAL
-    вообще не нужна нам, убрать отсюда и из классов, где вызывается -->
+
     <div id="modal-create" class="modal">
       <div class="modal-content">
         <h4>Create Guide</h4><br />
         <form id="create-form">
-          <div class="input-field">
-            <input type="text" id="title" required>
-            <label for="title">Guide Title</label>
-          </div>
-          <div class="input-field">
-            <textarea id="content" class="materialize-textarea" required></textarea>
-            <label for="content">Guide Content</label>
-          </div>
-          <button class="btn yellow darken-2 z-depth-0">Create</button>
         </form>
       </div>
-    </div>
-  
-    <!-- GUIDE LIST
-    тоже самое, не нужно -->
-    <div class="container" style="margin-top: 40px;">
-      <ul class="collapsible z-depth-0 guides" style="border: none;">
-      </ul>
     </div>
     <main class="container">
       <div class="container-fluid p-0">
       </div>
         </main>
-    <footer class="footer">
-      <div class="container-fluid">
-        <div class="row text-muted">
-          <div class="col-6 text-left">
-            <p class="mb-0">
-              <a href="https://rs.school/js/">
-                <img
-                  src="./assets/icon/rs_school_js.svg"
-                  alt="RS-Sсhool"
-                  class="footer__RS-logo"
-                  width="100"
-                  height="50"
-                />
-              </a>
-            </p>
+        <footer class="footer">
+          <div class="container-fluid">
+            <div class="row text-muted">
+              <div class="col-6 text-left">
+                <p class="mb-0">
+                  <a href="https://rs.school/js/" target="_blank">
+                    <img
+                      src="./assets/icon/rs_school_js.svg"
+                      alt="RS-Sсhool"
+                      class="footer__RS-logo"
+                      width="100"
+                      height="50"
+                    />
+                  </a>
+                </p>
+              </div>
+              <div class="col-6 text-right">
+                <ul class="list-inline">
+                  <li><a href="https://github.com/AinuAnna" target="_blank">Терешко Анна</a></li>
+                  <li><a href="https://github.com/dimit999" target="_blank">Ананьев Дмитрий</a></li>
+                  <li><a href="https://github.com/tv-dem" target="_blank">Демчук Татьяна</a></li>
+                  <li><a href="https://github.com/spaceragga" target="_blank">Михальченко Иван</a></li>
+                </ul>
+              </div>
+            </div>
           </div>
-          <div class="col-6 text-right">
-            <ul class="list-inline">
-              <li><a href="https://github.com/AinuAnna">Терешко Анна</a></li>
-              <li><a href="https://github.com/dimit999">Ананьев Дмитрий</a></li>
-              <li><a href="https://github.com/tv-dem">Демчук Татьяна</a></li>
-              <li><a href="https://github.com/spaceragga">Михальченко Иван</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </footer>
-</div>
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-firestore.js"></script>
-    <script>
-      // Initialize Firebase
-      const firebaseConfig = {
-        apiKey: 'AIzaSyDNs0n7GYZIl3PAk7HpxsER66AVZPyrl18',
-        authDomain: 'rsclone-8fee8.firebaseapp.com',
-        projectId: 'rsclone-8fee8',
-        storageBucket: 'rsclone-8fee8.appspot.com',
-        messagingSenderId: '136908602011',
-        appId: '1:136908602011:web:de6b7cfdd486208bd0643e',
-        measurementId: 'G-D8427FL6MX',
-      };
-
-      firebase.initializeApp(firebaseConfig);
-  
-      // make auth and firestore references
-      const auth = firebase.auth();
-      const db = firebase.firestore();
-  
-      // update firestore settings
-      db.settings({ timestampsInSnapshots: true });
-    </script>
+        </footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script src="../src/utils/Authorization/auth.js"></script>
-    <script src="../src/utils/Authorization/index.js"></script> 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
   </body>
-
 </html>
