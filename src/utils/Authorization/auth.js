@@ -43,6 +43,7 @@ adminForm.addEventListener('submit', (e) => {
 });
 */
 // listen for auth status changes
+
 auth.onAuthStateChanged((user) => {
   if (user) {
     db.collection('Guides').onSnapshot(
