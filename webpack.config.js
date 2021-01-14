@@ -6,7 +6,8 @@ const webpack = require('webpack');
 
 module.exports = {
   entry: {
-    main: path.resolve(__dirname, './src/index.js'),
+    app: path.resolve(__dirname, './src/index.js'),
+    main: path.resolve(__dirname, './src/main.js'),
   },
   output: {
     path: path.resolve(__dirname, './dist'),
@@ -36,6 +37,12 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, './src/index.html'),
       filename: 'index.html',
+      chunks: ['app'],
+    }),
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, './src/main.html'),
+      filename: 'main.html',
+      chunks: ['main'],
     }),
   ],
   module: {
