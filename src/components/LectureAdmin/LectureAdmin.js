@@ -41,7 +41,6 @@ export default class LectureAdmin extends UI {
             };
             this.firebaseDB.updateDataInDB('Lecture', lectureId, lectionObj);
             this.render();
-
             if (subtitle.length === 0) {
               this.firebaseDB.deleteItem('Lecture', lectureId);
             }
@@ -164,7 +163,7 @@ export default class LectureAdmin extends UI {
       const lectionTitle = getLectionInput();
       const lectureDoc = getFilePathInput();
 
-      if(!lectureDoc.files || !lectionTitle.value || !sectionTitle.value) {
+      if (!lectureDoc.files || !lectionTitle.value || !sectionTitle.value) {
         return;
       }
 
@@ -175,6 +174,7 @@ export default class LectureAdmin extends UI {
         const { value } = await mammoth.convertToHtml({ arrayBuffer: reader.result });
 
         const lectureHtml = value; // The generated HTML
+
         const arrayTitleLections = [];
 
         this.lecturesArray.forEach(({ title }) => {
@@ -183,16 +183,25 @@ export default class LectureAdmin extends UI {
 
         if (arrayTitleLections.includes(sectionTitle.value)) {
           this.lecturesArray.forEach(({ id, title, subtitle, text }) => {
-            if (!(title === sectionTitle.value)) {
-              return;
+            // if (!(title === sectionTitle.value)) {
+            //   return;
+            // }
+
+            if (title === sectionTitle.value) {
+              subtitle.push(lectionTitle.value);
+              const arraySubtitle = subtitle;
+
+              text.push(lectureHtml);
+              const arrayPath = text;
+
+              const lectionObj = {
+                title: sectionTitle.value,
+                subtitle: arraySubtitle,
+                text: arrayPath,
+              };
+              this.firebaseDB.updateDataInDB('Lecture', id, lectionObj);
+              this.render();
             }
-            const lectionObj = {
-              title: sectionTitle.value,
-              subtitle: [...subtitle, lectionTitle.value],
-              text: [...text, lectureHtml],
-            };
-            this.firebaseDB.updateDataInDB('Lecture', id, lectionObj);
-            this.render();
           });
         } else {
           const lectionObj = {
@@ -212,9 +221,13 @@ export default class LectureAdmin extends UI {
 
   render() {
     this.firebaseDB.getData('Lecture').then((data) => {
-      this.setData(data);
-      this.rootNode.innerHTML = '';
-      this.renderM();
+      if (data.array === 0) {
+        this.renderM();
+      } else {
+        this.setData(data);
+        this.rootNode.innerHTML = '';
+        this.renderM();
+      }
     });
   }
 }
