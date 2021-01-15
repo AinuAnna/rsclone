@@ -48,7 +48,8 @@ footer {
   padding-left: 3rem;
 }
 .display-4 {
-  color: #6c757d;
+  color: #313a46;
+  font-weight: 800;
 }
 .lead {
   padding-top: 1rem;
@@ -65,13 +66,24 @@ footer {
 .header-1 {
   height: 1000px;
 }
+
 .mycontent {
-  margin-left: 10rem !important;
-  margin-right: 30rem !important;
+  margin-left: -10rem !important;
   padding-top: 15rem;
 }
+
 .card {
+  .display-4 {
+    font-size: 24.5px;
+  }
   h2 {
     color: #f49344;
   }
+}
+.card-body {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+.form-control-label {
+  color: #8391a2;
 }
