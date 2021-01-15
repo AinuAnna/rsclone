@@ -1,9 +1,9 @@
 import './LectureAdmin.scss';
+import mammoth from 'mammoth/mammoth.browser';
 import { Modal } from 'bootstrap';
 import UI from '../UIclass/UIclass';
 import { FirebaseDB, db } from '../../utils/FirebaseDB/FirebaseDB';
 import '@firebase/firestore';
-
 import { deleteLectureYesBtn, getSectionInput, getLectionInput, getFilePathInput } from './LectureAdmin.constants';
 
 export default class LectureAdmin extends UI {
@@ -162,41 +162,47 @@ export default class LectureAdmin extends UI {
       e.preventDefault();
       const sectionTitle = getSectionInput();
       const lectionTitle = getLectionInput();
-      const filePath = getFilePathInput();
+      const lectureDoc = getFilePathInput();
 
-      /* add lection to DB */
-      const arrayTitleLections = [];
+      if(!lectureDoc.files || !lectionTitle.value || !sectionTitle.value) {
+        return;
+      }
 
-      this.lecturesArray.forEach(({ title }) => {
-        arrayTitleLections.push(title);
-      });
+      const file = lectureDoc.files[0];
+      const reader = new FileReader();
+      reader.readAsArrayBuffer(file);
+      reader.onload = async () => {
+        const { value } = await mammoth.convertToHtml({ arrayBuffer: reader.result });
 
-      if (arrayTitleLections.includes(sectionTitle.value)) {
-        this.lecturesArray.forEach(({ id, title, subtitle, text }) => {
-          if (title === sectionTitle.value) {
-            subtitle.push(lectionTitle.value);
-            const arraySubtitle = subtitle;
+        const lectureHtml = value; // The generated HTML
+        const arrayTitleLections = [];
 
-            text.push(filePath.value);
-            const arrayPath = text;
+        this.lecturesArray.forEach(({ title }) => {
+          arrayTitleLections.push(title);
+        });
 
+        if (arrayTitleLections.includes(sectionTitle.value)) {
+          this.lecturesArray.forEach(({ id, title, subtitle, text }) => {
+            if (!(title === sectionTitle.value)) {
+              return;
+            }
             const lectionObj = {
               title: sectionTitle.value,
-              subtitle: arraySubtitle,
-              text: arrayPath,
+              subtitle: [...subtitle, lectionTitle.value],
+              text: [...text, lectureHtml],
             };
             this.firebaseDB.updateDataInDB('Lecture', id, lectionObj);
             this.render();
-          }
-        });
-      } else {
-        const lectionObj = {
-          title: sectionTitle.value,
-          subtitle: [lectionTitle.value],
-          text: [filePath.value],
-        };
-        this.firebaseDB.addDataToDB('Lecture', lectionObj);
-      }
+          });
+        } else {
+          const lectionObj = {
+            title: sectionTitle.value,
+            subtitle: [lectionTitle.value],
+            text: [lectureHtml],
+          };
+          this.firebaseDB.addDataToDB('Lecture', lectionObj);
+        }
+      };
     });
   }
 
