@@ -45,18 +45,23 @@ footer {
   min-width: 200px;
 }
 .grey-text {
-  padding-left: 23px;
+  padding-left: 3rem;
 }
 .display-4 {
   color: #6c757d;
 }
 .lead {
+  padding-top: 1rem;
   color: #8391a2;
 }
-.btn-main-center {
+.btn-main-go {
   display: flex;
+  align-items: center;
   justify-content: center;
+  width: 16rem;
+  height: 2.5rem;
 }
+
 .header-1 {
   height: 1000px;
 }
