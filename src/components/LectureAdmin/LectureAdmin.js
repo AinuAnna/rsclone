@@ -75,6 +75,8 @@ export default class LectureAdmin extends UI {
     ]);
     const listTitle = UI.renderElement(listMainTitle, 'div', null, ['class', 'lecture-admin__list-title']);
     const ol = UI.renderElement(listTitle, 'ol', null, ['class', 'lecture-admin__ul']);
+
+    /* Render lections --- PS MODIFY IT after implementation oof rendering */
     this.lecturesArray.forEach(({ id, title, subtitle }) => {
       UI.renderElement(listTitle, 'div', null, ['data-id', id], ['class', 'lecture-admin__div']);
       const a = UI.renderElement(ol, 'a', null, ['class', 'lecture-admin__a'], ['href', '#']);
