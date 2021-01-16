@@ -7,19 +7,18 @@
 const express = require('express');
 const path = require('path');
 
+const port = process.env.port || 4004;
 const dirname = path.resolve();
 const app = express();
-const port = process.env.port || 4004;
+app.use(express.static('dist', { index: 'main.html' }));
+app.engine('html', require('ejs').renderFile);
 
-// app.use(express.static('dist'));
-
-app.get('/', (req, res) => {
-  res.sendFile(path.resolve(dirname, 'dist', 'main.html'));
+app.get('/pages-profile.html', (req, res) => {
+  res.render(path.resolve(dirname, 'dist', 'index.html'));
 });
 
-app.get('/test/pages-invoice.html', (req, res) => {
-  // handle root
-  console.log('yo');
+app.get('/my-url', (req, res) => {
+  res.send('Okay');
 });
 
 app.listen(port, (err) => {
