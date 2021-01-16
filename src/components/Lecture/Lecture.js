@@ -3,7 +3,7 @@ import UI from '../UIclass/UIclass';
 import { FirebaseDB } from '../../utils/FirebaseDB/FirebaseDB';
 import '@firebase/firestore';
 
-export default class TestResults extends UI {
+export default class Lecture extends UI {
   constructor(rootNode) {
     super();
     this.rootNode = rootNode;
@@ -13,7 +13,7 @@ export default class TestResults extends UI {
     this.firebaseDB = new FirebaseDB();
   }
 
-  renderDefault() {
+  renderList() {
     const wrapper = UI.renderElement(this.rootNode, 'div', null, ['class', 'lecture-admin__wrapper']);
     UI.renderElement(wrapper, 'h2', 'Лекции', ['class', 'lecture-admin__title']);
     const container = UI.renderElement(wrapper, 'div', null, ['class', 'lecture-admin__container']);
@@ -25,7 +25,7 @@ export default class TestResults extends UI {
     const ol = UI.renderElement(listTitle, 'ol', null, ['class', 'lecture-admin__ul']);
 
     /* Render lections --- PS MODIFY IT after implementation oof rendering */
-    this.lecturesArray.forEach(({ id, title, subtitle }) => {
+    this.lectureInfo.forEach(({ id, title, subtitle }) => {
       UI.renderElement(listTitle, 'div', null, ['data-id', id], ['class', 'lecture-admin__div']);
       const a = UI.renderElement(ol, 'a', null, ['class', 'lecture-admin__a'], ['href', '#']);
       UI.renderElement(a, 'li', title, ['class', 'lecture-admin__li']);
@@ -93,6 +93,7 @@ export default class TestResults extends UI {
       } else {
         this.setData(data);
         this.rootNode.innerHTML = '';
+        this.renderList();
         this.renderM();
       }
     });

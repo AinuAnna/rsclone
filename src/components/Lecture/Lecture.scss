@@ -1,33 +1,68 @@
-.lecture{
-  &__wrapper{
+.lecture {
+  &__wrapper {
     min-height: 100vh;
     margin: 10px 5px;
     display: flex;
-  ;
     //background-color: #fff;
   }
-  &__container{
+  &__container {
     margin: auto;
   }
-  &__l-arrow{
+  &__l-arrow {
     margin-top: 40vh;
     height: 80px;
     transform: rotate(180deg);
     cursor: pointer;
   }
-  &__r-arrow{
+  &__r-arrow {
     height: 80px;
     margin-top: 40vh;
     cursor: pointer;
   }
-  &__r-arrow, &__l-arrow{
+  &__r-arrow,
+  &__l-arrow {
     @media (max-width: 600px) {
       height: 40px;
     }
   }
-  &__btn-go-test{
+  &__btn-go-test {
     display: block;
     margin: 20px auto;
     min-width: 200px;
+  }
+}
+.lecture-admin {
+  &__wrapper {
+    padding: 16px 0 64px 32px;
+    background-color: #fff;
+  }
+  &__title {
+    color: #6c757d;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 49px;
+    text-align: left;
+    margin-bottom: 26px;
+  }
+  &__container {
+    @media (max-width: 600px) {
+      flex-wrap: wrap;
+      flex-direction: column-reverse;
+      align-items: start;
+    }
+    &__button {
+      max-width: 203px;
+      padding: 10px 22px;
+    }
+    ul {
+      display: flex;
+    }
+  }
+  &__items-add {
+    margin: 20px;
+  }
+  &__list-title {
+    margin: 20px;
   }
 }
