@@ -70,11 +70,11 @@ export default class LectureAdmin extends UI {
     const wrapper = UI.renderElement(this.rootNode, 'div', null, ['class', 'lecture-admin__wrapper']);
     UI.renderElement(wrapper, 'h2', 'Лекции', ['class', 'lecture-admin__title']);
     const container = UI.renderElement(wrapper, 'div', null, ['class', 'lecture-admin__container']);
-    const listMainTitle = UI.renderElement(container, 'div', 'Список лекций:', [
+    this.listMainTitle = UI.renderElement(container, 'div', 'Список лекций:', [
       'class',
       'lecture-admin__list-main-title',
     ]);
-    const listTitle = UI.renderElement(listMainTitle, 'div', null, ['class', 'lecture-admin__list-title']);
+    const listTitle = UI.renderElement(this.listMainTitle, 'div', null, ['class', 'lecture-admin__list-title']);
     const ol = UI.renderElement(listTitle, 'ol', null, ['class', 'lecture-admin__ul']);
     this.lecturesArray.forEach(({ id, title, subtitle }) => {
       UI.renderElement(listTitle, 'div', null, ['data-id', id], ['class', 'lecture-admin__div']);
@@ -200,6 +200,12 @@ export default class LectureAdmin extends UI {
     });
   }
 
+  renderDefault() {
+    this.renderM();
+    const div = UI.renderElement(this.listMainTitle, 'div', null, ['class', 'lecture-admin__div']);
+    UI.renderElement(div, 'p', 'Добавьте данные', ['class', 'lecture-admin__p']);
+  }
+
   setData(tests) {
     this.lecturesArray = tests;
   }
@@ -209,6 +215,7 @@ export default class LectureAdmin extends UI {
       this.setData(data);
       this.rootNode.innerHTML = '';
       this.renderM();
+      this.renderDefault();
     });
   }
 }
