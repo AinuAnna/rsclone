@@ -17,8 +17,8 @@ app.get('/pages-profile.html', (req, res) => {
   res.render(path.resolve(dirname, 'dist', 'main.html'));
 });
 
-app.get('/my-url', (req, res) => {
-  res.send('Okay');
+app.get('/login.html', (req, res) => {
+  res.render(path.resolve(dirname, 'dist', 'login.html'));
 });
 
 app.listen(port, (err) => {
