@@ -4,6 +4,7 @@
   "description": "",
   "app": "index.js",
   "main": "main.js",
+  "login": "login.js",
   "scripts": {
     "start": "webpack serve",
     "build": "webpack",

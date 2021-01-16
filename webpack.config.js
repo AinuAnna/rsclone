@@ -8,6 +8,7 @@ module.exports = {
   entry: {
     app: path.resolve(__dirname, './src/index.js'),
     main: path.resolve(__dirname, './src/main.js'),
+    login: path.resolve(__dirname, './src/login.js'),
   },
   output: {
     path: path.resolve(__dirname, './dist'),
@@ -43,6 +44,11 @@ module.exports = {
       template: path.resolve(__dirname, './src/main.html'),
       filename: 'main.html',
       chunks: ['main'],
+    }),
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, './src/login.html'),
+      filename: 'login.html',
+      chunks: ['login'],
     }),
   ],
   module: {
