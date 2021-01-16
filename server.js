@@ -10,11 +10,11 @@ const path = require('path');
 const port = process.env.port || 4004;
 const dirname = path.resolve();
 const app = express();
-app.use(express.static('dist', { index: 'main.html' }));
+app.use(express.static('dist'));
 app.engine('html', require('ejs').renderFile);
 
 app.get('/pages-profile.html', (req, res) => {
-  res.render(path.resolve(dirname, 'dist', 'index.html'));
+  res.render(path.resolve(dirname, 'dist', 'main.html'));
 });
 
 app.get('/my-url', (req, res) => {
