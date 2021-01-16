@@ -20,5 +20,11 @@ function ToggleMenuButton() {
     });
   });
 }
-
+function Focus() {
+  const login = document.querySelector('#loginClick');
+  login.addEventListener('click', () => {
+    document.getElementById('input-email').focus();
+  });
+}
+Focus();
 ToggleMenuButton();
