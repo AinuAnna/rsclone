@@ -22,6 +22,8 @@ export default class TestResults extends UI {
       ['class', 'lecture__l-arrow'],
       ['src', '../../../assets/icon/arrow.svg']
     );
+
+    /* Render lections - PS NEED TO UPPDATE RENDERING */
     this.lectureInfo.forEach(({ id, title, subtitle, text }) => {
       const lectureContainer = UI.renderElement(wrapper, 'div', text, ['class', 'lecture__container']);
       const rArrow = UI.renderElement(
