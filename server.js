@@ -13,7 +13,7 @@ const app = express();
 app.use(express.static('dist'));
 app.engine('html', require('ejs').renderFile);
 
-app.get('/pages-profile.html', (req, res) => {
+app.get('/main.html', (req, res) => {
   res.render(path.resolve(dirname, 'dist', 'main.html'));
 });
 
