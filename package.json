@@ -14,7 +14,9 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage --colors",
     "dev": "webpack --mode development",
-    "watch": "webpack --mode development --watch"
+    "watch": "webpack --mode development --watch",
+    "serve": "nodemon server.js",
+    "startexp": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -34,6 +36,7 @@
     "@babel/preset-env": "^7.12.11",
     "@babel/runtime": "^7.12.5",
     "@popperjs/core": "^2.6.0",
+    "@types/express": "^4.17.11",
     "babel-eslint": "^10.1.0",
     "babel-jest": "^26.6.3",
     "babel-loader": "^8.2.2",
@@ -51,6 +54,7 @@
     "jest": "^26.6.3",
     "jest-transform-stub": "^2.0.0",
     "node-sass": "^5.0.0",
+    "nodemon": "^2.0.7",
     "postcss-loader": "^4.1.0",
     "postcss-preset-env": "^6.7.0",
     "prettier": "^2.2.1",
@@ -65,6 +69,7 @@
     "@firebase/auth": "^0.16.1",
     "@firebase/firestore": "^2.1.1",
     "bootstrap": "^5.0.0-beta1",
+    "ejs": "^3.1.5",
     "express": "^4.17.1",
     "firebase": "^8.2.1",
     "laravel-mix": "^6.0.6",

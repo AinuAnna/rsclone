@@ -39,3 +39,51 @@ footer {
     opacity: 0.8;
   }
 }
+.btn-primary {
+  display: block;
+  margin: 20px auto;
+  min-width: 200px;
+}
+.grey-text {
+  padding-left: 3rem;
+}
+.display-4 {
+  color: #313a46;
+  font-weight: 800;
+}
+.lead {
+  padding-top: 1rem;
+  color: #8391a2;
+}
+.btn-main-go {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16rem;
+  height: 2.5rem;
+}
+
+.header-1 {
+  height: 1000px;
+}
+
+.mycontent {
+  margin-left: -10rem !important;
+  padding-top: 15rem;
+}
+
+.card {
+  .display-4 {
+    font-size: 24.5px;
+  }
+  h2 {
+    color: #f49344;
+  }
+}
+.card-body {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+.form-control-label {
+  color: #8391a2;
+}

@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mathematical Modeling</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <body data-theme="default" data-layout="fluid" data-sidebar="left">
+    <div class="wrapper">
+      <nav id="sidebar" class="sidebar">
+        <div class="sidebar-content js-simplebar" data-simplebar="init">
+          <div class="simplebar-wrapper" style="margin: 0px">
+            <div class="simplebar-height-auto-observer-wrapper"><div class="simplebar-height-auto-observer"></div></div>
+            <div class="simplebar-mask">
+              <div class="simplebar-offset" style="right: 0px; bottom: 0px">
+                <div class="simplebar-content-wrapper" style="height: 100%; overflow: hidden scroll">
+                  <div class="simplebar-content" style="padding: 0px">
+                    <a class="sidebar-brand" href="index.html">
+                      <span class="align-middle">Администратор</span>
+                    </a>
+                    <ul class="sidebar-nav">
+                      <li class="sidebar-item active">
+                        <a class="sidebar-link" href="pages-profile.html">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="feather feather-user align-middle"
+                          >
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                          </svg>
+                          <span class="align-middle">Пользователи</span>
+                        </a>
+                      </li>
+                      <li class="sidebar-item">
+                        <a class="sidebar-link" href="pages-profile.html">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-list align-middle"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+                          <span class="align-middle">Лекции</span>
+                        </a>
+                      </li>
+                      <li class="sidebar-item">
+                        <a class="sidebar-link" href="pages-invoice.html">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle align-middle"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                          <span class="align-middle">Тесты</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="simplebar-placeholder" style="width: auto; height: 1365px"></div>
+          </div>
+          <div class="simplebar-track simplebar-horizontal" style="visibility: hidden">
+            <div class="simplebar-scrollbar" style="width: 0px; display: none"></div>
+          </div>
+          <div class="simplebar-track simplebar-vertical" style="visibility: visible">
+            <div
+              class="simplebar-scrollbar"
+              style="height: 687px; transform: translate3d(0px, 0px, 0px); display: block"
+            ></div>
+          </div>
+        </div>
+      </nav>
+      <div class="main">
+        <nav class="navbar navbar-expand navbar-light navbar-bg">
+          <a class="sidebar-toggle d-flex">
+            <i class="hamburger align-self-center"></i>
+          </a>
+          <div class="navbar-collapse collapse">
+            <ul class="navbar-nav navbar-align">
+              <li class="nav-item dropdown">
+                <a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-toggle="dropdown">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="feather feather-settings align-middle"
+                  >
+                    <circle cx="12" cy="12" r="3"></circle>
+                    <path
+                      d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"
+                    ></path>
+                  </svg>
+                </a>
+                <a href="#" class="logo">
+                  <span class="subtitle">Математическое Моделирование</span>
+                </a>
+                <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-toggle="dropdown">
+                  Администратор
+                </a>
+                <div class="dropdown-menu dropdown-menu-right">
+                  <a class="dropdown-item" href="pages-profile.html"
+                    ><svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="feather feather-user align-middle mr-1"
+                    >
+                      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                      <circle cx="12" cy="7" r="4"></circle></svg>Профиль</a
+                  >
+
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">Выйти</a>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </nav>
+
+        <main class="container">
+          <div class="container-fluid p-0">
+            <div id="table__users"></div>
+            <!-- Modal DELETE USER-->
+            <div
+              class="modal fade"
+              id="deleteUserModal"
+              data-bs-backdrop="static"
+              data-bs-keyboard="false"
+              tabindex="-1"
+              aria-labelledby="deleteUserModalLabel"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="deleteUserModalLabel">Удаление пользователя</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">Вы действительно хотите удалить этого пользователя?</div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Нет</button>
+                    <button type="button" class="btn btn-primary" id="delete-user-yes">Да</button>
+                  </div>
+                </div>
+              </div></div>
+               <!-- Modal DELETE TEST-->
+            <div
+            class="modal fade"
+            id="deleteTestModal"
+            data-bs-backdrop="static"
+            data-bs-keyboard="false"
+            tabindex="-1"
+            aria-labelledby="deleteTestModalLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="deleteTestModalLabel">Удаление теста</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">Вы действительно хотите удалить этот тест?</div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Нет</button>
+                  <button type="button" class="btn btn-primary" id="delete-test-yes">Да</button>
+                </div>
+              </div>
+            </div></div>
+             <!-- Modal DELETE LECTURE-->
+             <div
+             class="modal fade"
+             id="deleteLectureModal"
+             data-bs-backdrop="static"
+             data-bs-keyboard="false"
+             tabindex="-1"
+             aria-labelledby="deleteLectureModalLabel"
+             aria-hidden="true"
+           >
+             <div class="modal-dialog">
+               <div class="modal-content">
+                 <div class="modal-header">
+                   <h5 class="modal-title" id="deleteLectureModalLabel">Удаление лекции</h5>
+                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                 </div>
+                 <div class="modal-body">Вы действительно хотите удалить эту лекцию?</div>
+                 <div class="modal-footer">
+                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Нет</button>
+                   <button type="button" class="btn btn-primary" id="delete-lecture-yes">Да</button>
+                 </div>
+               </div>
+             </div></div>
+             <!-- Modal ADD TEST-->
+             <div
+             class="modal fade"
+             id="addTestModal"
+             data-bs-backdrop="static"
+             data-bs-keyboard="false"
+             tabindex="-1"
+             aria-labelledby="addTestModalLabel"
+             aria-hidden="true"
+           >
+             <div class="modal-dialog">
+               <div class="modal-content">
+                 <div class="modal-header">
+                   <h5 class="modal-title" id="addTestModalLabel">Добавление теста</h5>
+                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                 </div>
+                 <div class="modal-body">Новый тест был успешно добавлен!</div>
+                 <div class="modal-footer">
+                   <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Ок</button>
+                 </div>
+               </div>
+             </div></div>
+             <!-- Modal ADD LECTURE-->
+             <div
+             class="modal fade"
+             id="addLectureModal"
+             data-bs-backdrop="static"
+             data-bs-keyboard="false"
+             tabindex="-1"
+             aria-labelledby="addLectureModalLabel"
+             aria-hidden="true"
+           >
+             <div class="modal-dialog">
+               <div class="modal-content">
+                 <div class="modal-header">
+                   <h5 class="modal-title" id="addLectureModalLabel">Добавление лекции</h5>
+                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                 </div>
+                 <div class="modal-body">Новая лекция была успешно добавлена!</div>
+                 <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Ок</button>
+                 </div>
+               </div>
+             </div></div>
+               <!-- Modal ADD-->
+            <div
+            class="modal fade"
+            id="addUserModal"
+            data-bs-backdrop="static"
+            data-bs-keyboard="false"
+            tabindex="-1"
+            aria-labelledby="addUserModalLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="addUserModalLabel">Добавление пользователя</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                  <div class="mb-3">
+                    <label for="exampleInputName" class="form-label">ФИО</label>
+                    <input type="text" class="form-control" id="addInputName">
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputEmail" class="form-label">Эл.Почта</label>
+                    <input type="email" class="form-control" id="addInputEmail">
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputRole" class="form-label">Роль</label>
+                    <input type="text" class="form-control" id="addInputRole">
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputDescription" class="form-label">Описание</label>
+                    <input type="text" class="form-control" id="addInputDescription">
+                  </div>
+                  <div>Сохранить данные?</div>
+                  </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Нет</button>
+                  <button type="button" class="btn btn-primary" id = "add-user-yes">Да</button>
+                </div>
+              </div>
+            </div>
+            </div>
+              <!-- Modal EDIT-->
+            <div
+            class="modal fade"
+            id="editUserModal"
+            data-bs-backdrop="static"
+            data-bs-keyboard="false"
+            tabindex="-1"
+            aria-labelledby="editUserModalLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="editUserModalLabel">Редактирование пользователя</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                  <div class="mb-3">
+                    <label for="exampleInputName" class="form-label">ФИО</label>
+                    <input type="text" class="form-control" id="editInputName">
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputEmail" class="form-label">Эл.Почта</label>
+                    <input type="email" class="form-control" id="editInputEmail">
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputRole" class="form-label">Роль</label>
+                    <input type="text" class="form-control" id="editInputRole">
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputDescription" class="form-label">Описание</label>
+                    <input type="text" class="form-control" id="editInputDescription">
+                  </div>
+                  <div>Сохранить изменения?</div>
+                  </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Нет</button>
+                  <button type="button" class="btn btn-primary" id="edit-user-yes">Да</button>
+                </div>
+              </div>
+            </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+          <div class="container-fluid">
+            <div class="row text-muted">
+              <div class="col-6 text-left">
+                <p class="mb-0">
+                  <a href="https://rs.school/js/" target="_blank">
+                    <img
+                      src="./assets/icon/rs_school_js.svg"
+                      alt="RS-Sсhool"
+                      class="footer__RS-logo"
+                      width="100"
+                      height="50"
+                    />
+                  </a>
+                </p>
+              </div>
+              <div class="col-6 text-right">
+                <ul class="list-inline">
+                  <li><a href="https://github.com/AinuAnna" target="_blank">Терешко Анна</a></li>
+                  <li><a href="https://github.com/dimit999" target="_blank">Ананьев Дмитрий</a></li>
+                  <li><a href="https://github.com/tv-dem" target="_blank">Демчук Татьяна</a></li>
+                  <li><a href="https://github.com/spaceragga" target="_blank">Михальченко Иван</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </div>
+  <script src="app.bundle.js"></script></body>
+
+</html>
