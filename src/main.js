@@ -5,8 +5,11 @@ import './utils/FirebaseAuth/FirebaseAuth';
 // import TestsAdmin from './components/TestsAdmin/TestsAdmin';
 import LectureAdmin from './components/LectureAdmin/LectureAdmin';
 // import TestResults from './components/TestResults/TestResults';
-import './events';
+import Event from './events';
 // import Lecture from './components/Lecture/Lecture';
+
+const event = new Event();
+event.renderToggle();
 // import Profile from './components/Profile/Profile';
 
 // const st = new Profile();
