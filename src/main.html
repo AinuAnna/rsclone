@@ -15,34 +15,34 @@
       <div class="navbar-collapse collapse">
         <ul class="navbar-nav navbar-align">
             <li class="logged-in" style="display: none;">
-              <a href="#" class="grey-text modal-trigger" data-target="modal-account">Account</a>
+              <a href="#profile" class="grey-text modal-trigger" data-target="modal-account">Account</a>
             </li>
             <li class="logged-in" style="display: none;">
-              <a href="#" class="grey-text" id="logout">Logout</a>
+              <a href="#logout" class="grey-text" id="logout">Logout</a>
             </li>
           
             <li class="logged-out" style="display: none;">
-              <a href="#" class="grey-text ">Главная</a>
+              <a href="#main" class="grey-text ">Главная</a>
               <!-- логично то, что видим когда открываем страницу -->
             </li>
             <li class="logged-out" style="display: none;">
-              <a href="#" class="grey-text ">Личный кабинет</a>
+              <a href="#personal-area" class="grey-text ">Личный кабинет</a>
               <!-- переход в личный кабинет, если зарегестрирован или вошел, если нет, поля регестрации -->
             </li>
             <li class="logged-out" style="display: none;">
-              <a href="#" class="grey-text " >Лекции</a>
+              <a href="#lecture" class="grey-text " >Лекции</a>
               <!-- страница со списком лекций, при нажатии переход на лекцию -->
             </li>
             <li class="logged-out" style="display: none;">
-              <a href="#" class="grey-text " >Тесты</a>
+              <a href="#tests" class="grey-text " >Тесты</a>
               <!-- страница со списком тестов, при нажатии переход на тест -->
             </li>
-            <li class="logged-out" style="display: none;">
-              <a href="#" class="grey-text modal-trigger" data-target="modal-login">Login</a>
+            <li class="logged-out" action="/my-url" style="display: none;">
+              <a href="#login" class="grey-text modal-trigger" data-target="modal-login">Login</a>
               <!-- при нажатии на логин, как и на сигн ап, котрывается попап(или страница, надо решить), после нажатия на который мы попадаем в личный кабинет -->
             </li>
             <li class="logged-out" style="display: none;">
-              <a href="#" class="grey-text modal-trigger" data-target="modal-signup">Sign up</a>
+              <a href="#sign-up" class="grey-text modal-trigger" data-target="modal-signup">Sign up</a>
             </li>
           </span>
         </ul>
@@ -51,7 +51,7 @@
 <div class="main-content">
       <!-- Section 1(title and button start) -->
       <section class="header-1 section-rotate bg-section-secondary section__title" data-offset-top="#header-main">
-      <!-- illustration -->
+      <a class="btn btn-pill btn-primary" href="pages-profile.html">Приступить к работе</a>
       <div class="position-absolute middle right-0 col-lg-7 col-xl-7 d-none d-lg-block" style="padding-top: 88.4766px;">
         <div class="col-lg-6 order-lg-1">
           <img alt="title image" src="./assets/img/10799-svg.svg" style = "max-width: 980px;" class="img-fluid img-center">
