@@ -3,7 +3,7 @@ import './utils/FirebaseAuth/FirebaseAuth';
 // import Admin from './components/Admin/Admin';
 // import Tests from './components/Tests/Tests';
 // import TestsAdmin from './components/TestsAdmin/TestsAdmin';
-// import LectureAdmin from './components/LectureAdmin/LectureAdmin';
+import LectureAdmin from './components/LectureAdmin/LectureAdmin';
 // import TestResults from './components/TestResults/TestResults';
 import Event from './events';
 import Lecture from './components/Lecture/Lecture';
@@ -22,11 +22,11 @@ event.renderToggle();
 // const testsAdmin = new TestsAdmin(document.getElementById('container'));
 // testsAdmin.render();
 
-// const lectureAdmin = new LectureAdmin(document.getElementById('container'));
-// lectureAdmin.render();
+const lectureAdmin = new LectureAdmin(document.getElementById('container'));
+lectureAdmin.render();
 
-const lecture = new Lecture(document.getElementById('container'));
-lecture.render();
+// const lecture = new Lecture(document.getElementById('container'));
+// lecture.render();
 
 // const rez = new TestResults();
 // rez.render(document.getElementById('container'), 'f0Ld29L3o6G9PU7GKmT6');
