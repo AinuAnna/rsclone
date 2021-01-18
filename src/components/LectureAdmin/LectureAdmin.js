@@ -57,9 +57,9 @@ export default class LectureAdmin extends UI {
     db.collection('Lecture').onSnapshot((snapshot) => {
       snapshot.docChanges().forEach((change) => {
         if (change.type === 'added') {
-          this.render();
+          this.update();
         } else if (change.type === 'removed') {
-          this.render();
+          this.update();
         }
       });
     });
@@ -262,11 +262,22 @@ export default class LectureAdmin extends UI {
     this.lecturesArray = tests;
   }
 
+  update() {
+    if (this.mounted) {
+      this.render();
+    }
+  }
+
   render() {
+    this.mounted = true;
     this.firebaseDB.getData('Lecture').then((data) => {
       this.setData(data);
       this.rootNode.innerHTML = '';
       this.renderM();
     });
+  }
+
+  unmount() {
+    this.mounted = false;
   }
 }

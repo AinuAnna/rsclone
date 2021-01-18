@@ -22,6 +22,7 @@ module.exports = {
     compress: true,
     hot: true,
     port: 8081,
+    index: 'main.html',
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
@@ -43,6 +44,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, './src/main.html'),
       filename: 'main.html',
+      publicPath: 'http://localhost:4004/', // 'http://localhost:8081',
       chunks: ['main'],
     }),
     new HtmlWebpackPlugin({

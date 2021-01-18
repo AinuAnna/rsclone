@@ -129,9 +129,9 @@ export default class Admin extends UI {
     db.collection('Users').onSnapshot((snapshot) => {
       snapshot.docChanges().forEach((change) => {
         if (change.type === 'added') {
-          this.render();
+          this.update();
         } else if (change.type === 'removed') {
-          this.render();
+          this.update();
         }
       });
     });
@@ -194,11 +194,22 @@ export default class Admin extends UI {
     this.usersArray = users.filter(() => true);
   }
 
+  update() {
+    if (this.mounted) {
+      this.render();
+    }
+  }
+
   render() {
+    this.mounted = true;
     this.firebaseDB.getUsers().then((data) => {
       this.setData(data);
       this.rootNode.innerHTML = '';
       this.renderM();
     });
+  }
+
+  unmount() {
+    this.mounted = false;
   }
 }

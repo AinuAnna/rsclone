@@ -7,4 +7,4 @@ const event = new Event();
 event.renderToggle();
 
 const menu = new Menu(document.getElementById('menu'));
-menu.render();
+menu.initRender();
