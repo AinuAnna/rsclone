@@ -36,6 +36,6 @@ export default class Menu extends UI {
   }
 
   render() {
-    this.renderM('student');
+    this.renderM('admin');
   }
 }

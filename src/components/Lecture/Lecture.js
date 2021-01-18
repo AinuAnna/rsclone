@@ -113,7 +113,6 @@ export default class Lecture extends UI {
   }
 
   render() {
-    console.log(this)
     this.firebaseDB.getData('Lecture').then((data) => {
       if (data.length === 0) {
         this.renderEmptyLectionsMsg();
