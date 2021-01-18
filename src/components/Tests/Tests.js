@@ -10,14 +10,7 @@ export default class Tests extends UI {
   }
 
   renderList() {
-    const goBtn = UI.renderElement(this.rootNode, 'div', null, ['class', 'go-back-btn']);
     const wrapper = UI.renderElement(this.rootNode, 'div', null, ['class', 'tests__wrapper']);
-
-    const goBackBtn = UI.renderElement(goBtn, 'button', 'Вернуться назад', [
-      'class',
-      'btn btn-primary lecture__btn-go-test',
-    ]);
-
     UI.renderElement(wrapper, 'h2', 'Тесты', ['class', 'tests__title']);
     const container = UI.renderElement(wrapper, 'div', null, ['class', 'tests__container']);
     const listTitle = UI.renderElement(container, 'div', 'Список тестов:', ['class', 'tests__list-title ']);
@@ -44,7 +37,6 @@ export default class Tests extends UI {
         UI.renderElement(label, 'label', value, ['class', 'tests__label-list'], ['for', 'question']);
       });
     });
-
     UI.renderElement(
       this.rootNode,
       'button',
@@ -54,6 +46,39 @@ export default class Tests extends UI {
     );
   }
 
+  renderResult() {
+    const wrapper = UI.renderElement(this.rootNode, 'div', null, ['class', 'tests__wrapper']);
+    UI.renderElement(wrapper, 'h2', 'Ваш результат:', ['class', 'tests__title']);
+    UI.renderElement(
+      wrapper,
+      'img',
+      null,
+      ['src', './assets/img/trophy.svg'],
+      ['style', 'max-width: 15rem;'],
+      ['class', 'tests__trophy']
+    );
+    const tableTitles = ['Правильные ответы', 'Неправильные ответы', 'Отметка'];
+    const container = UI.renderElement(wrapper, 'div', null, ['class', 'table-responsive-md']);
+    const table = UI.renderElement(container, 'table', null, ['class', 'table']);
+    const thead = UI.renderElement(table, 'thead');
+    const trh = UI.renderElement(thead, 'tr');
+    tableTitles.forEach((title) => UI.renderElement(trh, 'th', title));
+    const tbody = UI.renderElement(table, 'tbody');
+    // наверное у нас будет какой то массив? правильных и неправильных ответов, а так же оценка? (если нет скажешь, изменю)
+    // this.testResult.forEach(({ correct, wrong, mark }) => {
+    //   const tr = UI.renderElement(tbody, 'tr', null);
+    //   UI.renderElement(tr, 'td', correct);
+    //   UI.renderElement(tr, 'td', wrong);
+    //   UI.renderElement(tr, 'td', mark);
+    // });
+    UI.renderElement(table, 'tbody');
+    const goBtn = UI.renderElement(wrapper, 'div', null, ['class', 'go-back-btn']);
+    const goBackBtn = UI.renderElement(goBtn, 'button', 'Вернуться к списку', [
+      'class',
+      'btn btn-primary tests__btn-go-test',
+    ]);
+  }
+
   setData(tests) {
     this.testsArray = tests;
   }
@@ -61,8 +86,9 @@ export default class Tests extends UI {
   render() {
     this.firebaseDB.getData('Tests').then((data) => {
       this.setData(data);
-      this.renderM();
       this.renderList();
+      this.renderM();
+      this.renderResult();
     });
   }
 }
