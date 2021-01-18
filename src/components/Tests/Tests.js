@@ -73,7 +73,7 @@ export default class Tests extends UI {
     // });
     UI.renderElement(table, 'tbody');
     const goBtn = UI.renderElement(wrapper, 'div', null, ['class', 'go-back-btn']);
-    const goBackBtn = UI.renderElement(goBtn, 'button', 'Вернуться назад', [
+    const goBackBtn = UI.renderElement(goBtn, 'button', 'Вернуться к списку', [
       'class',
       'btn btn-primary tests__btn-go-test',
     ]);
