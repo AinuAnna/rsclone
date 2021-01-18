@@ -51,9 +51,9 @@ export default class TestsAdmin extends UI {
     db.collection('Tests').onSnapshot((snapshot) => {
       snapshot.docChanges().forEach((change) => {
         if (change.type === 'added') {
-          this.render();
+          this.update();
         } else if (change.type === 'removed') {
-          this.render();
+          this.update();
         }
       });
     });
@@ -308,7 +308,14 @@ export default class TestsAdmin extends UI {
     this.testsArray = tests;
   }
 
+  update() {
+    if (this.mounted) {
+      this.render();
+    }
+  }
+
   render() {
+    this.mounted = true;
     this.firebaseDB.getTests().then((data) => {
       this.groupTests = data;
       const uniqueTestsCollections = [...new Map(data.map((item) => [item.title, item])).values()];
@@ -316,5 +323,9 @@ export default class TestsAdmin extends UI {
       this.rootNode.innerHTML = '';
       this.renderM();
     });
+  }
+
+  unmount() {
+    this.mounted = false;
   }
 }

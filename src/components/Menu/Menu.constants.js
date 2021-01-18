@@ -17,7 +17,7 @@ export const arrayMENU = {
   admin: [
     {
       title: ` <li class="sidebar-item">
-      <a class="sidebar-link" href="main.html">
+      <a class="sidebar-link" href="main.html/users">
         <svg
       xmlns="http://www.w3.org/2000/svg"
       width="24"
@@ -36,25 +36,28 @@ export const arrayMENU = {
     <span class="align-middle">Пользователи</span>
     </a>
   </li>`,
-      onclick: admin.render.bind(admin),
+      view: admin,
+      path: '/main/admin/users',
     },
     {
       title: ` <li class="sidebar-item">
-      <a class="sidebar-link" href="main.html">
+      <a class="sidebar-link" href="main.html/lecture">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-list align-middle"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
         <span class="align-middle">Лекции</span>
       </a>
     </li>`,
-      onclick: lectureAdmin.render.bind(lectureAdmin),
+      view: lectureAdmin,
+      path: '/main/admin/lectures',
     },
     {
       title: `<li class="sidebar-item">
-      <a class="sidebar-link" href="main.html">
+      <a class="sidebar-link" href="main.html/tests">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle align-middle"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
         <span class="align-middle">Тесты</span>
       </a>
     </li>`,
-      onclick: testsAdmin.render.bind(testsAdmin),
+      view: testsAdmin,
+      path: `/main/admin/tests`,
     },
   ],
   student: [
@@ -67,7 +70,8 @@ export const arrayMENU = {
         <span class="align-middle">Результаты тестов</span>
       </a>
     </li>`,
-      onclick: testResults.render.bind(testResults),
+      view: testResults,
+      path: '/main/student/results',
     },
     {
       title: ` <li class="sidebar-item">
@@ -76,7 +80,8 @@ export const arrayMENU = {
         <span class="align-middle">Лекции</span>
       </a>
     </li>`,
-      onclick: lecture.render.bind(lecture),
+      view: lecture,
+      path: '/main/student/lectures',
     },
     {
       title: `<li class="sidebar-item">
@@ -85,7 +90,8 @@ export const arrayMENU = {
         <span class="align-middle">Тесты</span>
       </a>
     </li>`,
-      onclick: tests.render.bind(tests),
+      view: tests,
+      path: '/main/student/tests',
     },
   ],
   teacher: [
