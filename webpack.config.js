@@ -44,7 +44,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, './src/main.html'),
       filename: 'main.html',
-      publicPath: 'http://localhost:8081/', // 'http://localhost:4004/',
+      publicPath: 'http://localhost:4004/', // 'http://localhost:8081',
       chunks: ['main'],
     }),
     new HtmlWebpackPlugin({
