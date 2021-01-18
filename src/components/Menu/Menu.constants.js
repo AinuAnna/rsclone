@@ -112,7 +112,8 @@ export const arrayMENU = {
         <span class="align-middle">Группы</span>
       </a>
     </li>`,
-      // onclick: group.render(),
+      // view: group.render(),
+      path: '/main/teacher/groups',
     },
     {
       title: ` <li class="sidebar-item">
@@ -121,7 +122,8 @@ export const arrayMENU = {
         <span class="align-middle">Лекции</span>
       </a>
     </li>`,
-      onclick: lecture.render.bind(lecture),
+      view: lecture.render.bind(lecture),
+      path: '/main/teacher/tests',
     },
     {
       title: `<li class="sidebar-item">
@@ -130,7 +132,8 @@ export const arrayMENU = {
         <span class="align-middle">Тесты</span>
       </a>
     </li>`,
-      onclick: tests.render.bind(tests),
+      view: tests.render.bind(tests),
+      path: '/main/teacher/tests',
     },
   ],
 };
