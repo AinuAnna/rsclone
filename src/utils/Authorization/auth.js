@@ -137,13 +137,15 @@ export default class Auth {
     });
 
     // signup
-    const signupForm = document.querySelector('#signup-form');
-    signupForm.addEventListener('submit', (e) => {
-      e.preventDefault();
+    const signupForm = document.querySelector('#form-singup');
+    document.querySelector('#button-singup').addEventListener('click', () => {
+      // e.preventDefault();
 
       // get user info
-      const email = signupForm['signup-email'].value;
-      const password = signupForm['signup-password'].value;
+      const email = signupForm['input-email'].value;
+      const password = signupForm['input-password'].value;
+      // const fio = signupForm['input-fio'].value;
+      // const group = signupForm['input-group'].value;
 
       console.log(email, password);
 
@@ -152,13 +154,14 @@ export default class Auth {
         .createUserWithEmailAndPassword(email, password)
         .then((cred) =>
           db.collection('UsersBio').doc(cred.user.uid).set({
-            bio: signupForm['signup-bio'].value,
+            fio: signupForm['input-fio'].value,
+            group: signupForm['input-group'].value,
           })
         )
         .then(() => {
           // close the signup modal & reset form
-          const modal = document.querySelector('#modal-signup');
-          M.Modal.getInstance(modal).close();
+          // const modal = document.querySelector('#modal-signup');
+          // M.Modal.getInstance(modal).close();
           signupForm.reset();
         });
     });
@@ -171,13 +174,13 @@ export default class Auth {
     });
 
     // login
-    const loginForm = document.querySelector('#login-form');
-    loginForm.addEventListener('submit', (e) => {
-      e.preventDefault();
+    const loginForm = document.querySelector('#form-login');
+    document.querySelector('#submit-main').addEventListener('click', () => {
+      // e.preventDefault();
 
       // get user info
-      const email = loginForm['login-email'].value;
-      const password = loginForm['login-password'].value;
+      const email = loginForm['input-email'].value;
+      const password = loginForm['input-password'].value;
 
       // log the user in
       auth.signInWithEmailAndPassword(email, password).then((cred) => {

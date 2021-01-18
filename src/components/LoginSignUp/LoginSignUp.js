@@ -19,7 +19,7 @@ export default class LoginSignUp extends UI {
       'text-muted mb-0',
     ]);
     UI.renderElement(container, 'span', null, ['class', 'clearfix']);
-    const form = UI.renderElement(container, 'form', null, ['role', 'form']);
+    const form = UI.renderElement(container, 'form', null, ['role', 'form'], ['id', 'form-singup']);
     const divFormGroup = UI.renderElement(form, 'div', null, ['class', 'form-group']);
     const divMail = UI.renderElement(divFormGroup, 'div', null, ['class', 'form-group']);
     UI.renderElement(divMail, 'label', 'Эл. Почта', ['class', 'form-control-label']);
@@ -59,7 +59,15 @@ export default class LoginSignUp extends UI {
     const divFormGroup3 = UI.renderElement(form, 'div', null, ['class', 'form-group']);
     const divFullName = UI.renderElement(divFormGroup3, 'div', null, ['class', 'form-group']);
     UI.renderElement(divFullName, 'label', 'Имя Фамилия Отчество', ['class', 'form-control-label']);
-    UI.renderElement(divFormGroup3, 'input', null, ['class', 'form-control'], ['type', 'text'], ['placeholder', 'ФИО']);
+    UI.renderElement(
+      divFormGroup3,
+      'input',
+      null,
+      ['class', 'form-control'],
+      ['type', 'text'],
+      ['placeholder', 'ФИО'],
+      ['id', 'input-fio']
+    );
 
     const divFormGroup4 = UI.renderElement(form, 'div', null, ['class', 'form-group']);
     const divType = UI.renderElement(divFormGroup4, 'div', null, ['class', 'form-group']);
@@ -78,7 +86,8 @@ export default class LoginSignUp extends UI {
       null,
       ['class', 'form-control'],
       ['type', 'text'],
-      ['placeholder', 'Номер группы, категория']
+      ['placeholder', 'Номер группы, категория'],
+      ['id', 'input-group']
     );
 
     const divFormGroup6 = UI.renderElement(form, 'div', null, ['class', 'mt-4']);
@@ -87,7 +96,9 @@ export default class LoginSignUp extends UI {
       'button',
       null,
       ['class', 'btn btn-primary rounded-pill'],
-      ['type', 'button']
+      ['type', 'button'],
+      ['form', 'form-singup'],
+      ['id', 'button-singup']
     );
     UI.renderElement(ButtonSubmit, 'span', '✓', ['class', 'btn-inner--text'], ['style', 'font-size: 18px; ']);
 
@@ -112,7 +123,7 @@ export default class LoginSignUp extends UI {
       'text-muted mb-0',
     ]);
     UI.renderElement(container, 'span', null, ['class', 'clearfix']);
-    const form = UI.renderElement(container, 'form', null, ['role', 'form']);
+    const form = UI.renderElement(container, 'form', null, ['role', 'form'], ['id', 'form-login']);
     const divFormGroup = UI.renderElement(form, 'div', null, ['class', 'form-group']);
     const divMail = UI.renderElement(divFormGroup, 'div', null, ['class', 'form-group']);
     UI.renderElement(divMail, 'label', 'Эл. Почта', ['class', 'form-control-label']);
@@ -156,7 +167,8 @@ export default class LoginSignUp extends UI {
       'button',
       null,
       ['class', 'btn btn-primary rounded-pill'],
-      ['type', 'button']
+      ['type', 'button'],
+      ['id', 'submit-main']
     );
     UI.renderElement(ButtonSubmit, 'span', '✓', ['class', 'btn-inner--text'], ['style', 'font-size: 18px; ']);
 
