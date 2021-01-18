@@ -1,7 +1,7 @@
 import './sass/style.scss';
 import './utils/FirebaseAuth/FirebaseAuth';
 // import Admin from './components/Admin/Admin';
-// import Tests from './components/Tests/Tests';
+import Tests from './components/Tests/Tests';
 // import TestsAdmin from './components/TestsAdmin/TestsAdmin';
 // import LectureAdmin from './components/LectureAdmin/LectureAdmin';
 import Menu from './components/Menu/Menu';
@@ -20,13 +20,13 @@ menu.renderM();
 
 // const admin = new Admin(document.getElementById('container'));
 // admin.render();
-// const tests = new Tests(document.getElementById('container'));
-// tests.render();
+const tests = new Tests(document.getElementById('container'));
+tests.render();
 // const testsAdmin = new TestsAdmin(document.getElementById('container'));
 // testsAdmin.render();
 
-const lectureAdmin = new LectureAdmin(document.getElementById('container'));
-lectureAdmin.render();
+// const lectureAdmin = new LectureAdmin(document.getElementById('container'));
+// lectureAdmin.render();
 
 // const lecture = new Lecture(document.getElementById('container'));
 // lecture.render();
