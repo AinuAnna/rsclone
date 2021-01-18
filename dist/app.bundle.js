@@ -16,7 +16,7 @@
   \***********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => /* binding */ Event\n/* harmony export */ });\n/* eslint-disable class-methods-use-this */\nclass Event {\n  toggleMenuButton() {\n    const simpleBarElement = document.getElementsByClassName('js-simplebar')[0];\n\n    if (simpleBarElement) {\n      const sidebarElement = document.getElementsByClassName('sidebar')[0];\n      const sidebarToggleElement = document.getElementsByClassName('sidebar-toggle')[0];\n      sidebarToggleElement.addEventListener('click', () => {\n        sidebarElement.classList.toggle('collapsed');\n      });\n    }\n\n    const dropdown = document.querySelector('.nav-item.dropdown');\n    dropdown.addEventListener('mousemove', () => {\n      const menu = document.querySelector('.dropdown-menu.dropdown-menu-right');\n      menu.classList.add('show');\n      menu.addEventListener('mouseleave', () => {\n        const menuDrop = document.querySelector('.dropdown-menu.dropdown-menu-right');\n        menuDrop.classList.remove('show');\n      });\n    });\n  }\n\n  renderToggle() {\n    this.toggleMenuButton();\n  }\n\n  focus() {\n    const login = document.querySelector('#loginClick');\n    login.addEventListener('click', () => {\n      document.getElementById('input-email').focus();\n    });\n  }\n\n  renderFocus() {\n    this.focus();\n  }\n\n}\n\n//# sourceURL=webpack://rsclone/./src/events.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => /* binding */ Event\n/* harmony export */ });\n/* eslint-disable class-methods-use-this */\nclass Event {\n  toggleMenuButton() {\n    const simpleBarElement = document.getElementsByClassName('js-simplebar')[0];\n\n    if (simpleBarElement) {\n      const sidebarElement = document.getElementsByClassName('sidebar')[0];\n      const sidebarToggleElement = document.getElementsByClassName('sidebar-toggle')[0];\n      sidebarToggleElement.addEventListener('click', () => {\n        sidebarElement.classList.toggle('collapsed');\n      });\n    }\n\n    const dropdown = document.querySelector('.nav-item.dropdown');\n    dropdown.addEventListener('mousemove', () => {\n      const menu = document.querySelector('.dropdown-menu.dropdown-menu-right');\n      menu.classList.add('show');\n      menu.addEventListener('mouseleave', () => {\n        const menuDrop = document.querySelector('.dropdown-menu.dropdown-menu-right');\n        menuDrop.classList.remove('show');\n      });\n    });\n  }\n\n  renderToggle() {\n    this.toggleMenuButton();\n  }\n\n  focus() {\n    const login = document.querySelector('#loginClick');\n    login.addEventListener('click', () => {\n      document.getElementById('input-email').focus({\n        preventScroll: false\n      });\n    });\n  }\n\n  renderFocus() {\n    this.focus();\n  }\n\n}\n\n//# sourceURL=webpack://rsclone/./src/events.js?");
 
 /***/ }),
 
@@ -148,7 +148,7 @@ eval("\n\nvar isOldIE = function isOldIE() {\n  var memo;\n  return function mem
 /******/ 	
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	(() => {
-/******/ 		__webpack_require__.h = () => "bac45c5bd5738dfdabf9"
+/******/ 		__webpack_require__.h = () => "4d3c9353e84d8e0745a3"
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/global */
