@@ -11,7 +11,7 @@ const tests = new Tests(document.getElementById('container'));
 const testsAdmin = new TestsAdmin(document.getElementById('container'));
 const lectureAdmin = new LectureAdmin(document.getElementById('container'));
 const lecture = new Lecture(document.getElementById('container'));
-const rez = new TestResults();
+const testResults = new TestResults(document.getElementById('container'));
 
 export const arrayMENU = {
   admin: [
@@ -36,7 +36,7 @@ export const arrayMENU = {
     <span class="align-middle">Пользователи</span>
     </a>
   </li>`,
-      onclick: admin.render(),
+      onclick: admin.render.bind(admin),
     },
     {
       title: ` <li class="sidebar-item">
@@ -45,7 +45,7 @@ export const arrayMENU = {
         <span class="align-middle">Лекции</span>
       </a>
     </li>`,
-      onclick: lectureAdmin.render(),
+      onclick: lectureAdmin.render.bind(lectureAdmin),
     },
     {
       title: `<li class="sidebar-item">
@@ -54,7 +54,7 @@ export const arrayMENU = {
         <span class="align-middle">Тесты</span>
       </a>
     </li>`,
-      onclick: testsAdmin.render(),
+      onclick: testsAdmin.render.bind(testsAdmin),
     },
   ],
   student: [
@@ -67,7 +67,7 @@ export const arrayMENU = {
         <span class="align-middle">Результаты тестов</span>
       </a>
     </li>`,
-      onclick: rez.render(),
+      onclick: testResults.render.bind(testResults),
     },
     {
       title: ` <li class="sidebar-item">
@@ -76,7 +76,7 @@ export const arrayMENU = {
         <span class="align-middle">Лекции</span>
       </a>
     </li>`,
-      onclick: lecture.render(),
+      onclick: lecture.render.bind(lecture),
     },
     {
       title: `<li class="sidebar-item">
@@ -85,7 +85,7 @@ export const arrayMENU = {
         <span class="align-middle">Тесты</span>
       </a>
     </li>`,
-      onclick: tests.render(),
+      onclick: tests.render.bind(tests),
     },
   ],
   teacher: [
@@ -115,7 +115,7 @@ export const arrayMENU = {
         <span class="align-middle">Лекции</span>
       </a>
     </li>`,
-      onclick: lecture.render(),
+      onclick: lecture.render.bind(lecture),
     },
     {
       title: `<li class="sidebar-item">
@@ -124,7 +124,7 @@ export const arrayMENU = {
         <span class="align-middle">Тесты</span>
       </a>
     </li>`,
-      onclick: tests.render(),
+      onclick: tests.render.bind(tests),
     },
   ],
 };

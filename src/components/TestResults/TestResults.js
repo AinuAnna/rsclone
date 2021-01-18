@@ -5,6 +5,10 @@ import { FirebaseDB } from '../../utils/FirebaseDB/FirebaseDB';
 const firebase = new FirebaseDB();
 
 export default class TestResults extends UI {
+  constructor(rootNode) {
+    super();
+    this.rootNode = rootNode;
+  }
   renderM() {
     const wrapper = UI.renderElement(this.rootNode, 'div', null, ['class', 'test-results__wrapper']);
     const tableTitles = ['Тема', 'Тест', 'Отметка'];
@@ -30,8 +34,8 @@ export default class TestResults extends UI {
     this.userId = userId;
   }
 
-  render(rootNode, idUser) {
-    this.rootNode = rootNode;
+  render(idUser) {
+    this.rootNode.innerHTML = "";
     firebase.getData('TestResults').then((data) => {
       this.setData(data, idUser);
       this.renderM();
