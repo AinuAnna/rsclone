@@ -9,6 +9,26 @@ export default class Tests extends UI {
     this.firebaseDB = new FirebaseDB();
   }
 
+  renderList() {
+    const goBtn = UI.renderElement(this.rootNode, 'div', null, ['class', 'go-back-btn']);
+    const wrapper = UI.renderElement(this.rootNode, 'div', null, ['class', 'tests__wrapper']);
+
+    const goBackBtn = UI.renderElement(goBtn, 'button', 'Вернуться назад', [
+      'class',
+      'btn btn-primary lecture__btn-go-test',
+    ]);
+
+    UI.renderElement(wrapper, 'h2', 'Тесты', ['class', 'tests__title']);
+    const container = UI.renderElement(wrapper, 'div', null, ['class', 'tests__container']);
+    const listTitle = UI.renderElement(container, 'div', 'Список тестов:', ['class', 'tests__list-title ']);
+    this.testsArray.forEach(({ id, title }) => {
+      const div = UI.renderElement(listTitle, 'div', null, ['data-id', id], ['class', 'tests__div']);
+      const ul = UI.renderElement(div, 'ul', null, ['class', 'tests__ul']);
+      const a = UI.renderElement(ul, 'a', null, ['class', 'tests__a'], ['href', '#']);
+      UI.renderElement(a, 'li', title, ['class', 'tests__li']);
+    });
+  }
+
   renderM() {
     const wrapper = UI.renderElement(this.rootNode, 'div', null, ['class', 'tests__wrapper']);
     UI.renderElement(wrapper, 'h2', 'Тесты', ['class', 'tests__title']);
@@ -42,6 +62,7 @@ export default class Tests extends UI {
     this.firebaseDB.getData('Tests').then((data) => {
       this.setData(data);
       this.renderM();
+      this.renderList();
     });
   }
 }
