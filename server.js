@@ -1,9 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-console */
-
 // import path from 'path';
 // import express from 'express';
-
 const express = require('express');
 const path = require('path');
 
@@ -13,12 +11,17 @@ const app = express();
 app.use(express.static('dist'));
 app.engine('html', require('ejs').renderFile);
 
+app.use('/js', express.static(`${__dirname}/dist/js`));
+
 app.get('/main.html', (req, res) => {
   res.render(path.resolve(dirname, 'dist', 'main.html'));
 });
 
 app.get('/login.html', (req, res) => {
   res.render(path.resolve(dirname, 'dist', 'login.html'));
+});
+app.route('/lecture', (req, res) => {
+  res.render(path.resolve(dirname, 'dist', 'index.html'));
 });
 
 app.listen(port, (err) => {

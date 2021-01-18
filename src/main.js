@@ -4,15 +4,15 @@ import './utils/FirebaseAuth/FirebaseAuth';
 import Tests from './components/Tests/Tests';
 // import TestsAdmin from './components/TestsAdmin/TestsAdmin';
 // import LectureAdmin from './components/LectureAdmin/LectureAdmin';
-// import Menu from './components/Menu/Menu';
+import Menu from './components/Menu/Menu';
 // import TestResults from './components/TestResults/TestResults';
 import Event from './events';
 // import Lecture from './components/Lecture/Lecture';
 
 const event = new Event();
 event.renderToggle();
-// const menu = new Menu(document.getElementById('menu'));
-// menu.renderM();
+const menu = new Menu(document.getElementById('menu'));
+menu.renderM();
 // import Profile from './components/Profile/Profile';
 
 // const st = new Profile();
