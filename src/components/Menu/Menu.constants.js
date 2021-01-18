@@ -115,7 +115,7 @@ export const arrayMENU = {
         <span class="align-middle">Лекции</span>
       </a>
     </li>`,
-      onclick: lecture.render.bind(lecture)
+      onclick: lecture.render.bind(lecture),
     },
     {
       title: `<li class="sidebar-item">

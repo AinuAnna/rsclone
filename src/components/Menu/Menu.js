@@ -21,18 +21,6 @@ export default class Menu extends UI {
         onclick();
       });
     });
-    //
-    // const ul2 = UI.renderElement(this.rootNode, 'ul', null, ['class', 'menu__admin']);
-    // const arr2 = arrayMENU.student.flat();
-    // arr2.forEach(({ title, onclick }) => {
-    //   UI.renderElement(ul2, 'li', title, ['class', 'name']);
-    // });
-    //
-    // const ul3 = UI.renderElement(this.rootNode, 'ul', null, ['class', 'menu__admin']);
-    // const arr3 = arrayMENU.teacher.flat();
-    // arr3.forEach(({ title, onclick }) => {
-    //   UI.renderElement(ul3, 'li', title, ['class', 'name']);
-    // });
   }
 
   render() {
