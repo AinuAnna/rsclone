@@ -42,4 +42,20 @@
   &__label-list {
     margin-left: 20px;
   }
+  &__btn-go-test {
+    display: block;
+    margin: 20px auto;
+    min-width: 200px;
+  }
+  &__trophy {
+    display: block;
+    margin: 20px auto;
+  }
+  &__resilt-text {
+    display: block;
+    margin: 20px auto;
+    color: #6c757d;
+    text-align: center;
+    font-size: 18px;
+  }
 }
