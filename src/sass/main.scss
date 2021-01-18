@@ -86,3 +86,9 @@ footer {
 .form-control-label {
   color: #8391a2;
 }
+.login {
+  &__wrapper {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+}

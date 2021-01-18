@@ -23,7 +23,7 @@ export default class Admin extends UI {
   constructor(rootNode) {
     super();
     this.rootNode = rootNode;
-    this.etAddUserPopUp();
+    this.getAddUserPopUp();
     this.getEditUserPopUp();
     this.deleteUser();
     this.addUser();

@@ -69,14 +69,6 @@ export default class LoginSignUp extends UI {
       ['id', 'input-fio']
     );
 
-    const divFormGroup4 = UI.renderElement(form, 'div', null, ['class', 'form-group']);
-    const divType = UI.renderElement(divFormGroup4, 'div', null, ['class', 'form-group']);
-    UI.renderElement(divType, 'label', 'Роль', ['class', 'form-control-label']);
-    const selectType = UI.renderElement(divFormGroup4, 'select', null, ['class', 'form-control']);
-    UI.renderElement(selectType, 'option', 'Преподаватель', ['value', 'Преподаватель']);
-    UI.renderElement(selectType, 'option', 'Студент', ['value', 'Студент']);
-    UI.renderElement(selectType, 'option', 'Администратор', ['value', 'Администратор']);
-
     const divFormGroup5 = UI.renderElement(form, 'div', null, ['class', 'form-group']);
     const divDescription = UI.renderElement(divFormGroup5, 'div', null, ['class', 'form-group']);
     UI.renderElement(divDescription, 'label', 'Описание', ['class', 'form-control-label']);
@@ -109,8 +101,21 @@ export default class LoginSignUp extends UI {
       ['class', 'card-footer px-md-5'],
       ['style', 'color: #6c757d;']
     );
-    const smallText = UI.renderElement(divFormGroup7, 'small', 'Уже зарегистрированы?', ['class', 'login__small']);
-    UI.renderElement(smallText, 'a', 'Вход', ['class', 'small font-weight-bold'], ['href', '#']);
+    const smallText = UI.renderElement(
+      divFormGroup7,
+      'small',
+      'Уже зарегистрированы?',
+      ['class', 'login__small'],
+      ['style', 'font-size: 14px;']
+    );
+    UI.renderElement(
+      smallText,
+      'a',
+      'Вход',
+      ['class', 'small font-weight-bold'],
+      ['href', '#'],
+      ['style', 'font-size: 14px;']
+    );
   }
 
   renderLogin() {
@@ -179,8 +184,21 @@ export default class LoginSignUp extends UI {
       ['class', 'card-footer px-md-5'],
       ['style', 'color: #6c757d;']
     );
-    const smallText = UI.renderElement(divFormGroup7, 'small', 'Еще нет аккаунта?', ['class', 'login__small']);
-    UI.renderElement(smallText, 'a', 'Регистрация', ['class', 'small font-weight-bold'], ['href', '#']);
+    const smallText = UI.renderElement(
+      divFormGroup7,
+      'small',
+      'Еще нет аккаунта?',
+      ['class', 'login__small'],
+      ['style', 'font-size: 14px;']
+    );
+    UI.renderElement(
+      smallText,
+      'a',
+      'Регистрация',
+      ['class', 'small font-weight-bold'],
+      ['href', '#'],
+      ['style', 'font-size: 14px;']
+    );
   }
 
   render() {
