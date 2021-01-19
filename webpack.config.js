@@ -31,8 +31,8 @@ module.exports = {
       watch: path.resolve('./dist'),
       ext: 'html,js,njk,json',
     }),
-    new webpack.HotModuleReplacementPlugin(),
-    new CleanWebpackPlugin(),
+    // new webpack.HotModuleReplacementPlugin(),
+    // new CleanWebpackPlugin(),
     new CopyPlugin({
       // Images
       patterns: [
