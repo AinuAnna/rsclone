@@ -29,7 +29,6 @@ export default class Menu extends UI {
       item.addEventListener('click', (e) => {
         e.preventDefault();
         history.push(item.path);
-        // onclick();
       });
     });
   }
@@ -39,7 +38,7 @@ export default class Menu extends UI {
     const ul = UI.renderElement(this.rootNode, 'ul', null, ['class', `menu__${role}`]);
     document.getElementById('menu-title').innerHTML = role;
     const arr = arrayMENU[role].flat();
-    arr.forEach(({ title, onclick, path }) => {
+    arr.forEach(({ title, path }) => {
       const item = UI.renderElement(ul, 'li', title, ['class', 'name']);
       item.addEventListener('click', (e) => {
         e.preventDefault();

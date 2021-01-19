@@ -122,8 +122,8 @@ export const arrayMENU = {
         <span class="align-middle">Лекции</span>
       </a>
     </li>`,
-      view: lecture.render.bind(lecture),
-      path: '/main/teacher/tests',
+      view: lecture,
+      path: '/main/teacher/lectures',
     },
     {
       title: `<li class="sidebar-item">
@@ -132,7 +132,7 @@ export const arrayMENU = {
         <span class="align-middle">Тесты</span>
       </a>
     </li>`,
-      view: tests.render.bind(tests),
+      view: tests,
       path: '/main/teacher/tests',
     },
   ],
