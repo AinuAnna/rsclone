@@ -19,32 +19,32 @@ const adminForm = document.querySelector('.admin-actions');
 adminForm.addEventListener('submit', (e) => {
   e.preventDefault();
 
-  // const adminEmail = document.querySelector('#admin-email').value;
-  // const addAdminRole = functions.httpsCallable('addAdminRole');
-  // addAdminRole({ email: adminEmail }).then(result => {
-  //   console.log(result);
-  // });
+  const adminEmail = document.querySelector('#admin-email').value;
+  const addAdminRole = functions.httpsCallable('addAdminRole');
+  addAdminRole({ email: adminEmail }).then(result => {
+    console.log(result);
+  });
 
-  // auth.then((cred) =>
-  //   db
-  //     .collection('UsersBio')
-  //     .doc(cred.user.uid)
-  //     .set({
-  //       status: document.querySelector('#admin-email').value,
-  //     })
-  // );
+  auth.then((cred) =>
+    db
+      .collection('UsersBio')
+      .doc(cred.user.uid)
+      .set({
+        status: document.querySelector('#admin-email').value,
+      })
+  );
   const user = firebase.auth().currentUser;
   console.log(user);
-  // user
-  //   .updateProfile({
-  //     displayName: 'Admin',
-  //   })
-  //   .then(() => {
-  //     // Update successful.
-  //   })
-  //   .catch((error) => {
-  //     // An error happened.
-  //   });
+  user
+    .updateProfile({
+      displayName: 'Admin',
+    })
+    .then(() => {
+      // Update successful.
+    })
+    .catch((error) => {
+      // An error happened.
+    });
 });
 */
 // listen for auth status changes
@@ -81,6 +81,12 @@ export default class Auth {
       }
     };
 
+    // const checkStatus = (status) => {
+    //   if (status === 'student') {
+    //   }
+    //   if (status === 'admin') {
+    //   }
+    // }
     // setup guides
     // const setupGuides = (data) => {
     //   if (data.length) {
@@ -102,14 +108,22 @@ export default class Auth {
     // };
 
     auth.onAuthStateChanged((user) => {
+      // console.log(user.uid);
       if (user) {
-        db.collection('Guides').onSnapshot(
-          (snapshot) => {
-            // setupGuides(snapshot.docs);
-            setupUI(user);
-          },
-          (err) => console.log(err.message)
-        );
+        // db.collection('UsersBio')
+        //   .doc(user.uid)
+        //   .get()
+        //   .then((doc) => {
+        //     doc.data().status;
+        //   });
+        // document.location.href = 'index.html';
+        // db.collection('Guides').onSnapshot(
+        //   (snapshot) => {
+        //     setupGuides(snapshot.docs);
+        //     setupUI(user);
+        //   },
+        //   (err) => console.log(err.message)
+        // );
       } else {
         setupUI();
         // setupGuides([]);
@@ -156,6 +170,7 @@ export default class Auth {
           db.collection('UsersBio').doc(cred.user.uid).set({
             fio: signupForm['input-fio'].value,
             group: signupForm['input-group'].value,
+            status: 'student',
           })
         )
         .then(() => {

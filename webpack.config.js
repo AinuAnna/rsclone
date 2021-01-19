@@ -1,6 +1,7 @@
 const path = require('path');
 const CopyPlugin = require('copy-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const NodemonPlugin = require('nodemon-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 
@@ -25,6 +26,11 @@ module.exports = {
     index: 'main.html',
   },
   plugins: [
+    new NodemonPlugin({
+      script: './server.js',
+      watch: path.resolve('./dist'),
+      ext: 'html,js,njk,json',
+    }),
     new webpack.HotModuleReplacementPlugin(),
     new CleanWebpackPlugin(),
     new CopyPlugin({

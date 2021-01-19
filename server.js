@@ -22,6 +22,8 @@ app.get('/main.html', (req, res) => {
 });
 
 app.get('/login.html', (req, res) => {
+  console.log(req);
+  console.log(req.uid);
   res.render(path.resolve(dirname, 'dist', 'login.html'));
 });
 
