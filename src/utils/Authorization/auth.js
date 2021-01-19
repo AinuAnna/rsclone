@@ -116,7 +116,6 @@ export default class Auth {
         //   .then((doc) => {
         //     doc.data().status;
         //   });
-        // document.location.href = 'index.html';
         // db.collection('Guides').onSnapshot(
         //   (snapshot) => {
         //     setupGuides(snapshot.docs);
@@ -183,8 +182,9 @@ export default class Auth {
 
     // logout
     const logout = document.querySelector('#logout');
-    logout.addEventListener('click', (e) => {
-      e.preventDefault();
+    logout.addEventListener('click', () => {
+      // e.preventDefault();
+      // document.location.href = './main';
       auth.signOut();
     });
 
@@ -199,11 +199,13 @@ export default class Auth {
 
       // log the user in
       auth.signInWithEmailAndPassword(email, password).then((cred) => {
-        console.log(cred.user);
+        // document.location.href = `./main/student/results:${cred.user.uid}`;
+        // console.log(cred.user);
+        document.location.href = './main/student/results';
         // close the signup modal & reset form
-        const modal = document.querySelector('#modal-login');
-        M.Modal.getInstance(modal).close();
-        loginForm.reset();
+        // const modal = document.querySelector('#modal-login');
+        // M.Modal.getInstance(modal).close();
+        // loginForm.reset();
       });
     });
     // setup materialize components
