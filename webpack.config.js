@@ -12,11 +12,14 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, './dist'),
-    filename: '[name].bundle.js',
+    filename: '[name].bandle.js',
+    chunkFilename: '[id].bundle.js',
   },
   mode: 'development',
   devServer: {
-    historyApiFallback: true,
+    historyApiFallback: {
+      disableDotRule: true,
+    },
     contentBase: path.resolve(__dirname, './dist'),
     open: true,
     compress: true,
@@ -44,7 +47,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, './src/main.html'),
       filename: 'main.html',
-      publicPath: 'http://localhost:4004/', // 'http://localhost:8081',
+      publicPath: 'http://localhost:8081', // 'http://localhost:4004/',
       chunks: ['main'],
     }),
     new HtmlWebpackPlugin({

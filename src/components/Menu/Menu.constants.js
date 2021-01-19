@@ -37,7 +37,7 @@ export const arrayMENU = {
     </a>
   </li>`,
       view: admin,
-      path: '/main/admin/users',
+      path: '/admin-users',
     },
     {
       title: ` <li class="sidebar-item">
@@ -47,7 +47,7 @@ export const arrayMENU = {
       </a>
     </li>`,
       view: lectureAdmin,
-      path: '/main/admin/lectures',
+      path: '/admin-lectures',
     },
     {
       title: `<li class="sidebar-item">
@@ -57,7 +57,7 @@ export const arrayMENU = {
       </a>
     </li>`,
       view: testsAdmin,
-      path: `/main/admin/tests`,
+      path: `/admin-tests`,
     },
   ],
   student: [
@@ -71,7 +71,7 @@ export const arrayMENU = {
       </a>
     </li>`,
       view: testResults,
-      path: '/main/student/results',
+      path: '/student-results',
     },
     {
       title: ` <li class="sidebar-item">
@@ -81,7 +81,7 @@ export const arrayMENU = {
       </a>
     </li>`,
       view: lecture,
-      path: '/main/student/lectures',
+      path: '/student-lectures',
     },
     {
       title: `<li class="sidebar-item">
@@ -91,7 +91,7 @@ export const arrayMENU = {
       </a>
     </li>`,
       view: tests,
-      path: '/main/student/tests',
+      path: '/student-tests',
     },
   ],
   teacher: [
@@ -113,7 +113,7 @@ export const arrayMENU = {
       </a>
     </li>`,
       // view: group.render(),
-      path: '/main/teacher/groups',
+      path: '/teacher-groups',
     },
     {
       title: ` <li class="sidebar-item">
@@ -123,7 +123,7 @@ export const arrayMENU = {
       </a>
     </li>`,
       view: lecture,
-      path: '/main/teacher/lectures',
+      path: '/teacher-lectures',
     },
     {
       title: `<li class="sidebar-item">
@@ -133,7 +133,7 @@ export const arrayMENU = {
       </a>
     </li>`,
       view: tests,
-      path: '/main/teacher/tests',
+      path: '/teacher-tests',
     },
   ],
 };

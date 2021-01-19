@@ -17,11 +17,11 @@ const productRouter = express.Router();
 app.use(express.static('dist'));
 app.engine('html', require('ejs').renderFile);
 
-app.get('/main.html', (req, res) => {
+app.get('/main', (req, res) => {
   res.render(path.resolve(dirname, 'dist', 'main.html'));
 });
 
-app.get('/login.html', (req, res) => {
+app.get('/login', (req, res) => {
   res.render(path.resolve(dirname, 'dist', 'login.html'));
 });
 
