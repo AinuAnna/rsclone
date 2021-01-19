@@ -22,6 +22,10 @@ app.get('/main.html', (req, res) => {
   res.render(path.resolve(dirname, 'dist', 'main.html'));
 });
 
+app.get('/index.html', (req, res) => {
+  res.render(path.resolve(dirname, 'dist', 'index.html'));
+});
+
 app.get('/login.html', (req, res) => {
   res.render(path.resolve(dirname, 'dist', 'login.html'));
   console.log(req);
@@ -33,7 +37,7 @@ app.get('/*', (req, res) => {
 });
 /*
 app.get('/main/student/results/', (req, res) => {
-  res.send('/main/student/results/1');
+  res.send('/main/student/results/');
 });
 */
 app.listen(port, (err) => {
