@@ -53,7 +53,7 @@ export default class Tests extends UI {
       wrapper,
       'img',
       null,
-      ['src', './assets/img/trophy.svg'],
+      ['src', '/assets/img/trophy.svg'],
       ['style', 'max-width: 15rem;'],
       ['class', 'tests__trophy']
     );
