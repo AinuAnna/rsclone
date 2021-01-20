@@ -65,7 +65,7 @@ export default class LectureAdmin extends UI {
     });
   }
 
-  renderM() {
+  renderLectureAdminForm() {
     const wrapper = UI.renderElement(this.rootNode, 'div', null, ['class', 'lecture-admin__wrapper']);
     UI.renderElement(wrapper, 'h2', 'Лекции', ['class', 'lecture-admin__title']);
     const container = UI.renderElement(wrapper, 'div', null, ['class', 'lecture-admin__container']);
@@ -251,7 +251,7 @@ export default class LectureAdmin extends UI {
 
     goBackBtn.addEventListener('click', () => {
       this.rootNode.innerHTML = '';
-      this.renderM();
+      this.renderLectureAdminForm();
     });
 
     /* Render lections */
