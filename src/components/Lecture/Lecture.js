@@ -43,13 +43,8 @@ export default class Lecture extends UI {
 
     /* Add event for rendering subtitle of lection */
     subtitlesRenderedArr.forEach((sectionLecture) => {
-      // const subtitles = document.querySelectorAll('.lecture-admin__li');
       sectionLecture.addEventListener('click', (e) => {
-        // subtitles.forEach((titleCss) => {
-        //   // eslint-disable-next-line no-param-reassign
-        //   titleCss.style.fontWeight = '400';
-        // });
-
+        e.preventDefault();
         const lectureId = e.target.closest('.lecture-admin__div').getAttribute('data-id');
         const lectureSubtitle = e.target.closest('.lecture-admin__div').textContent;
         this.lectureInfo.forEach((lecture) => {
@@ -67,6 +62,7 @@ export default class Lecture extends UI {
   }
 
   renderLecture(text) {
+    // debugger
     this.rootNode.innerHTML = '';
     const goBtn = UI.renderElement(this.rootNode, 'div', null, ['class', 'go-back-btn']);
     const wrapper = UI.renderElement(this.rootNode, 'div', null, ['class', 'lecture__wrapper']);

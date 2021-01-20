@@ -22,7 +22,7 @@ export default class Tests extends UI {
     });
   }
 
-  renderM() {
+  renderTests() {
     const wrapper = UI.renderElement(this.rootNode, 'div', null, ['class', 'tests__wrapper']);
     UI.renderElement(wrapper, 'h2', 'Тесты', ['class', 'tests__title']);
     const container = UI.renderElement(wrapper, 'div', null, ['class', 'tests__container']);
@@ -86,8 +86,9 @@ export default class Tests extends UI {
   render() {
     this.firebaseDB.getData('Tests').then((data) => {
       this.setData(data);
+      this.rootNode.innerHTML = '';
       this.renderList();
-      this.renderM();
+      this.renderTests();
       this.renderResult();
     });
   }
