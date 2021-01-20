@@ -151,8 +151,8 @@ export default class Auth {
 
     // signup
     const signupForm = document.querySelector('#form-singup');
-    document.querySelector('#button-singup').addEventListener('click', () => {
-      // e.preventDefault();
+    document.querySelector('#button-singup').addEventListener('click', (e) => {
+      e.preventDefault();
 
       // get user info
       const email = signupForm['input-email'].value;
@@ -170,6 +170,15 @@ export default class Auth {
             fio: signupForm['input-fio'].value,
             group: signupForm['input-group'].value,
             status: 'student',
+          })
+        )
+        .then(() =>
+          fetch('http://localhost:4004/api/sendMail', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email, name: signupForm['input-fio'].value }),
           })
         )
         .then(() => {

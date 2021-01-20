@@ -8,6 +8,7 @@
 // const admin = new Admin(document.getElementById('container'));
 
 const express = require('express');
+const bodyParser = require('body-parser');
 const path = require('path');
 
 const port = process.env.port || 4004;
@@ -16,6 +17,7 @@ const app = express();
 const productRouter = express.Router();
 
 app.use(express.static('dist'));
+app.use(bodyParser.json());
 app.engine('html', require('ejs').renderFile);
 
 app.get('/main.html', (req, res) => {
@@ -66,29 +68,42 @@ const transporter = nodemailer.createTransport({
     user: 'rschool999@gmail.com',
     pass: 'Rschool999d+',
   },
-  tls: {
-    rejectUnathorized: false,
-  },
+  // tls: {
+  //   rejectUnathorized: false,
+  // },
 });
 
 const mailOptions = {
   from: '"RS-School" <rschool999@gmail.com>',
-  to: 'anna.26.tereshko@gmail.com',
-  subject: 'Inventation',
+  // to: 'anna.tereshko@logicsoftware.net',
+  subject: 'hi',
   text: 'This inventation from RS-School.',
-  html: 'This <i>inventation</i> from RS-School.',
+  // html: '<h1>hi sasuke</h1>',
 };
+
+app.get('/', (req, res) => {
+  res.render(path.resolve(dirname, 'dist', 'login.html'));
+});
 
 app.post('/login.html', (req, res) => {
   const output = `<>You have a new contact request</p>`;
 });
 
-transporter.sendMail(mailOptions, (error, info) => {
-  if (error) {
-    return console.log(error);
-  }
+// todo: auth ??
+app.post('/api/sendMail', async (req, res) => {
+  try {
+    const info = await transporter.sendMail({
+      ...mailOptions,
+      to: req.body.email,
+      html: `<h1>hi ${req.body.name}</h1>`,
+    });
 
-  console.log(`Email sent: ${info.response}`);
+    console.log(`Email sent: ${info.response}`);
+    res.sendStatus(200);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
 });
 
 app.listen(port, (err) => {

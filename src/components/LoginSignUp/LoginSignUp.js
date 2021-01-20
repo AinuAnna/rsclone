@@ -26,7 +26,7 @@ export default class LoginSignUp extends UI {
       ['role', 'form'],
       ['id', 'form-singup'],
       ['method', 'POST'],
-      ['action', 'send']
+      ['action', '']
     );
     const divFormGroup = UI.renderElement(form, 'div', null, ['class', 'form-group']);
     const divMail = UI.renderElement(divFormGroup, 'div', null, ['class', 'form-group']);
