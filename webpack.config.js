@@ -1,7 +1,7 @@
 const path = require('path');
 const CopyPlugin = require('copy-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const NodemonPlugin = require('nodemon-webpack-plugin')
+const NodemonPlugin = require('nodemon-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 
@@ -10,6 +10,7 @@ module.exports = {
     app: path.resolve(__dirname, './src/index.js'),
     main: path.resolve(__dirname, './src/main.js'),
     login: path.resolve(__dirname, './src/login.js'),
+    profile: path.resolve(__dirname, './src/profile.js'),
   },
   output: {
     path: path.resolve(__dirname, './dist'),
@@ -57,6 +58,11 @@ module.exports = {
       template: path.resolve(__dirname, './src/login.html'),
       filename: 'login.html',
       chunks: ['login'],
+    }),
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, './src/profile.html'),
+      filename: 'profile.html',
+      chunks: ['profile'],
     }),
   ],
   module: {
