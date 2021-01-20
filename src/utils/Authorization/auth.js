@@ -81,12 +81,20 @@ export default class Auth {
       }
     };
 
-    // const checkStatus = (status) => {
-    //   if (status === 'student') {
-    //   }
-    //   if (status === 'admin') {
-    //   }
-    // }
+    const checkStatus = (status) => {
+      db.collection('Users')
+        .doc(status)
+        .get()
+        .then((doc) => {
+          if (doc.data().type === 'student') {
+            document.location.href = './main/student/results';
+          }
+          if (doc.data().type === 'admin') {
+            document.location.href = './main/admin';
+          }
+        });
+    };
+
     // setup guides
     // const setupGuides = (data) => {
     //   if (data.length) {
@@ -186,7 +194,7 @@ export default class Auth {
           // close the signup modal & reset form
           // const modal = document.querySelector('#modal-signup');
           // M.Modal.getInstance(modal).close();
-          signupForm.reset();
+          // signupForm.reset();
           document.location.href = './main/student/results';
         });
     });
@@ -212,7 +220,7 @@ export default class Auth {
       auth.signInWithEmailAndPassword(mail, password).then((cred) => {
         // document.location.href = `./main/student/results:${cred.user.uid}`;
         // console.log(cred.user);
-        document.location.href = './main/student/results';
+        checkStatus(cred.user.uid);
         // close the signup modal & reset form
         // const modal = document.querySelector('#modal-login');
         // M.Modal.getInstance(modal).close();
