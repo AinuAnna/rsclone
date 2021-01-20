@@ -55,7 +55,7 @@
                       <circle cx="12" cy="7" r="4"></circle></svg>Профиль</a
                   >
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item logged-in" href="/index.html" id = "logout">Выйти</a>
+                  <a class="dropdown-item logged-in" href="/main.html" id = "logout">Выйти</a>
                 </div>
               </li>
             </ul>
@@ -65,201 +65,30 @@
         <main class="container">
           <div class="container-fluid p-0">
             <div id="profile"></div>
-                        <!-- Modal DELETE USER-->
-                        <div
-                        class="modal fade"
-                        id="deleteUserModal"
-                        data-bs-backdrop="static"
-                        data-bs-keyboard="false"
-                        tabindex="-1"
-                        aria-labelledby="deleteUserModalLabel"
-                        aria-hidden="true"
-                      >
-                        <div class="modal-dialog">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <h5 class="modal-title" id="deleteUserModalLabel">Удаление пользователя</h5>
-                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">Вы действительно хотите удалить этого пользователя?</div>
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Нет</button>
-                              <button type="button" class="btn btn-primary" id="delete-user-yes">Да</button>
-                            </div>
-                          </div>
-                        </div></div>
-                         <!-- Modal DELETE TEST-->
+                         <!-- Modal SAVE-->
                       <div
                       class="modal fade"
-                      id="deleteTestModal"
+                      id="saveUserModal"
                       data-bs-backdrop="static"
                       data-bs-keyboard="false"
                       tabindex="-1"
-                      aria-labelledby="deleteTestModalLabel"
+                      aria-labelledby="saveUserModalLabel"
                       aria-hidden="true"
                     >
                       <div class="modal-dialog">
                         <div class="modal-content">
                           <div class="modal-header">
-                            <h5 class="modal-title" id="deleteTestModalLabel">Удаление теста</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                          </div>
-                          <div class="modal-body">Вы действительно хотите удалить этот тест?</div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Нет</button>
-                            <button type="button" class="btn btn-primary" id="delete-test-yes">Да</button>
-                          </div>
-                        </div>
-                      </div></div>
-                       <!-- Modal DELETE LECTURE-->
-                       <div
-                       class="modal fade"
-                       id="deleteLectureModal"
-                       data-bs-backdrop="static"
-                       data-bs-keyboard="false"
-                       tabindex="-1"
-                       aria-labelledby="deleteLectureModalLabel"
-                       aria-hidden="true"
-                     >
-                       <div class="modal-dialog">
-                         <div class="modal-content">
-                           <div class="modal-header">
-                             <h5 class="modal-title" id="deleteLectureModalLabel">Удаление лекции</h5>
-                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                           </div>
-                           <div class="modal-body">Вы действительно хотите удалить эту лекцию?</div>
-                           <div class="modal-footer">
-                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Нет</button>
-                             <button type="button" class="btn btn-primary" id="delete-lecture-yes">Да</button>
-                           </div>
-                         </div>
-                       </div></div>
-                       <!-- Modal ADD TEST-->
-                       <div
-                       class="modal fade"
-                       id="addTestModal"
-                       data-bs-backdrop="static"
-                       data-bs-keyboard="false"
-                       tabindex="-1"
-                       aria-labelledby="addTestModalLabel"
-                       aria-hidden="true"
-                     >
-                       <div class="modal-dialog">
-                         <div class="modal-content">
-                           <div class="modal-header">
-                             <h5 class="modal-title" id="addTestModalLabel">Добавление теста</h5>
-                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                           </div>
-                           <div class="modal-body">Новый тест был успешно добавлен!</div>
-                           <div class="modal-footer">
-                             <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Ок</button>
-                           </div>
-                         </div>
-                       </div></div>
-                       <!-- Modal ADD LECTURE-->
-                       <div
-                       class="modal fade"
-                       id="addLectureModal"
-                       data-bs-backdrop="static"
-                       data-bs-keyboard="false"
-                       tabindex="-1"
-                       aria-labelledby="addLectureModalLabel"
-                       aria-hidden="true"
-                     >
-                       <div class="modal-dialog">
-                         <div class="modal-content">
-                           <div class="modal-header">
-                             <h5 class="modal-title" id="addLectureModalLabel">Добавление лекции</h5>
-                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                           </div>
-                           <div class="modal-body">Новая лекция была успешно добавлена!</div>
-                           <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Ок</button>
-                           </div>
-                         </div>
-                       </div></div>
-                         <!-- Modal ADD-->
-                      <div
-                      class="modal fade"
-                      id="addUserModal"
-                      data-bs-backdrop="static"
-                      data-bs-keyboard="false"
-                      tabindex="-1"
-                      aria-labelledby="addUserModalLabel"
-                      aria-hidden="true"
-                    >
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="addUserModalLabel">Добавление пользователя</h5>
+                            <h5 class="modal-title" id="saveUserModalLabel">Сохранение изменений</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                           </div>
           
                           <div class="modal-body">
-                            <div class="mb-3">
-                              <label for="exampleInputName" class="form-label">ФИО</label>
-                              <input type="text" class="form-control" id="addInputName">
-                            </div>
-                            <div class="mb-3">
-                              <label for="exampleInputEmail" class="form-label">Эл.Почта</label>
-                              <input type="email" class="form-control" id="addInputEmail">
-                            </div>
-                            <div class="mb-3">
-                              <label for="exampleInputRole" class="form-label">Роль</label>
-                              <input type="text" class="form-control" id="addInputRole">
-                            </div>
-                            <div class="mb-3">
-                              <label for="exampleInputDescription" class="form-label">Описание</label>
-                              <input type="text" class="form-control" id="addInputDescription">
-                            </div>
+                            <div class="mb-3">                          
                             <div>Сохранить данные?</div>
                             </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Нет</button>
-                            <button type="button" class="btn btn-primary" id = "add-user-yes">Да</button>
-                          </div>
-                        </div>
-                      </div>
-                      </div>
-                        <!-- Modal EDIT-->
-                      <div
-                      class="modal fade"
-                      id="editUserModal"
-                      data-bs-backdrop="static"
-                      data-bs-keyboard="false"
-                      tabindex="-1"
-                      aria-labelledby="editUserModalLabel"
-                      aria-hidden="true"
-                    >
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="editUserModalLabel">Редактирование пользователя</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                          </div>
-          
-                          <div class="modal-body">
-                            <div class="mb-3">
-                              <label for="exampleInputName" class="form-label">ФИО</label>
-                              <input type="text" class="form-control" id="editInputName">
-                            </div>
-                            <div class="mb-3">
-                              <label for="exampleInputEmail" class="form-label">Эл.Почта</label>
-                              <input type="email" class="form-control" id="editInputEmail">
-                            </div>
-                            <div class="mb-3">
-                              <label for="exampleInputRole" class="form-label">Роль</label>
-                              <input type="text" class="form-control" id="editInputRole">
-                            </div>
-                            <div class="mb-3">
-                              <label for="exampleInputDescription" class="form-label">Описание</label>
-                              <input type="text" class="form-control" id="editInputDescription">
-                            </div>
-                            <div>Сохранить изменения?</div>
-                            </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Нет</button>
-                            <button type="button" class="btn btn-primary" id="edit-user-yes">Да</button>
+                            <button type="button" class="btn btn-primary" id = "save-data-yes">Да</button>
                           </div>
                         </div>
                       </div>

@@ -26,7 +26,7 @@ app.get('/index.html', (req, res) => {
   res.render(path.resolve(dirname, 'dist', 'index.html'));
 });
 
-app.get('/*?profile.html', (req, res) => {
+app.get('/*?:id/profile.html', (req, res) => {
   res.render(path.resolve(dirname, 'dist', 'profile.html'));
 });
 
