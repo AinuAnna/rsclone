@@ -79,6 +79,7 @@
     "history": "^5.0.0",
     "laravel-mix": "^6.0.6",
     "mammoth": "^1.4.15",
+    "nodemailer": "^6.4.17",
     "popper.js": "^1.16.1"
   }
 }

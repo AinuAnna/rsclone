@@ -57,6 +57,40 @@ app.get('/*', (req, res) => {
   res.render(path.resolve(dirname, 'dist', 'main.html'));
 });
 
+/// ///////NODEMAILER///////////////////
+const nodemailer = require('nodemailer');
+
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'rschool999@gmail.com',
+    pass: 'Rschool999d+',
+  },
+  tls: {
+    rejectUnathorized: false,
+  },
+});
+
+const mailOptions = {
+  from: '"RS-School" <rschool999@gmail.com>',
+  to: 'anna.26.tereshko@gmail.com',
+  subject: 'Inventation',
+  text: 'This inventation from RS-School.',
+  html: 'This <i>inventation</i> from RS-School.',
+};
+
+app.post('/login.html', (req, res) => {
+  const output = `<>You have a new contact request</p>`;
+});
+
+transporter.sendMail(mailOptions, (error, info) => {
+  if (error) {
+    return console.log(error);
+  }
+
+  console.log(`Email sent: ${info.response}`);
+});
+
 app.listen(port, (err) => {
   if (err) {
     return console.log('ERROR', err);

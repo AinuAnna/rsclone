@@ -19,7 +19,15 @@ export default class LoginSignUp extends UI {
       'text-muted mb-0',
     ]);
     UI.renderElement(container, 'span', null, ['class', 'clearfix']);
-    const form = UI.renderElement(container, 'form', null, ['role', 'form'], ['id', 'form-singup']);
+    const form = UI.renderElement(
+      container,
+      'form',
+      null,
+      ['role', 'form'],
+      ['id', 'form-singup'],
+      ['method', 'POST'],
+      ['action', 'send']
+    );
     const divFormGroup = UI.renderElement(form, 'div', null, ['class', 'form-group']);
     const divMail = UI.renderElement(divFormGroup, 'div', null, ['class', 'form-group']);
     UI.renderElement(divMail, 'label', 'Эл. Почта', ['class', 'form-control-label']);
