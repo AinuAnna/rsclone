@@ -62,7 +62,6 @@ export default class Lecture extends UI {
   }
 
   renderLecture(text) {
-    // debugger
     this.rootNode.innerHTML = '';
     const goBtn = UI.renderElement(this.rootNode, 'div', null, ['class', 'go-back-btn']);
     const wrapper = UI.renderElement(this.rootNode, 'div', null, ['class', 'lecture__wrapper']);
