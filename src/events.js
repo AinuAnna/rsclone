@@ -23,6 +23,23 @@ export default class Event {
     });
   }
 
+  dropdownMenu() {
+    const dropdown = document.querySelector('.nav-item.dropdown');
+
+    dropdown.addEventListener('mousemove', () => {
+      const menu = document.querySelector('.dropdown-menu.dropdown-menu-right');
+      menu.classList.add('show');
+      menu.addEventListener('mouseleave', () => {
+        const menuDrop = document.querySelector('.dropdown-menu.dropdown-menu-right');
+        menuDrop.classList.remove('show');
+      });
+    });
+  }
+
+  renderDrop() {
+    this.dropdownMenu();
+  }
+
   renderToggle() {
     this.toggleMenuButton();
   }

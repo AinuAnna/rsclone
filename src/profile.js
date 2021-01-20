@@ -7,4 +7,4 @@ const profile = new Profile(document.getElementById('profile'));
 profile.render('ESY4qxNAPSVHqKiyJ7Js');
 
 const event = new Event();
-event.renderToggle();
+event.renderDrop();

@@ -25,8 +25,25 @@ app.get('/main.html', (req, res) => {
 app.get('/index.html/', (req, res) => {
   res.render(path.resolve(dirname, 'dist', 'index.html'));
 });
-
+app.get('/main/student/index.html/', (req, res) => {
+  res.render(path.resolve(dirname, 'dist', 'index.html'));
+});
+app.get('/main/admin/index.html/', (req, res) => {
+  res.render(path.resolve(dirname, 'dist', 'index.html'));
+});
+app.get('/main/teacher/index.html/', (req, res) => {
+  res.render(path.resolve(dirname, 'dist', 'index.html'));
+});
 app.get('/profile.html/', (req, res) => {
+  res.render(path.resolve(dirname, 'dist', 'profile.html'));
+});
+app.get('/main/student/profile.html/', (req, res) => {
+  res.render(path.resolve(dirname, 'dist', 'profile.html'));
+});
+app.get('/main/admin/profile.html/', (req, res) => {
+  res.render(path.resolve(dirname, 'dist', 'profile.html'));
+});
+app.get('/main/teacher/profile.html/', (req, res) => {
   res.render(path.resolve(dirname, 'dist', 'profile.html'));
 });
 
@@ -39,11 +56,7 @@ app.get('/login.html/', (req, res) => {
 app.get('/*', (req, res) => {
   res.render(path.resolve(dirname, 'dist', 'main.html'));
 });
-/*
-app.get('/main/student/results/', (req, res) => {
-  res.send('/main/student/results/');
-});
-*/
+
 app.listen(port, (err) => {
   if (err) {
     return console.log('ERROR', err);
