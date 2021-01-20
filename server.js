@@ -72,24 +72,18 @@ const transporter = nodemailer.createTransport({
 
 const mailOptions = {
   from: '"RS-School" <rschool999@gmail.com>',
-  subject: 'hi',
+  subject: 'Добро пожаловать на курс!',
   text: 'This inventation from RS-School.',
 };
-
-app.get('/', (req, res) => {
-  res.render(path.resolve(dirname, 'dist', 'login.html'));
-});
-
-app.post('/login.html', (req, res) => {
-  const output = `<>You have a new contact request</p>`;
-});
 
 app.post('/api/sendMail', async (req, res) => {
   try {
     const info = await transporter.sendMail({
       ...mailOptions,
       to: req.body.email,
-      html: `<h1>hi ${req.body.name}</h1>`,
+      html: `<h1>Привет, ${req.body.name}!</h1>
+      </br>
+      <p>Добро пожаловать на курс Математического Моделирования, мы рады приветствовать Вас и желаем удачи в прохождении!!!</p>`,
     });
 
     console.log(`Email sent: ${info.response}`);
