@@ -151,8 +151,8 @@ export default class Auth {
 
     // signup
     const signupForm = document.querySelector('#form-singup');
-    document.querySelector('#button-singup').addEventListener('click', (e) => {
-      e.preventDefault();
+    document.querySelector('#button-singup').addEventListener('click', () => {
+      // e.preventDefault();
 
       // get user info
       const mail = signupForm['input-email'].value;
@@ -187,6 +187,7 @@ export default class Auth {
           // const modal = document.querySelector('#modal-signup');
           // M.Modal.getInstance(modal).close();
           signupForm.reset();
+          document.location.href = './main/student/results';
         });
     });
 
