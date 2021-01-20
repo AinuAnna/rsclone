@@ -111,6 +111,7 @@ export default class LectureAdmin extends UI {
     /* Add event for rendering subtitle of lection for Admin */
     subtitlesRenderedArr.forEach((sectionLecture) => {
       sectionLecture.addEventListener('click', (e) => {
+        e.preventDefault();
         const lectureId = e.target.closest('.lecture-admin__div').getAttribute('data-id');
         const lectureSubtitle = e.target.closest('.lecture-admin__div').outerText;
         this.lecturesArray.forEach((lecture) => {
@@ -273,7 +274,7 @@ export default class LectureAdmin extends UI {
     this.firebaseDB.getData('Lecture').then((data) => {
       this.setData(data);
       this.rootNode.innerHTML = '';
-      this.renderM();
+      this.renderLectureAdminForm();
     });
   }
 
