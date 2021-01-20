@@ -174,7 +174,7 @@ export default class Auth {
           })
         )
         .then(() =>
-          fetch('http://localhost:4004/api/sendMail', {
+          fetch('/api/sendMail', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
