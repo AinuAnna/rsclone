@@ -68,17 +68,12 @@ const transporter = nodemailer.createTransport({
     user: 'rschool999@gmail.com',
     pass: 'Rschool999d+',
   },
-  // tls: {
-  //   rejectUnathorized: false,
-  // },
 });
 
 const mailOptions = {
   from: '"RS-School" <rschool999@gmail.com>',
-  // to: 'anna.tereshko@logicsoftware.net',
   subject: 'hi',
   text: 'This inventation from RS-School.',
-  // html: '<h1>hi sasuke</h1>',
 };
 
 app.get('/', (req, res) => {
@@ -89,7 +84,6 @@ app.post('/login.html', (req, res) => {
   const output = `<>You have a new contact request</p>`;
 });
 
-// todo: auth ??
 app.post('/api/sendMail', async (req, res) => {
   try {
     const info = await transporter.sendMail({
