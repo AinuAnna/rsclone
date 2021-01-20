@@ -22,15 +22,15 @@ app.get('/main.html', (req, res) => {
   res.render(path.resolve(dirname, 'dist', 'main.html'));
 });
 
-app.get('/index.html', (req, res) => {
+app.get('/index.html/', (req, res) => {
   res.render(path.resolve(dirname, 'dist', 'index.html'));
 });
 
-app.get('/*?:id/profile.html', (req, res) => {
+app.get('/profile.html/', (req, res) => {
   res.render(path.resolve(dirname, 'dist', 'profile.html'));
 });
 
-app.get('/login.html', (req, res) => {
+app.get('/login.html/', (req, res) => {
   res.render(path.resolve(dirname, 'dist', 'login.html'));
   console.log(req);
   console.log(req.uid);
