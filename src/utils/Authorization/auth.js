@@ -155,21 +155,22 @@ export default class Auth {
       e.preventDefault();
 
       // get user info
-      const email = signupForm['input-email'].value;
+      const mail = signupForm['input-email'].value;
       const password = signupForm['input-password'].value;
-      // const fio = signupForm['input-fio'].value;
+      // const fullname = signupForm['input-fullname'].value;
       // const group = signupForm['input-group'].value;
 
-      console.log(email, password);
+      console.log(mail, password);
 
       // sign up the user & add firestore data
       auth
-        .createUserWithEmailAndPassword(email, password)
+        .createUserWithEmailAndPassword(mail, password)
         .then((cred) =>
-          db.collection('UsersBio').doc(cred.user.uid).set({
-            fio: signupForm['input-fio'].value,
-            group: signupForm['input-group'].value,
-            status: 'student',
+          db.collection('Users').doc(cred.user.uid).set({
+            fullName: signupForm['input-fio'].value,
+            mail: signupForm['input-email'].value,
+            description: signupForm['input-group'].value,
+            type: 'student',
           })
         )
         .then(() =>
@@ -178,7 +179,7 @@ export default class Auth {
             headers: {
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ email, name: signupForm['input-fio'].value }),
+            body: JSON.stringify({ mail, name: signupForm['input-fio'].value }),
           })
         )
         .then(() => {
@@ -203,11 +204,11 @@ export default class Auth {
       // e.preventDefault();
 
       // get user info
-      const email = loginForm['input-email'].value;
+      const mail = loginForm['input-email'].value;
       const password = loginForm['input-password'].value;
 
       // log the user in
-      auth.signInWithEmailAndPassword(email, password).then((cred) => {
+      auth.signInWithEmailAndPassword(mail, password).then((cred) => {
         // document.location.href = `./main/student/results:${cred.user.uid}`;
         // console.log(cred.user);
         document.location.href = './main/student/results';

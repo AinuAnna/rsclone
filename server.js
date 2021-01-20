@@ -80,7 +80,7 @@ app.post('/api/sendMail', async (req, res) => {
   try {
     const info = await transporter.sendMail({
       ...mailOptions,
-      to: req.body.email,
+      to: req.body.mail,
       html: `<h1>Привет, ${req.body.name}!</h1>
       </br>
       <p>Добро пожаловать на курс Математического Моделирования, мы рады приветствовать Вас и желаем удачи в прохождении!!!</p>`,
