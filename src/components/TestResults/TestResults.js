@@ -9,7 +9,8 @@ export default class TestResults extends UI {
     super();
     this.rootNode = rootNode;
   }
-  renderM() {
+
+  renderTestResults() {
     const wrapper = UI.renderElement(this.rootNode, 'div', null, ['class', 'test-results__wrapper']);
     const tableTitles = ['Тема', 'Тест', 'Отметка'];
     UI.renderElement(wrapper, 'h2', 'Результаты тестов', ['class', 'test-results__title']);
@@ -38,7 +39,7 @@ export default class TestResults extends UI {
     this.rootNode.innerHTML = "";
     firebase.getData('TestResults').then((data) => {
       this.setData(data, idUser);
-      this.renderM();
+      this.renderTestResults();
     });
   }
 }
