@@ -239,7 +239,7 @@ export default class TestsAdmin extends UI {
         const uniqueQuestionOptions = allQuestionOptions.filter(
           (option) => option.questionNumber === question.questionNumber
         );
-        const uniqueOption = uniqueQuestionOptions.map((option) => option.optionValue).join(',');
+        const uniqueOption = uniqueQuestionOptions.map((option) => option.optionValue);
         uniqueSplittedQuestionOptions.push(uniqueOption);
       });
 
@@ -261,7 +261,7 @@ export default class TestsAdmin extends UI {
         const testObj = {
           title: QUESTION_TITLE,
           question: QTY_QUESTIONS[i].questionValue,
-          option: uniqueSplittedQuestionOptions[i].split(','),
+          option: uniqueSplittedQuestionOptions[i],
           answer: correctAnswersForAllQuestions[i].split(','),
         };
 
