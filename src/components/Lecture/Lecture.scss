@@ -67,3 +67,29 @@
     margin: 20px;
   }
 }
+.lecture__container {
+  strong {
+    font-size: 16px;
+  }
+  p {
+    font-size: 14px;
+    strong {
+      display: flex;
+      justify-content: center;
+    }
+    img {
+      display: flex;
+      justify-content: center !important;
+    }
+  }
+
+  table {
+    border: #d1cfd7 1px solid;
+    tr {
+      border: #d1cfd7 1px solid;
+    }
+    td {
+      border: #d1cfd7 1px solid;
+    }
+  }
+}
