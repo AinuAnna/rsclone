@@ -36,7 +36,7 @@ export default class TestResults extends UI {
   }
 
   render(idUser) {
-    this.rootNode.innerHTML = "";
+    this.rootNode.innerHTML = '';
     firebase.getData('TestResults').then((data) => {
       this.setData(data, idUser);
       this.renderTestResults();
