@@ -99,14 +99,16 @@ export default class TestsAdmin extends UI {
       sectionTest.addEventListener('click', (e) => {
         e.preventDefault();
         // const testId = e.target.closest('.tests-admin__div').getAttribute('data-id');
-        const testTitle = e.target.closest('.tests-admin__div').outerText;
-        const selectedThemTests = [];
-        this.groupTests.forEach((test) => {
-          if (test.title === testTitle) {
-            selectedThemTests.push(test);
-          }
-        });
-        this.renderTest(selectedThemTests);
+        if (e.target.nodeName !== 'svg') {
+          const testTitle = e.target.closest('.tests-admin__div').outerText;
+          const selectedThemTests = [];
+          this.groupTests.forEach((test) => {
+            if (test.title === testTitle) {
+              selectedThemTests.push(test);
+            }
+          });
+          this.renderTest(selectedThemTests);
+        }
       });
     });
 
