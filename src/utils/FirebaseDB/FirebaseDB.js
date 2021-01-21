@@ -12,8 +12,10 @@ export class FirebaseDB {
   constructor() {
     this.usersArray = [];
     this.testsArray = [];
+    this.lecturesArray = [];
     this.itemByID = {};
     this.getUsers();
+    this.getLecture();
   }
 
   async getUsers() {
@@ -24,6 +26,11 @@ export class FirebaseDB {
   async getTests() {
     this.testsArray = await this.getData('Tests');
     return this.testsArray;
+  }
+
+  async getLecture() {
+    this.lecturesArray = await this.getData('Lecture');
+    return this.lecturesArray;
   }
 
   /**

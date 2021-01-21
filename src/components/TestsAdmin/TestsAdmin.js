@@ -3,7 +3,7 @@
 import './TestsAdmin.scss';
 import { Modal } from 'bootstrap';
 import UI from '../UIclass/UIclass';
-import { FirebaseDB, db } from '../../utils/FirebaseDB/FirebaseDB';
+import { FirebaseDB, db, lecturesArray } from '../../utils/FirebaseDB/FirebaseDB';
 import '@firebase/firestore';
 
 import {
@@ -27,6 +27,7 @@ export default class TestsAdmin extends UI {
     this.deleteTest();
     this.listenerTests();
     this.firebaseDB = new FirebaseDB();
+    this.listTitleLecture = null;
   }
 
   deleteTest() {
@@ -136,6 +137,7 @@ export default class TestsAdmin extends UI {
       ['name', 'list-name'],
       ['required', '']
     );
+
     // add titles in option
     this.listTitleLecture.forEach(({ id, title }) => {
       UI.renderElement(selectTitle, 'option', title, ['value', `${title}`], ['data-id', id]);
@@ -399,8 +401,8 @@ export default class TestsAdmin extends UI {
       this.rootNode.innerHTML = '';
       this.renderTestTitles();
     });
-    this.firebaseDB.getData('Lecture').then((data) => {
-      this.setDataListTitle(data);
+    this.firebaseDB.getLecture().then((lectures) => {
+      this.setDataListTitle(lectures);
     });
   }
 
