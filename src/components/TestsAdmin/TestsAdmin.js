@@ -124,14 +124,20 @@ export default class TestsAdmin extends UI {
     // container for oll inputs in tests add
     const divTitleTestInput = UI.renderElement(titleAdd, 'div', null, ['class', 'col-md-cont']);
     const divInputQuestion = UI.renderElement(divTitleTestInput, 'div', null, ['class', 'col-md']);
-    UI.renderElement(
+
+    // select option title for lecture to test
+    const selectTitle = UI.renderElement(
       divInputQuestion,
-      'input',
+      'select',
       null,
       ['class', 'form-control title-test-input'],
-      ['type', 'text'],
+      ['name', 'list-name'],
       ['required', '']
     );
+    // add titles in option
+    this.listTitleLecture.forEach(({ id, title }) => {
+      UI.renderElement(selectTitle, 'option', title, ['value', `${title}`], ['data-id', id]);
+    });
 
     const divInputQuestionCont = UI.renderElement(divTitleTestInput, 'div', null, ['class', 'col-md']);
     // container for question
@@ -372,6 +378,10 @@ export default class TestsAdmin extends UI {
     this.uniqueTestsArray = tests;
   }
 
+  setDataListTitle(title) {
+    this.listTitleLecture = title;
+  }
+
   update() {
     if (this.mounted) {
       this.render();
@@ -386,6 +396,9 @@ export default class TestsAdmin extends UI {
       this.setData(uniqueTestsCollections);
       this.rootNode.innerHTML = '';
       this.renderTestTitles();
+    });
+    this.firebaseDB.getData('Lecture').then((data) => {
+      this.setDataListTitle(data);
     });
   }
 
