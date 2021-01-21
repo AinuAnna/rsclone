@@ -259,8 +259,12 @@ export default class LectureAdmin extends UI {
     UI.renderElement(wrapper, 'div', text, ['class', 'lecture__container']);
   }
 
-  setData(tests) {
-    this.lecturesArray = tests;
+  setData(lectures) {
+    this.lecturesArray = lectures;
+  }
+
+  setDataWithTests(tests) {
+    this.testsArray = tests;
   }
 
   update() {

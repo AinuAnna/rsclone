@@ -19,6 +19,7 @@ export default class TestsAdmin extends UI {
     super();
     this.rootNode = rootNode;
     this.id = null;
+    this.uniqueTestsArray = null;
     this.number = 1;
     this.checkboxNumber = 1;
     this.groupTests = null;
@@ -59,16 +60,28 @@ export default class TestsAdmin extends UI {
     });
   }
 
-  renderM() {
+  renderTestTitles() {
     const wrapper = UI.renderElement(this.rootNode, 'div', null, ['class', 'tests-admin__wrapper']);
     UI.renderElement(wrapper, 'h2', 'Тесты', ['class', 'tests-admin__title']);
     const container = UI.renderElement(wrapper, 'div', null, ['class', 'tests-admin__container']);
     const listTitle = UI.renderElement(container, 'div', 'Список тестов:', ['class', 'tests-admin__list-title ']);
-    this.testsArray.forEach(({ id, title }) => {
+
+    if (this.groupTests.length === 0) {
+      const div = UI.renderElement(listTitle, 'div', null, ['class', 'tests-admin__div']);
+      UI.renderElement(div, 'p', 'Добавьте тесты', ['class', 'test-admin__p']);
+    }
+
+    /* Render tests */
+    const titlesRenderedArr = [];
+    this.uniqueTestsArray.forEach(({ id, title }) => {
       const div = UI.renderElement(listTitle, 'div', null, ['data-id', id], ['class', 'tests-admin__div']);
       const ul = UI.renderElement(div, 'ul', null, ['class', 'tests-admin__ul']);
       const a = UI.renderElement(ul, 'a', null, ['class', 'tests-admin__a'], ['href', '#']);
+
       const li = UI.renderElement(a, 'li', title, ['class', 'tests-admin__li']);
+
+      titlesRenderedArr.push(li);
+
       UI.renderElement(
         li,
         'a',
@@ -79,6 +92,22 @@ export default class TestsAdmin extends UI {
         ['data-bs-target', '#deleteTestModal'],
         ['data-bs-testid', id]
       );
+    });
+
+    /* Add event for rendering title of test for Admin */
+    titlesRenderedArr.forEach((sectionTest) => {
+      sectionTest.addEventListener('click', (e) => {
+        e.preventDefault();
+        // const testId = e.target.closest('.tests-admin__div').getAttribute('data-id');
+        const testTitle = e.target.closest('.tests-admin__div').outerText;
+        const selectedThemTests = [];
+        this.groupTests.forEach((test) => {
+          if (test.title === testTitle) {
+            selectedThemTests.push(test);
+          }
+        });
+        this.renderTest(selectedThemTests);
+      });
     });
 
     // container with button add test
@@ -95,14 +124,20 @@ export default class TestsAdmin extends UI {
     // container for oll inputs in tests add
     const divTitleTestInput = UI.renderElement(titleAdd, 'div', null, ['class', 'col-md-cont']);
     const divInputQuestion = UI.renderElement(divTitleTestInput, 'div', null, ['class', 'col-md']);
-    UI.renderElement(
+
+    // select option title for lecture to test
+    const selectTitle = UI.renderElement(
       divInputQuestion,
-      'input',
+      'select',
       null,
       ['class', 'form-control title-test-input'],
-      ['type', 'text'],
+      ['name', 'list-name'],
       ['required', '']
     );
+    // add titles in option
+    this.listTitleLecture.forEach(({ id, title }) => {
+      UI.renderElement(selectTitle, 'option', title, ['value', `${title}`], ['data-id', id]);
+    });
 
     const divInputQuestionCont = UI.renderElement(divTitleTestInput, 'div', null, ['class', 'col-md']);
     // container for question
@@ -236,6 +271,41 @@ export default class TestsAdmin extends UI {
     });
   }
 
+  renderTest(testArray) {
+    this.rootNode.innerHTML = '';
+    const goBtn = UI.renderElement(this.rootNode, 'div', null, ['class', 'go-back-btn']);
+    const wrapper = UI.renderElement(this.rootNode, 'div', null, ['class', 'test__wrapper']);
+
+    const goBackBtn = UI.renderElement(goBtn, 'button', 'Вернуться назад', [
+      'class',
+      'btn btn-primary test__btn-go-test',
+    ]);
+
+    goBackBtn.addEventListener('click', () => {
+      this.rootNode.innerHTML = '';
+      this.renderTestTitles();
+    });
+
+    /* Render tests */
+    const titleTest = UI.renderElement(wrapper, 'h2', 'Тема:', ['class', 'tests__title']);
+    const div = UI.renderElement(titleTest, 'div', null, ['class', 'tests-admin__div']);
+
+    UI.renderElement(div, 'p', `${testArray[0].title}`, ['class', 'test-admin__p']);
+
+    const container = UI.renderElement(wrapper, 'div', null, ['class', 'tests__container']);
+    const containerList = UI.renderElement(container, 'div', null, ['class', 'tests__containerList']);
+    testArray.forEach(({ id, question, option }) => {
+      const p = UI.renderElement(containerList, 'div', question, ['class', 'tests__label']);
+      const divInputs = UI.renderElement(p, 'div', null, ['data-id', id], ['class', 'tests__divInputs']);
+      option.forEach((value) => {
+        const divInputList = UI.renderElement(divInputs, 'div', null, ['class', 'tests__divInputList']);
+        const label = UI.renderElement(divInputList, 'label', null, ['class', 'tests__label']);
+        UI.renderElement(label, 'input', null, ['type', 'checkbox'], ['class', 'tests__input'], ['name', 'question']);
+        UI.renderElement(label, 'label', value, ['class', 'tests__label-list'], ['for', 'question']);
+      });
+    });
+  }
+
   addQuestion(parent) {
     this.number++;
     this.checkboxNumber = 1;
@@ -305,7 +375,11 @@ export default class TestsAdmin extends UI {
   }
 
   setData(tests) {
-    this.testsArray = tests;
+    this.uniqueTestsArray = tests;
+  }
+
+  setDataListTitle(title) {
+    this.listTitleLecture = title;
   }
 
   update() {
@@ -321,7 +395,10 @@ export default class TestsAdmin extends UI {
       const uniqueTestsCollections = [...new Map(data.map((item) => [item.title, item])).values()];
       this.setData(uniqueTestsCollections);
       this.rootNode.innerHTML = '';
-      this.renderM();
+      this.renderTestTitles();
+    });
+    this.firebaseDB.getData('Lecture').then((data) => {
+      this.setDataListTitle(data);
     });
   }
 
