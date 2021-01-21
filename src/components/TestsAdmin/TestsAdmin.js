@@ -239,7 +239,11 @@ export default class TestsAdmin extends UI {
         const uniqueQuestionOptions = allQuestionOptions.filter(
           (option) => option.questionNumber === question.questionNumber
         );
-        const uniqueOption = uniqueQuestionOptions.map((option) => option.optionValue).join(',');
+        // debugger
+        // uniqueQuestionOptions.forEach((option) => {
+        //   uniqueSplittedQuestionOptions.push(option.optionValue);
+        // });
+        const uniqueOption = uniqueQuestionOptions.map((option) => option.optionValue);
         uniqueSplittedQuestionOptions.push(uniqueOption);
       });
 
@@ -258,10 +262,13 @@ export default class TestsAdmin extends UI {
       /* generate array of */
       const TESTS = [];
       for (let i = 0; i < QTY_QUESTIONS.length; i++) {
+        // debugger
         const testObj = {
           title: QUESTION_TITLE,
           question: QTY_QUESTIONS[i].questionValue,
-          option: uniqueSplittedQuestionOptions[i].split(','),
+          // option: uniqueSplittedQuestionOptions[i].split(','),
+          // answer: correctAnswersForAllQuestions[i].split(','),
+          option: uniqueSplittedQuestionOptions[i],
           answer: correctAnswersForAllQuestions[i].split(','),
         };
 
