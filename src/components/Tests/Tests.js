@@ -42,8 +42,6 @@ export default class Tests extends UI {
     titlesRenderedArr.forEach((sectionTest) => {
       sectionTest.addEventListener('click', (e) => {
         e.preventDefault();
-        // debugger
-        // const testId = e.target.closest('.tests-admin__div').getAttribute('data-id');
         const testTitle = e.target.closest('.tests__li').outerText;
         this.testTitle = testTitle;
         const selectedThemTests = [];
@@ -161,8 +159,8 @@ export default class Tests extends UI {
 
     /* add info about results to testResults table */
     this.lectures.forEach((lecture) => {
-      if (lecture.subtitle === this.testTitle) {
-        this.testThem = lecture.title; // need to change
+      if (lecture.subtitle[0] === this.testTitle) {
+        this.testThem = lecture.title;
       }
     });
     const testResult = {
