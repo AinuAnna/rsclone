@@ -186,21 +186,6 @@ export default class LectureAdmin extends UI {
       ['data-bs-target', '#addLectureModal']
     );
 
-    // add test to lecture button
-    const addTest = UI.renderElement(
-      titleAddTests,
-      'button',
-      'Добавить тест',
-      ['class', 'btn btn-primary lecture-admin__btn-go add-lection-btn'],
-      ['type', 'submit'],
-      ['data-bs-toggle', 'modal'],
-      ['data-bs-target', '#addTestToLectureModal']
-    );
-    // add test to lecture button click event
-    addTest.addEventListener('click', () => {
-      this.renderTestToLectionList(document.getElementById('modal-body-list-test'));
-    });
-
     addLection.addEventListener('click', (e) => {
       e.preventDefault();
       const sectionTitle = getSectionInput();
@@ -274,16 +259,6 @@ export default class LectureAdmin extends UI {
     UI.renderElement(wrapper, 'div', text, ['class', 'lecture__container']);
   }
 
-  // render tests list to lection
-  renderTestToLectionList(parent) {
-    this.testsArray.forEach(({ id, title }) => {
-      const div = UI.renderElement(parent, 'div', null, ['data-id', id], ['class', 'tests__div']);
-      const ul = UI.renderElement(div, 'ul', null, ['class', 'tests__ul']);
-      const a = UI.renderElement(ul, 'a', null, ['class', 'tests__a'], ['href', '#']);
-      UI.renderElement(a, 'li', title, ['class', 'tests__li']);
-    });
-  }
-
   setData(lectures) {
     this.lecturesArray = lectures;
   }
@@ -304,9 +279,6 @@ export default class LectureAdmin extends UI {
       this.setData(data);
       this.rootNode.innerHTML = '';
       this.renderLectureAdminForm();
-    });
-    this.firebaseDB.getData('Tests').then((data) => {
-      this.setDataWithTests(data);
     });
   }
 
