@@ -16,21 +16,23 @@ export default class Teacher extends UI {
 
   // eslint-disable-next-line class-methods-use-this
   renderM() {
-    const wrapper = UI.renderElement(this.rootNode, 'div', null, ['class', 'users__wrapper']);
-    const tableTitles = ['ФИО', 'Эл.Почта', 'Роль', 'Описание', 'Действия'];
-    UI.renderElement(wrapper, 'h2', 'Пользователи', ['class', 'users__title']);
+    const wrapper = UI.renderElement(this.rootNode, 'div', null, ['class', 'group__wrapper']);
+    const tableTitles = ['Отделение', 'Курс', 'Номер', 'Описание', 'Участники', 'Действия'];
+    UI.renderElement(wrapper, 'h2', 'Группы', ['class', 'group__title']);
     const container = UI.renderElement(wrapper, 'div', null, ['class', 'table-responsive-md']);
     const table = UI.renderElement(container, 'table', null, ['class', 'table']);
     const thead = UI.renderElement(table, 'thead');
     const trh = UI.renderElement(thead, 'tr');
     tableTitles.forEach((title) => UI.renderElement(trh, 'th', title));
     const tbody = UI.renderElement(table, 'tbody');
-    this.groupsArray.forEach(({ fullName, id, mail, type, description }) => {
+    this.groupsArray.forEach(({ course, id, department, number, description, participants }) => {
       const tr = UI.renderElement(tbody, 'tr', null, ['data-id', id]);
-      UI.renderElement(tr, 'td', fullName, ['class', 'name']);
-      UI.renderElement(tr, 'td', mail, ['class', 'mail']);
-      UI.renderElement(tr, 'td', type, ['class', 'type']);
+      UI.renderElement(tr, 'td', department, ['class', 'department']);
+      UI.renderElement(tr, 'td', course, ['class', 'course']);
+      UI.renderElement(tr, 'td', number, ['class', 'number']);
       UI.renderElement(tr, 'td', description, ['class', 'description']);
+      const participantsTR = UI.renderElement(tr, 'td', null, ['class', 'participants']);
+      UI.renderElement(participantsTR, 'a', participants, ['class', 'participants']);
       const svgButtonEdit = UI.renderElement(
         tr,
         'a',
@@ -55,17 +57,37 @@ export default class Teacher extends UI {
       );
     });
     UI.renderElement(table, 'tbody');
-    const ButtonAddUser = UI.renderElement(
+    const ButtonAddGruop = UI.renderElement(
       wrapper,
       'a',
-      'Добавить пользователя',
+      'Добавить группу',
       ['href', '#'],
-      ['data-bs-toggle', 'modal'],
-      ['data-bs-target', '#addUserModal'],
       ['class', 'btn btn-primary']
     );
+    ButtonAddGruop.addEventListener('click', (e) => {
+      e.preventDefault();
+      this.addNextForm();
+    });
   }
-
+  addNextForm() {
+    const wrapper = UI.renderElement(this.rootNode, 'div', null, ['class', 'group__wrapper']);
+    const tableTitles = ['Параметры группы'];
+    UI.renderElement(wrapper, 'h2', 'Добавление группы', ['class', 'group__title ']);
+    const container = UI.renderElement(wrapper, 'div', null, ['class', 'table-responsive-md']);
+    const table = UI.renderElement(container, 'table', null, ['class', 'table']);
+    const thead = UI.renderElement(table, 'thead');
+    const trh = UI.renderElement(thead, 'tr');
+    tableTitles.forEach((title) => UI.renderElement(trh, 'th', title));
+    const tbody = UI.renderElement(table, 'tbody');
+    const tr1 = UI.renderElement(tbody, 'tr', null);
+    UI.renderElement(tr1, 'td', 'Отделение', ['class', 'department']);
+    const tr2 = UI.renderElement(tbody, 'tr', null);
+    UI.renderElement(tr2, 'td', 'Курс', ['class', 'course']);
+    const tr3 = UI.renderElement(tbody, 'tr', null);
+    UI.renderElement(tr3, 'td', 'Номер', ['class', 'number']);
+    const tr4 = UI.renderElement(tbody, 'tr', null);
+    UI.renderElement(tr4, 'td', 'Описание', ['class', 'description']);
+  }
   // eslint-disable-next-line class-methods-use-this
   setData(group) {
     this.groupsArray = group.filter(() => true);
