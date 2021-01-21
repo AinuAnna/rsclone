@@ -42,9 +42,11 @@ app.get('/profile.html/', (req, res) => {
 app.get('/main/student/profile.html/', (req, res) => {
   res.render(path.resolve(dirname, 'dist', 'profile.html'));
 });
-app.get('/main/student/login.html/', (req, res) => {
-  res.render(path.resolve(dirname, 'dist', 'login.html'));
-});
+// app.get('/main/student/results', (req, res) => {
+// res.render(path.resolve(dirname, 'dist', 'profile.html'));
+// res.send('/main/student/results/');
+// console.log(req);
+// });
 app.get('/main/admin/profile.html/', (req, res) => {
   res.render(path.resolve(dirname, 'dist', 'profile.html'));
 });

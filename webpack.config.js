@@ -30,7 +30,7 @@ module.exports = {
   plugins: [
     new NodemonPlugin({
       script: './server.js',
-      watch: path.resolve('./dist'),
+      watch: path.resolve('./src'),
       ext: 'html,js,njk,json,scss',
     }),
     // new webpack.HotModuleReplacementPlugin(),
