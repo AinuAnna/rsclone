@@ -118,6 +118,7 @@ export default class Auth {
     auth.onAuthStateChanged((user) => {
       // console.log(user.uid);
       if (user) {
+        localStorage.setItem('uidMath', user.uid);
         // db.collection('UsersBio')
         //   .doc(user.uid)
         //   .get()
