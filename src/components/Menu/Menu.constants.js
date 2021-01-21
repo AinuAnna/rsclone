@@ -114,7 +114,7 @@ export const arrayMENU = {
         <span class="align-middle">Группы</span>
       </a>
     </li>`,
-      view: group.render(),
+      view: group,
       path: '/main/teacher/groups',
     },
     {

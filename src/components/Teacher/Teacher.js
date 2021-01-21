@@ -25,7 +25,7 @@ export default class Teacher extends UI {
     const trh = UI.renderElement(thead, 'tr');
     tableTitles.forEach((title) => UI.renderElement(trh, 'th', title));
     const tbody = UI.renderElement(table, 'tbody');
-    this.usersArray.forEach(({ fullName, id, mail, type, description }) => {
+    this.groupsArray.forEach(({ fullName, id, mail, type, description }) => {
       const tr = UI.renderElement(tbody, 'tr', null, ['data-id', id]);
       UI.renderElement(tr, 'td', fullName, ['class', 'name']);
       UI.renderElement(tr, 'td', mail, ['class', 'mail']);
