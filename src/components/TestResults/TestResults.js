@@ -7,13 +7,20 @@ const firebase = new FirebaseDB();
 export default class TestResults extends UI {
   constructor(rootNode) {
     super();
+    this.testResults = null;
     this.rootNode = rootNode;
   }
 
   renderTestResults() {
     const wrapper = UI.renderElement(this.rootNode, 'div', null, ['class', 'test-results__wrapper']);
     const tableTitles = ['Тема', 'Тест', 'Отметка'];
-    UI.renderElement(wrapper, 'h2', 'Результаты тестов', ['class', 'test-results__title']);
+    const testResults = UI.renderElement(wrapper, 'h2', 'Результаты тестов', ['class', 'test-results__title']);
+
+    if (this.testResults.length === 0) {
+      const div = UI.renderElement(testResults, 'div', null, ['class', 'tests-results__title_zero']);
+      UI.renderElement(div, 'p', 'Ни один тест еще не пройден', ['class', 'test-results__zero']);
+    }
+
     const container = UI.renderElement(wrapper, 'div', null, ['class', 'table-responsive-md']);
     const table = UI.renderElement(container, 'table', null, ['class', 'table']);
     const thead = UI.renderElement(table, 'thead');
@@ -24,7 +31,7 @@ export default class TestResults extends UI {
       const tr = UI.renderElement(tbody, 'tr', null, ['data-id', id]);
       UI.renderElement(tr, 'td', them);
       UI.renderElement(tr, 'td', testName);
-      UI.renderElement(tr, 'td', mark);
+      UI.renderElement(tr, 'td', mark.toString());
     });
     UI.renderElement(table, 'tbody');
   }
@@ -38,6 +45,7 @@ export default class TestResults extends UI {
   render(idUser) {
     this.rootNode.innerHTML = '';
     firebase.getData('TestResults').then((data) => {
+      this.testResults = data;
       this.setData(data, idUser);
       this.renderTestResults();
     });

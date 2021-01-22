@@ -3,7 +3,7 @@
 import './TestsAdmin.scss';
 import { Modal } from 'bootstrap';
 import UI from '../UIclass/UIclass';
-import { FirebaseDB, db, lecturesArray } from '../../utils/FirebaseDB/FirebaseDB';
+import { FirebaseDB, db } from '../../utils/FirebaseDB/FirebaseDB';
 import '@firebase/firestore';
 
 import {
@@ -139,8 +139,8 @@ export default class TestsAdmin extends UI {
     );
 
     // add titles in option
-    this.listTitleLecture.forEach(({ id, title }) => {
-      UI.renderElement(selectTitle, 'option', title, ['value', `${title}`], ['data-id', id]);
+    this.listTitleLecture.forEach(({ id, subtitle }) => {
+      UI.renderElement(selectTitle, 'option', subtitle, ['value', `${subtitle}`], ['data-id', id]);
     });
 
     const divInputQuestionCont = UI.renderElement(divTitleTestInput, 'div', null, ['class', 'col-md']);
@@ -239,7 +239,7 @@ export default class TestsAdmin extends UI {
         const uniqueQuestionOptions = allQuestionOptions.filter(
           (option) => option.questionNumber === question.questionNumber
         );
-        const uniqueOption = uniqueQuestionOptions.map((option) => option.optionValue).join(',');
+        const uniqueOption = uniqueQuestionOptions.map((option) => option.optionValue);
         uniqueSplittedQuestionOptions.push(uniqueOption);
       });
 
@@ -261,7 +261,7 @@ export default class TestsAdmin extends UI {
         const testObj = {
           title: QUESTION_TITLE,
           question: QTY_QUESTIONS[i].questionValue,
-          option: uniqueSplittedQuestionOptions[i].split(','),
+          option: uniqueSplittedQuestionOptions[i],
           answer: correctAnswersForAllQuestions[i].split(','),
         };
 

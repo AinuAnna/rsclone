@@ -14,6 +14,7 @@ export default class Tests extends UI {
     this.answerNumber = 1;
     this.assessment = 0;
     this.uniqueTestsArray = null;
+    this.uniqueListIDQuestions = null;
     this.firebaseDB = new FirebaseDB();
   }
 
@@ -42,8 +43,6 @@ export default class Tests extends UI {
     titlesRenderedArr.forEach((sectionTest) => {
       sectionTest.addEventListener('click', (e) => {
         e.preventDefault();
-        // debugger
-        // const testId = e.target.closest('.tests-admin__div').getAttribute('data-id');
         const testTitle = e.target.closest('.tests__li').outerText;
         this.testTitle = testTitle;
         const selectedThemTests = [];
@@ -105,7 +104,8 @@ export default class Tests extends UI {
           if (variantAnswer.children[0].children[0].checked === true) {
             const questionId = variantAnswer.closest('.tests__divInputs').getAttribute('data-id');
             listIDQuestions.push(questionId);
-            listSelectedAnswersByQuestion.push(this.answerNumber);
+            const answerNumberStr = this.answerNumber;
+            listSelectedAnswersByQuestion.push(answerNumberStr.toString());
           }
           this.answerNumber++;
         });
@@ -120,6 +120,7 @@ export default class Tests extends UI {
 
   renderResult(listIDQuestions, selectedAnswersArr) {
     const dbQuestionsIDs = [];
+    this.uniqueListIDQuestions = listIDQuestions.filter((item, i, ar) => ar.indexOf(item) === i);
     this.groupTests.forEach((question) => {
       dbQuestionsIDs.push(question.id);
     });
@@ -146,8 +147,8 @@ export default class Tests extends UI {
     const tbody = UI.renderElement(table, 'tbody');
 
     this.groupTests.forEach((question) => {
-      if (listIDQuestions.includes(question.id)) {
-        const indexOfRenderedQuestion = listIDQuestions.indexOf(question.id);
+      if (this.uniqueListIDQuestions.includes(question.id)) {
+        const indexOfRenderedQuestion = this.uniqueListIDQuestions.indexOf(question.id);
         const indexOfDBQuestion = dbQuestionsIDs.indexOf(question.id);
         if (arraysEqual(selectedAnswersArr[indexOfRenderedQuestion], this.groupTests[indexOfDBQuestion].answer)) {
           this.assessment++;
@@ -161,8 +162,8 @@ export default class Tests extends UI {
 
     /* add info about results to testResults table */
     this.lectures.forEach((lecture) => {
-      if (lecture.subtitle === this.testTitle) {
-        this.testThem = lecture.title; // need to change
+      if (lecture.subtitle[0] === this.testTitle) {
+        this.testThem = lecture.title;
       }
     });
     const testResult = {
@@ -203,8 +204,6 @@ export default class Tests extends UI {
       this.setData(uniqueTestsCollections);
       this.rootNode.innerHTML = '';
       this.renderList();
-      // this.renderTests();
-      // this.renderResult();
     });
     this.firebaseDB.getData('Lecture').then((data) => {
       this.lectures = data;
