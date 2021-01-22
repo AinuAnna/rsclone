@@ -109,10 +109,6 @@ export default class Lecture extends UI {
       }
       this.renderTests(selectedThemTests);
     });
-
-    // this.selectedLectionId;
-    // this.selectedLectionSubtitle;
-    // this.selectedLectionIndex;
   }
 
   setData(info) {
@@ -143,10 +139,7 @@ export default class Lecture extends UI {
     });
   }
 
-
-
-
-
+  /* Render test sections START */
   renderTests(testsArr) {
     this.rootNode.innerHTML = '';
 
@@ -282,4 +275,6 @@ export default class Lecture extends UI {
     this.selectedLectionSubtitle = '';
     this.testThem = '';
   }
+
+  /* Render test sections END */
 }
