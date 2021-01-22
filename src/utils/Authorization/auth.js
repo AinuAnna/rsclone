@@ -92,6 +92,9 @@ export default class Auth {
           if (doc.data().type === 'admin') {
             document.location.href = './main/admin';
           }
+          if (doc.data().type === 'teacher') {
+            document.location.href = './main/teacher/group';
+          }
         });
     };
 
