@@ -140,7 +140,7 @@ export default class Admin extends UI {
   // eslint-disable-next-line class-methods-use-this
   renderM() {
     const wrapper = UI.renderElement(this.rootNode, 'div', null, ['class', 'users__wrapper']);
-    const tableTitles = ['ФИО', 'Эл.Почта', 'Роль', 'Описание', 'Действия'];
+    const tableTitles = ['Аватар', 'ФИО', 'Эл.Почта', 'Роль', 'Описание', 'Действия'];
     UI.renderElement(wrapper, 'h2', 'Пользователи', ['class', 'users__title']);
     const container = UI.renderElement(wrapper, 'div', null, ['class', 'table-responsive-md']);
     const table = UI.renderElement(container, 'table', null, ['class', 'table']);
@@ -148,8 +148,10 @@ export default class Admin extends UI {
     const trh = UI.renderElement(thead, 'tr');
     tableTitles.forEach((title) => UI.renderElement(trh, 'th', title));
     const tbody = UI.renderElement(table, 'tbody');
-    this.usersArray.forEach(({ fullName, id, mail, type, description }) => {
+    this.usersArray.forEach(({ fullName, id, mail, type, description, avatar }) => {
       const tr = UI.renderElement(tbody, 'tr', null, ['data-id', id]);
+      const tdavatar = UI.renderElement(tr, 'td', null, ['class', 'avatar']);
+      UI.renderElement(tdavatar, 'img', null, ['src', `${avatar}`], ['class', 'img-fluid rounded-circle mb-1']);
       UI.renderElement(tr, 'td', fullName, ['class', 'name']);
       UI.renderElement(tr, 'td', mail, ['class', 'mail']);
       UI.renderElement(tr, 'td', type, ['class', 'type']);

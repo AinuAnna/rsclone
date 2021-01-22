@@ -1,4 +1,5 @@
 /* eslint-disable class-methods-use-this */
+
 export default class Event {
   toggleMenuButton() {
     const simpleBarElement = document.getElementsByClassName('js-simplebar')[0];
