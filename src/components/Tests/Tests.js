@@ -170,7 +170,7 @@ export default class Tests extends UI {
       mark: this.assessment,
       them: this.testThem,
       testName: this.testTitle,
-      userName: 'user',
+      userId: localStorage.getItem('uidMath'),
     };
     this.firebaseDB.addDataToDB('TestResults', testResult);
 

@@ -27,7 +27,7 @@ export default class TestResults extends UI {
     const trh = UI.renderElement(thead, 'tr');
     tableTitles.forEach((title) => UI.renderElement(trh, 'th', title));
     const tbody = UI.renderElement(table, 'tbody');
-    this.studentsInfo.forEach(({ testName, them, mark, id }) => {
+    this.testResults.forEach(({ testName, them, mark, id }) => {
       const tr = UI.renderElement(tbody, 'tr', null, ['data-id', id]);
       UI.renderElement(tr, 'td', them);
       UI.renderElement(tr, 'td', testName);
@@ -37,15 +37,13 @@ export default class TestResults extends UI {
   }
 
   setData(data, userId) {
-    // потом отфильтруем по id
-    this.studentsInfo = data.filter(() => true);
+    this.testResults = data.filter((testResult) => testResult.userId === localStorage.getItem('uidMath'));
     this.userId = userId;
   }
 
   render(idUser) {
     this.rootNode.innerHTML = '';
     firebase.getData('TestResults').then((data) => {
-      this.testResults = data;
       this.setData(data, idUser);
       this.renderTestResults();
     });
