@@ -1,10 +1,10 @@
-.student-profile{
-  &__wrapper{
+.student-profile {
+  &__wrapper {
     padding: 16px 0 64px 32px;
     background-color: #fff;
   }
-  &__title{
-    color: #6C757D;
+  &__title {
+    color: #6c757d;
     font-size: 18px;
     font-style: normal;
     font-weight: 400;
@@ -12,67 +12,101 @@
     text-align: left;
     margin-bottom: 26px;
   }
-  &__container{
-    @media (max-width: 600px){
+  &__container {
+    @media (max-width: 600px) {
       flex-wrap: wrap;
       flex-direction: column-reverse;
       align-items: start;
     }
     display: flex;
   }
-  &__photo{
-    @media (max-width: 600px){
+  &__photo {
+    @media (max-width: 600px) {
       margin-bottom: 40px;
     }
     border-radius: 100%;
     height: 150px;
     width: 150px;
   }
-  &__password-form, &__info-form, &__right{
+  &__password-form,
+  &__info-form,
+  &__right {
     display: flex;
     flex-direction: column;
   }
-  &__left{
+  &__left {
     margin-right: 60px;
     display: flex;
     flex-direction: column;
-    &>*:first-child{
+    & > *:first-child {
       margin-bottom: 50px;
     }
   }
-  &__button{
+  &__button {
     max-width: 203px;
     padding: 10px 22px;
   }
-  &__input{
+  &__input {
     min-width: 270px;
     padding: 9px 10px;
     margin-bottom: 25px;
-    color: #6C757D;
+    color: #6c757d;
     font-size: 13px;
     font-style: normal;
     font-weight: 400;
     line-height: 18px;
     text-align: left;
-    @media (max-width: 350px){
+    @media (max-width: 350px) {
       min-width: 200px;
       flex-wrap: wrap;
       flex-direction: column-reverse;
       align-items: start;
     }
-
   }
-  &__info-title, &__photo-title{
+  &__info-title,
+  &__photo-title {
     margin-bottom: 18px;
     font-size: 15px;
     font-style: normal;
     font-weight: 400;
     line-height: 25px;
     text-align: left;
-    color: #6C757D;
-
+    color: #6c757d;
   }
-  &__photo-title{
+  &__photo-title {
     text-align: center;
   }
+}
+#user-avatar {
+  height: inherit;
+  width: inherit;
+  border: 3px solid #a8d2a0;
+  border-radius: 50%;
+  transition: ease-out 200ms;
+}
+.card-body {
+  padding-top: 112px;
+}
+input#upload {
+  display: none;
+}
+label span {
+  position: relative;
+  height: 30px;
+  width: 30px;
+  background-color: #a8d2a0;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14),
+    0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+  transition: ease-out 200ms;
+  cursor: pointer;
+}
+
+label span:hover,
+label span:focus {
+  box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14),
+    0px 3px 14px 2px rgba(0, 0, 0, 0.12);
+  background-color: #82a07c;
 }

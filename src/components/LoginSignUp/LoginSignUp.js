@@ -108,7 +108,7 @@ export default class LoginSignUp extends UI {
       ['class', 'login__small'],
       ['style', 'font-size: 14px;']
     );
-    UI.renderElement(
+    const LoginButton = UI.renderElement(
       smallText,
       'a',
       'Вход',
@@ -116,6 +116,11 @@ export default class LoginSignUp extends UI {
       ['href', '#'],
       ['style', 'font-size: 14px;']
     );
+    LoginButton.addEventListener('click', (e) => {
+      e.preventDefault();
+      this.rootNode.innerHTML = '';
+      this.renderLogin();
+    });
   }
 
   renderLogin() {
@@ -191,7 +196,7 @@ export default class LoginSignUp extends UI {
       ['class', 'login__small'],
       ['style', 'font-size: 14px;']
     );
-    UI.renderElement(
+    const SignUpButton = UI.renderElement(
       smallText,
       'a',
       'Регистрация',
@@ -199,10 +204,14 @@ export default class LoginSignUp extends UI {
       ['href', '#'],
       ['style', 'font-size: 14px;']
     );
+    SignUpButton.addEventListener('click', (e) => {
+      e.preventDefault();
+      this.rootNode.innerHTML = '';
+      this.renderM();
+    });
   }
 
   render() {
     this.renderM();
-    this.renderLogin();
   }
 }

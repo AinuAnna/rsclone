@@ -5,6 +5,7 @@ import TestsAdmin from '../TestsAdmin/TestsAdmin';
 import LectureAdmin from '../LectureAdmin/LectureAdmin';
 import TestResults from '../TestResults/TestResults';
 import Lecture from '../Lecture/Lecture';
+import Teacher from '../Teacher/Teacher';
 
 const admin = new Admin(document.getElementById('container'));
 const tests = new Tests(document.getElementById('container'));
@@ -12,6 +13,7 @@ const testsAdmin = new TestsAdmin(document.getElementById('container'));
 const lectureAdmin = new LectureAdmin(document.getElementById('container'));
 const lecture = new Lecture(document.getElementById('container'));
 const testResults = new TestResults(document.getElementById('container'));
+const group = new Teacher(document.getElementById('container'));
 
 export const arrayMENU = {
   admin: [
@@ -112,7 +114,7 @@ export const arrayMENU = {
         <span class="align-middle">Группы</span>
       </a>
     </li>`,
-      // view: group.render(),
+      view: group,
       path: '/main/teacher/groups',
     },
     {
