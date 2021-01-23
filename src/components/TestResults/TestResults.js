@@ -37,6 +37,7 @@ export default class TestResults extends UI {
   }
 
   setData(data, userId) {
+    /* Filter test result by logged user to the system */
     this.testResults = data.filter((testResult) => testResult.userId === localStorage.getItem('uidMath'));
     this.userId = userId;
   }
