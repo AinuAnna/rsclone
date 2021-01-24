@@ -1,7 +1,9 @@
 /* eslint-disable class-methods-use-this */
 import './Profile.scss';
+import { Modal } from 'bootstrap';
 import UI from '../UIclass/UIclass';
 import { FirebaseDB } from '../../utils/FirebaseDB/FirebaseDB';
+import saveDataYesBtn from './Profile.constants';
 
 const firebase = new FirebaseDB();
 
@@ -9,8 +11,23 @@ export default class Profile extends UI {
   constructor(rootNode) {
     super();
     this.rootNode = rootNode;
+    this.saveDataUserPopUp();
     this.submitInfoOnHandler = this.submitInfoOnHandler.bind(this);
     this.submitPasswordOnHandler = this.submitPasswordOnHandler.bind(this);
+  }
+
+  saveDataUserPopUp() {
+    const SaveDataUserModalPopUp = new Modal(document.getElementById('saveDataUserModal'), {});
+    const saveDataUserModal = document.getElementById('saveDataUserModal');
+    saveDataUserModal.addEventListener('show.bs.modal', (updateEvent) => {
+      const button = updateEvent.relatedTarget;
+      const userId = button.getAttribute('data-bs-userid');
+      saveDataYesBtn.addEventListener('click', () => {
+        this.firebaseDB.updateItem('Users', userId);
+        SaveDataUserModalPopUp.hide();
+        this.render();
+      });
+    });
   }
 
   renderM() {
@@ -73,6 +90,7 @@ export default class Profile extends UI {
       ['Имя пользователя', 'name', this.studentInfo.fullName],
       ['Эл. Почта', 'mail', this.studentInfo.mail],
       ['Роль', 'role', this.studentInfo.type],
+      ['Описание', 'description', this.studentInfo.description],
     ];
 
     this.inputsInfo = arrInfo.map((el) => {
@@ -87,7 +105,15 @@ export default class Profile extends UI {
       );
     });
 
-    UI.renderElement(this.formData, 'button', 'Обновить данные', ['class', 'btn btn-primary'], ['type', 'submit']);
+    UI.renderElement(
+      this.formData,
+      'button',
+      'Обновить данные',
+      ['type', 'submit'],
+      ['data-bs-toggle', 'modal'],
+      ['data-bs-target', '#saveDataUserModal'],
+      ['class', 'btn btn-primary']
+    );
 
     this.formPassword = UI.renderElement(
       left,
@@ -113,7 +139,15 @@ export default class Profile extends UI {
       );
     });
 
-    UI.renderElement(this.formPassword, 'button', 'Обновить данные', ['class', 'btn btn-primary'], ['type', 'submit']);
+    UI.renderElement(
+      this.formPassword,
+      'button',
+      'Обновить данные',
+      ['class', 'btn btn-primary'],
+      ['type', 'submit'],
+      ['data-bs-toggle', 'modal'],
+      ['data-bs-target', '#saveDataUserModal']
+    );
 
     this.formPassword.addEventListener('submit', this.submitPasswordOnHandler);
     this.formData.addEventListener('submit', this.submitInfoOnHandler);
@@ -125,6 +159,7 @@ export default class Profile extends UI {
       fullName: this.inputsInfo.find(({ dataset }) => dataset.type === 'name').value,
       mail: this.inputsInfo.find(({ dataset }) => dataset.type === 'mail').value,
       type: this.inputsInfo.find(({ dataset }) => dataset.type === 'role').value,
+      description: this.inputsInfo.find(({ dataset }) => dataset.type === 'description').value,
     };
     // do smth with new fields
     // console.log(newFields);
