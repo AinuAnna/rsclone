@@ -213,5 +213,6 @@ export default class LoginSignUp extends UI {
 
   render() {
     this.renderLogin();
+    this.renderM();
   }
 }
