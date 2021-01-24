@@ -24,7 +24,7 @@ export function getTestResultObject(dataObject) {
   const TESTRESULT = {
     them: dataObject.them,
     testName: dataObject.testName,
-    userName: dataObject.userName,
+    userId: dataObject.userId,
     assessment: dataObject.assessment,
   };
   return TESTRESULT;

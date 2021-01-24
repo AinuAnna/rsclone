@@ -253,7 +253,7 @@ export default class Lecture extends UI {
       mark: this.assessment,
       them: this.testThem,
       testName: this.selectedLectionSubtitle,
-      userName: 'user',
+      userId: localStorage.getItem('uidMath'),
     };
     this.firebaseDB.addDataToDB('TestResults', testResult);
 
