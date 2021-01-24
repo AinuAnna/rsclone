@@ -111,7 +111,7 @@ export default class Profile extends UI {
       'Обновить данные',
       ['type', 'submit'],
       ['data-bs-toggle', 'modal'],
-      ['data-bs-target', '#saveUserDataModal'],
+      ['data-bs-target', '#saveDataUserModal'],
       ['class', 'btn btn-primary']
     );
 
@@ -146,7 +146,7 @@ export default class Profile extends UI {
       ['class', 'btn btn-primary'],
       ['type', 'submit'],
       ['data-bs-toggle', 'modal'],
-      ['data-bs-target', '#saveUserDataModal']
+      ['data-bs-target', '#saveDataUserModal']
     );
 
     this.formPassword.addEventListener('submit', this.submitPasswordOnHandler);
