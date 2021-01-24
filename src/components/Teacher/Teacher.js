@@ -1,3 +1,4 @@
+/* eslint-disable lines-between-class-members */
 /* eslint-disable no-unused-vars */
 import './Teacher.scss';
 import { Modal } from 'bootstrap';
