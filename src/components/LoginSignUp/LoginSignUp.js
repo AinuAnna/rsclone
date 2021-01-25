@@ -88,7 +88,7 @@ export default class LoginSignUp extends UI {
       'button',
       null,
       ['class', 'btn btn-primary rounded-pill'],
-      ['type', 'button'],
+      ['type', 'submit'],
       ['form', 'form-singup'],
       ['id', 'button-singup']
     );
@@ -177,7 +177,7 @@ export default class LoginSignUp extends UI {
       'button',
       null,
       ['class', 'btn btn-primary rounded-pill'],
-      ['type', 'button'],
+      ['type', 'submit'],
       ['id', 'submit-main']
     );
     UI.renderElement(ButtonSubmit, 'span', '✓', ['class', 'btn-inner--text'], ['style', 'font-size: 18px; ']);
