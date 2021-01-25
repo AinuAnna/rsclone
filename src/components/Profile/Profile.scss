@@ -77,15 +77,20 @@
     text-align: center;
   }
 }
+.divInputs {
+  padding: 1rem 1.25rem;
+}
 #user-avatar {
-  height: inherit;
-  width: inherit;
-  border: 3px solid #a8d2a0;
+  width: 15em;
+  height: 15em;
+  border: 2px solid #82a07c;
   border-radius: 50%;
-  transition: ease-out 200ms;
+  text-align: center;
+  background: rgb(236, 236, 236);
+  margin: auto;
 }
 .card-body {
-  padding-top: 112px;
+  padding-top: 186px;
 }
 input#upload {
   display: none;
