@@ -152,24 +152,14 @@ export default class Admin extends UI {
       const tr = UI.renderElement(tbody, 'tr', null, ['data-id', id]);
       const tdavatar = UI.renderElement(tr, 'td', null, ['class', 'avatar']);
       if (avatar !== '' || undefined) {
-        UI.renderElement(
-          tdavatar,
-          'img',
-          null,
-          ['src', `${avatar}`],
-          ['class', 'img-fluid rounded-circle mb-1'],
-          ['width', '30px'],
-          ['height', '30px']
-        );
+        UI.renderElement(tdavatar, 'img', null, ['src', `${avatar}`], ['class', 'avatar rounded-circle']);
       } else {
         UI.renderElement(
           tdavatar,
           'img',
           null,
           ['src', '../../assets/icon/user.svg'],
-          ['class', 'img-fluid rounded-circle mb-1'],
-          ['width', '30px'],
-          ['height', '30px']
+          ['class', 'avatar rounded-circle']
         );
       }
       UI.renderElement(tr, 'td', fullName, ['class', 'name']);
