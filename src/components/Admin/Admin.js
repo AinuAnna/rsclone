@@ -151,7 +151,27 @@ export default class Admin extends UI {
     this.usersArray.forEach(({ fullName, id, mail, type, description, avatar }) => {
       const tr = UI.renderElement(tbody, 'tr', null, ['data-id', id]);
       const tdavatar = UI.renderElement(tr, 'td', null, ['class', 'avatar']);
-      UI.renderElement(tdavatar, 'img', null, ['src', `${avatar}`], ['class', 'img-fluid rounded-circle mb-1']);
+      if (avatar !== '' || undefined) {
+        UI.renderElement(
+          tdavatar,
+          'img',
+          null,
+          ['src', `${avatar}`],
+          ['class', 'img-fluid rounded-circle mb-1'],
+          ['width', '30px'],
+          ['height', '30px']
+        );
+      } else {
+        UI.renderElement(
+          tdavatar,
+          'img',
+          null,
+          ['src', '../../assets/icon/user.svg'],
+          ['class', 'img-fluid rounded-circle mb-1'],
+          ['width', '30px'],
+          ['height', '30px']
+        );
+      }
       UI.renderElement(tr, 'td', fullName, ['class', 'name']);
       UI.renderElement(tr, 'td', mail, ['class', 'mail']);
       UI.renderElement(tr, 'td', type, ['class', 'type']);
