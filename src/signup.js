@@ -6,6 +6,5 @@ const loginSignUp = new LoginSignUp(document.getElementById('login'));
 loginSignUp.renderM();
 
 const auth = new Auth();
-auth.AuthStateChanged();
 auth.goSignUp();
 auth.goLogout();
