@@ -1,31 +1,35 @@
 /* eslint-disable class-methods-use-this */
 import './Profile.scss';
 import { Modal } from 'bootstrap';
+import { firebase } from '@firebase/app';
 import UI from '../UIclass/UIclass';
-import { FirebaseDB } from '../../utils/FirebaseDB/FirebaseDB';
+import { db, FirebaseDB } from '../../utils/FirebaseDB/FirebaseDB';
 import saveDataYesBtn from './Profile.constants';
-
-const firebase = new FirebaseDB();
+import '@firebase/auth';
 
 export default class Profile extends UI {
   constructor(rootNode) {
     super();
     this.rootNode = rootNode;
-    this.saveDataUserPopUp();
+    this.userId = null;
+    this.studentInfo = null;
+    this.newUserInfoFields = null;
+    this.inputsInfo = null;
     this.submitInfoOnHandler = this.submitInfoOnHandler.bind(this);
     this.submitPasswordOnHandler = this.submitPasswordOnHandler.bind(this);
+    this.saveDataUserPopUp();
+    this.firebaseDB = new FirebaseDB();
+    this.auth = firebase.auth();
   }
 
   saveDataUserPopUp() {
-    const SaveDataUserModalPopUp = new Modal(document.getElementById('saveDataUserModal'), {});
+    const saveDataUserModalPopUp = new Modal(document.getElementById('saveDataUserModal'), {});
     const saveDataUserModal = document.getElementById('saveDataUserModal');
-    saveDataUserModal.addEventListener('show.bs.modal', (updateEvent) => {
-      const button = updateEvent.relatedTarget;
-      const userId = button.getAttribute('data-bs-userid');
+    saveDataUserModal.addEventListener('show.bs.modal', () => {
       saveDataYesBtn.addEventListener('click', () => {
-        this.firebaseDB.updateItem('Users', userId);
-        SaveDataUserModalPopUp.hide();
-        this.render();
+        this.firebaseDB.updateDataInDB('Users', this.userId, this.newUserInfoFields);
+        saveDataUserModalPopUp.hide();
+        this.render(this.userId);
       });
     });
   }
@@ -62,21 +66,21 @@ export default class Profile extends UI {
       ['aria-label', 'upload user profile']
     );
 
-    const divInputs = UI.renderElement(
-      CardAvatarMD,
-      'div',
-      null,
-      ['data-id', this.studentInfo.id],
-      ['class', 'divInputs']
-    );
-    UI.renderElement(divInputs, 'h5', this.studentInfo.fullName, [
-      'class',
-      'student-profile__photo-title card-title mb-0',
-    ]);
-    UI.renderElement(divInputs, 'div', this.studentInfo.description, [
-      'class',
-      'student-profile__photo-title text-muted mb-2',
-    ]);
+    // const divInputs = UI.renderElement(
+    //   CardAvatarMD,
+    //   'div',
+    //   null,
+    //   ['data-id', this.studentInfo.id],
+    //   ['class', 'divInputs']
+    // );
+    // UI.renderElement(divInputs, 'h5', this.studentInfo.fullName, [
+    //   'class',
+    //   'student-profile__photo-title card-title mb-0',
+    // ]);
+    // UI.renderElement(divInputs, 'div', this.studentInfo.description, [
+    //   'class',
+    //   'student-profile__photo-title text-muted mb-2',
+    // ]);
 
     this.formData = UI.renderElement(
       left,
@@ -155,14 +159,24 @@ export default class Profile extends UI {
 
   submitInfoOnHandler(event) {
     event.preventDefault();
-    const newFields = {
+    this.newUserInfoFields = {
       fullName: this.inputsInfo.find(({ dataset }) => dataset.type === 'name').value,
       mail: this.inputsInfo.find(({ dataset }) => dataset.type === 'mail').value,
       type: this.inputsInfo.find(({ dataset }) => dataset.type === 'role').value,
       description: this.inputsInfo.find(({ dataset }) => dataset.type === 'description').value,
     };
-    // do smth with new fields
-    // console.log(newFields);
+  }
+
+  listenerUsers() {
+    db.collection('Users').onSnapshot((snapshot) => {
+      snapshot.docChanges().forEach((change) => {
+        if (change.type === 'added') {
+          this.render(this.userId);
+        } else if (change.type === 'removed') {
+          this.render(this.userId);
+        }
+      });
+    });
   }
 
   submitPasswordOnHandler(event) {
@@ -170,8 +184,6 @@ export default class Profile extends UI {
     const infoPassword = {};
     infoPassword[this.inputsPassword[0].dataset.type] = this.inputsPassword[0].value;
     infoPassword[this.inputsPassword[1].dataset.type] = this.inputsPassword[1].value;
-    // do smth with new fields
-    // console.log(infoPassword);
   }
 
   renderAvatar() {
@@ -202,7 +214,7 @@ export default class Profile extends UI {
 
   render(userId) {
     this.userId = userId;
-    firebase.getData('Users').then((data) => {
+    this.firebaseDB.getData('Users').then((data) => {
       this.setData(data);
       this.renderM();
       this.renderAvatar();
