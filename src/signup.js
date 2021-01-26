@@ -3,9 +3,9 @@ import Auth from './utils/Authorization/auth';
 import LoginSignUp from './components/LoginSignUp/LoginSignUp';
 
 const loginSignUp = new LoginSignUp(document.getElementById('login'));
-loginSignUp.renderLogin();
+loginSignUp.renderM();
 
 const auth = new Auth();
 auth.AuthStateChanged();
-auth.goLogin();
+auth.goSignUp();
 auth.goLogout();
