@@ -54,39 +54,40 @@ export default class Auth {
   }
 
   goSignUp() {
+    this.AuthStateChanged();
     // signup
     const signupForm = document.querySelector('#form-singup');
+    document.querySelector('#button-singup').addEventListener('click', () => {
+      // get user info
+      const mail = signupForm['input-email'].value;
+      const password = signupForm['input-password'].value;
 
-    // get user info
-    const mail = signupForm['input-email'].value;
-    const password = signupForm['input-password'].value;
+      console.log(mail, password);
 
-    console.log(mail, password);
-
-    // sign up the user & add firestore data
-    auth
-      .createUserWithEmailAndPassword(mail, password)
-      .then((cred) =>
-        db.collection('Users').doc(cred.user.uid).set({
-          fullName: signupForm['input-fio'].value,
-          mail: signupForm['input-email'].value,
-          description: signupForm['input-group'].value,
-          type: 'student',
-        })
-      )
-      .then(() =>
-        fetch('/api/sendMail', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ mail, name: signupForm['input-fio'].value }),
-        })
-      )
-      .then(() => {
-        document.location.href = './main/student/results';
-      });
-    this.AuthStateChanged();
+      // sign up the user & add firestore data
+      auth
+        .createUserWithEmailAndPassword(mail, password)
+        .then((cred) =>
+          db.collection('Users').doc(cred.user.uid).set({
+            fullName: signupForm['input-fio'].value,
+            mail: signupForm['input-email'].value,
+            description: signupForm['input-group'].value,
+            type: 'student',
+          })
+        )
+        .then(() =>
+          fetch('/api/sendMail', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ mail, name: signupForm['input-fio'].value }),
+          })
+        )
+        .then(() => {
+          document.location.href = './main/student/results';
+        });
+    });
   }
 
   goLogout() {
