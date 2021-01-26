@@ -56,8 +56,6 @@ export default class Auth {
   goSignUp() {
     // signup
     const signupForm = document.querySelector('#form-singup');
-    // document.querySelector('#button-singup').addEventListener('click', () => {
-    // e.preventDefault();
 
     // get user info
     const mail = signupForm['input-email'].value;
@@ -88,7 +86,6 @@ export default class Auth {
       .then(() => {
         document.location.href = './main/student/results';
       });
-    // });
     this.AuthStateChanged();
   }
 
