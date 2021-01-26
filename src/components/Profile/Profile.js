@@ -40,11 +40,11 @@ export default class Profile extends UI {
     const container = UI.renderElement(wrapper, 'div', null, ['class', 'student-profile__container']);
     const left = UI.renderElement(container, 'div', null, ['class', 'student-profile__left']);
     const containerFluid = UI.renderElement(container, 'div', null, ['class', 'container-fluid p-0']);
-    const right = UI.renderElement(containerFluid, 'div', null, ['class', 'row']);
+    const right = UI.renderElement(containerFluid, 'div', null, ['class', 'student-profile__right']);
 
-    const CardAvatar = UI.renderElement(right, 'div', null, ['class', 'col-md-4 col-xl-3']);
-    const CardAvatarMD = UI.renderElement(CardAvatar, 'div', null, ['class', 'card mb-3']);
-    const cardHeader = UI.renderElement(CardAvatarMD, 'div', null, ['class', 'card-header']);
+    const CardAvatar = UI.renderElement(right, 'div', null, ['class', 'col-md-8 col-xl-4']);
+    const cardHeader = UI.renderElement(CardAvatar, 'div', null, ['class', 'card-header']);
+    const CardAvatarMD = UI.renderElement(CardAvatar, 'div', null, ['class', 'center-cont']);
     UI.renderElement(cardHeader, 'h5', 'Фото профиля', ['class', 'student-profile__photo-title card-title mb-0']);
     const cardBody = UI.renderElement(
       CardAvatarMD,
@@ -60,27 +60,27 @@ export default class Profile extends UI {
     UI.renderElement(
       labelButtonAvatar,
       'span',
-      'click',
+      '🡇',
       ['role', 'button'],
       ['tabindex', '0'],
       ['aria-label', 'upload user profile']
     );
 
-    // const divInputs = UI.renderElement(
-    //   CardAvatarMD,
-    //   'div',
-    //   null,
-    //   ['data-id', this.studentInfo.id],
-    //   ['class', 'divInputs']
-    // );
-    // UI.renderElement(divInputs, 'h5', this.studentInfo.fullName, [
-    //   'class',
-    //   'student-profile__photo-title card-title mb-0',
-    // ]);
-    // UI.renderElement(divInputs, 'div', this.studentInfo.description, [
-    //   'class',
-    //   'student-profile__photo-title text-muted mb-2',
-    // ]);
+    const divInputs = UI.renderElement(
+      CardAvatar,
+      'div',
+      null,
+      ['data-id', this.studentInfo.id],
+      ['class', 'divInputs']
+    );
+    UI.renderElement(divInputs, 'h5', this.studentInfo.fullName, [
+      'class',
+      'student-profile__photo-title card-title mb-0',
+    ]);
+    UI.renderElement(divInputs, 'div', this.studentInfo.description, [
+      'class',
+      'student-profile__photo-title text-muted mb-2',
+    ]);
 
     this.formData = UI.renderElement(
       left,

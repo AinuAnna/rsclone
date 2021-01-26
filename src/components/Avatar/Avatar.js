@@ -15,7 +15,7 @@ export default class Avatar extends UI {
       'img',
       null,
       ['src', `${this.usersArray.avatar}`],
-      ['class', 'img-fluid rounded-circle mb-1'],
+      ['class', 'avatar rounded-circle'],
       ['width', '30px'],
       ['height', '30px']
     );
@@ -34,7 +34,7 @@ export default class Avatar extends UI {
           'img',
           null,
           ['src', '../../assets/icon/user.svg'],
-          ['class', 'img-fluid rounded-circle mb-1'],
+          ['class', 'avatar rounded-circle'],
           ['width', '30px'],
           ['height', '30px']
         );
