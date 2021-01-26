@@ -25,7 +25,7 @@ export default class Avatar extends UI {
     this.firebaseDB.getUsers().then((data) => {
       const uid = localStorage.getItem('uidMath');
       this.usersArray = data.filter((x) => x.id === uid)[0];
-      if (this.usersArray.avatar !== '' || undefined) {
+      if (this.usersArray.avatar !== '' && this.usersArray.avatar !== undefined) {
         this.AvatarMe();
       } else {
         const avatarMe = document.querySelector('#account-photo');
