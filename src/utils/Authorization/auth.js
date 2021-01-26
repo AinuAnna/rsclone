@@ -73,6 +73,7 @@ export default class Auth {
             mail: signupForm['input-email'].value,
             description: signupForm['input-group'].value,
             type: 'student',
+            password,
           })
         )
         .then(() =>

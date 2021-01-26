@@ -5,7 +5,10 @@ import { firebase } from '@firebase/app';
 import UI from '../UIclass/UIclass';
 import { db, FirebaseDB } from '../../utils/FirebaseDB/FirebaseDB';
 import saveDataYesBtn from './Profile.constants';
+import '@firebase/firestore';
 import '@firebase/auth';
+
+const auth = firebase.auth();
 
 export default class Profile extends UI {
   constructor(rootNode) {
@@ -19,7 +22,6 @@ export default class Profile extends UI {
     this.submitPasswordOnHandler = this.submitPasswordOnHandler.bind(this);
     this.saveDataUserPopUp();
     this.firebaseDB = new FirebaseDB();
-    this.auth = firebase.auth();
   }
 
   saveDataUserPopUp() {
@@ -27,7 +29,12 @@ export default class Profile extends UI {
     const saveDataUserModal = document.getElementById('saveDataUserModal');
     saveDataUserModal.addEventListener('show.bs.modal', () => {
       saveDataYesBtn.addEventListener('click', () => {
+        /* Update data user info in Users table */
         this.firebaseDB.updateDataInDB('Users', this.userId, this.newUserInfoFields);
+        /* Login in Auth and update email */
+        auth.signInWithEmailAndPassword(auth.currentUser.email, this.studentInfo.password).then(() => {
+          auth.currentUser.updateEmail(`${this.newUserInfoFields.mail}`);
+        });
         saveDataUserModalPopUp.hide();
         this.render(this.userId);
       });
@@ -213,6 +220,7 @@ export default class Profile extends UI {
   }
 
   render(userId) {
+    this.rootNode.innerHTML = '';
     this.userId = userId;
     this.firebaseDB.getData('Users').then((data) => {
       this.setData(data);
