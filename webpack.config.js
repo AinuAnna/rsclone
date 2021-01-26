@@ -10,6 +10,7 @@ module.exports = {
     app: path.resolve(__dirname, './src/index.js'),
     main: path.resolve(__dirname, './src/main.js'),
     login: path.resolve(__dirname, './src/login.js'),
+    signup: path.resolve(__dirname, './src/signup.js'),
     profile: path.resolve(__dirname, './src/profile.js'),
   },
   output: {
@@ -59,6 +60,11 @@ module.exports = {
       template: path.resolve(__dirname, './src/login.html'),
       filename: 'login.html',
       chunks: ['login'],
+    }),
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, './src/signup.html'),
+      filename: 'signup.html',
+      chunks: ['signup'],
     }),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, './src/profile.html'),

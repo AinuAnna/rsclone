@@ -54,8 +54,13 @@ app.get('/main/teacher/profile.html/', (req, res) => {
   res.render(path.resolve(dirname, 'dist', 'profile.html'));
 });
 
-app.get('/login.html/', (req, res) => {
+app.post('/login.html', (req, res) => {
   res.render(path.resolve(dirname, 'dist', 'login.html'));
+  console.log(req);
+  console.log(req.uid);
+});
+app.post('/signup.html', (req, res) => {
+  res.render(path.resolve(dirname, 'dist', 'signup.html'));
   console.log(req);
   console.log(req.uid);
 });

@@ -5,6 +5,7 @@
   "app": "index.js",
   "main": "main.js",
   "login": "login.js",
+  "signup": "signup.js",
   "scripts": {
     "start": "webpack serve",
     "build": "webpack",
