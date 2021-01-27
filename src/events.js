@@ -57,7 +57,7 @@ export default class Event {
       if (pass === '') {
         this.printError('passErr', 'Please enter your password');
       } else {
-        const regex = /^[a-zA-Z\s]+$/;
+        const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
         if (regex.test(pass) === false) {
           this.printError('passErr', 'Please enter a valid password');
         } else {
@@ -69,7 +69,7 @@ export default class Event {
       if (fio === '') {
         this.printError('fioErr', 'Please enter your name');
       } else {
-        const regex = /^[a-zA-Z\s]+$/;
+        const regex = /^[А-ЯA-Z][а-яa-zА-ЯA-Z\-]{0,}\s[А-ЯA-Z][а-яa-zА-ЯA-Z\-]{1,}(\s[А-ЯA-Z][а-яa-zА-ЯA-Z\-]{1,})?$/;
         if (regex.test(fio) === false) {
           this.printError('fioErr', 'Please enter a valid name');
         } else {
@@ -79,15 +79,9 @@ export default class Event {
       }
       // Validate info
       if (info === '') {
-        this.printError('infoErr', 'Please enter your name');
+        this.printError('infoErr', 'Please enter your info');
       } else {
-        const regex = /^[a-zA-Z\s]+$/;
-        if (regex.test(info) === false) {
-          this.printError('infoErr', 'Please enter a valid name');
-        } else {
-          this.printError('infoErr', '');
-          infoErr = false;
-        }
+        return false;
       }
 
       // Validate email address
