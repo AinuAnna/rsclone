@@ -147,6 +147,8 @@ export default class LoginSignUp extends UI {
       ['id', 'input-email'],
       ['placeholder', 'name@example.com']
     );
+    UI.renderElement(divFormGroup, 'div', null, ['class', 'error'], ['id', 'emailErr']);
+
     const divFormGroupMB2 = UI.renderElement(form, 'div', null, ['class', 'form-group mb-2']);
     const divDFlex = UI.renderElement(divFormGroupMB2, 'div', null, [
       'class',
@@ -171,6 +173,7 @@ export default class LoginSignUp extends UI {
       ['id', 'input-password'],
       ['placeholder', 'Пароль']
     );
+    UI.renderElement(divFormGroupMB2, 'div', null, ['class', 'error'], ['id', 'passErr']);
 
     const divFormGroup6 = UI.renderElement(form, 'div', null, ['class', 'mt-4']);
     const ButtonSubmit = UI.renderElement(
