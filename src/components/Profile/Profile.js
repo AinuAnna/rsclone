@@ -4,7 +4,7 @@ import { Modal } from 'bootstrap';
 import { firebase } from '@firebase/app';
 import UI from '../UIclass/UIclass';
 import { db, FirebaseDB } from '../../utils/FirebaseDB/FirebaseDB';
-import saveDataYesBtn from './Profile.constants';
+import { saveDataYesBtn, changeAuthYesBtn } from './Profile.constants';
 import '@firebase/firestore';
 import '@firebase/auth';
 
@@ -21,6 +21,7 @@ export default class Profile extends UI {
     this.submitInfoOnHandler = this.submitInfoOnHandler.bind(this);
     this.submitPasswordOnHandler = this.submitPasswordOnHandler.bind(this);
     this.saveDataUserPopUp();
+    this.changeAuthPopUp();
     this.firebaseDB = new FirebaseDB();
   }
 
@@ -36,6 +37,23 @@ export default class Profile extends UI {
           auth.currentUser.updateEmail(`${this.newUserInfoFields.mail}`);
         });
         saveDataUserModalPopUp.hide();
+        this.render(this.userId);
+      });
+    });
+  }
+
+  changeAuthPopUp() {
+    const changeAuthModalPopUp = new Modal(document.getElementById('changeAuthModal'), {});
+    const changeAuthModal = document.getElementById('changeAuthModal');
+    changeAuthModal.addEventListener('show.bs.modal', () => {
+      changeAuthYesBtn.addEventListener('click', () => {
+        // я перенесла, дальше не буду трогать
+        /* Login in Auth and update email */
+        auth.signInWithEmailAndPassword(auth.currentUser.email, this.studentInfo.password).then(() => {
+          auth.currentUser.updateEmail(`${this.newUserInfoFields.mail}`);
+        });
+        // я так понимаю тут же прописывается выход из акка при нажатии на кнопку, скорее всго надо будет вызвать метод класса auth goLogout();
+        changeAuthModalPopUp.hide();
         this.render(this.userId);
       });
     });
@@ -99,7 +117,6 @@ export default class Profile extends UI {
 
     const arrInfo = [
       ['Имя пользователя', 'name', this.studentInfo.fullName],
-      ['Эл. Почта', 'mail', this.studentInfo.mail],
       ['Роль', 'role', this.studentInfo.type],
       ['Описание', 'description', this.studentInfo.description],
     ];
@@ -134,11 +151,24 @@ export default class Profile extends UI {
       ['id', 'student-profile__password-form']
     );
 
+    const changeMail = [['mail', 'Эл. Почта', this.studentInfo.mail]];
     const arrPassword = [
       ['prev', 'Старый пароль'],
       ['new', 'Новый пароль'],
     ];
-
+    // инпут для почты с введенным значением почты
+    this.inputsPassword = changeMail.map((el) => {
+      UI.renderElement(this.formPassword, 'span', el[1], ['class', 'student-profile__info-title']);
+      return UI.renderElement(
+        this.formPassword,
+        'input',
+        '',
+        ['class', 'student-profile__input'],
+        ['data-type', el[0]],
+        ['value', el[2]]
+      );
+    });
+    // инпуты для паролей без значений
     this.inputsPassword = arrPassword.map((el) => {
       UI.renderElement(this.formPassword, 'span', el[1], ['class', 'student-profile__info-title']);
       return UI.renderElement(
@@ -157,7 +187,7 @@ export default class Profile extends UI {
       ['class', 'btn btn-primary'],
       ['type', 'submit'],
       ['data-bs-toggle', 'modal'],
-      ['data-bs-target', '#saveDataUserModal']
+      ['data-bs-target', '#changeAuthModal']
     );
 
     this.formPassword.addEventListener('submit', this.submitPasswordOnHandler);
