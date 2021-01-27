@@ -20,20 +20,6 @@ export default class Menu extends UI {
     });
   }
 
-  renderM(role) {
-    const ul = UI.renderElement(this.rootNode, 'ul', null, ['class', `menu__${role}`]);
-    document.getElementById('menu-title').innerHTML = role;
-    const arr = arrayMENU[role].flat();
-    arr.forEach(({ title, onclick }) => {
-      const item = UI.renderElement(ul, 'li', title, ['class', 'name']);
-      item.addEventListener('click', (e) => {
-        e.preventDefault();
-        history.push(item.path);
-        // onclick();
-      });
-    });
-  }
-
   renderMenu(role) {
     this.rootNode.innerHTML = '';
     const ul = UI.renderElement(this.rootNode, 'ul', null, ['class', `menu__${role}`]);
