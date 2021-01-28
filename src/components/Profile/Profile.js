@@ -324,6 +324,13 @@ export default class Profile extends UI {
       reader.onloadend = () => {
         const imageBuffer = reader.result;
         AVATAR.style.background = `url(${imageBuffer}) center center/cover`;
+        // const myAvatar = {
+        //   avatar: imageBuffer,
+        // };
+        // this.firebaseDB.addDataToDB('Users', myAvatar);
+        db.collection('Users').doc(this.userId).update({
+          avatar: imageBuffer,
+        });
       };
     };
 
