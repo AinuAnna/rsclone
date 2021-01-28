@@ -74,7 +74,7 @@ export default class Event {
       } else {
         const regex = /^[А-ЯA-Z][а-яa-zА-ЯA-Z\-]{0,}\s[А-ЯA-Z][а-яa-zА-ЯA-Z\-]{1,}(\s[А-ЯA-Z][а-яa-zА-ЯA-Z\-]{1,})?$/;
         if (regex.test(fio) === false) {
-          this.printError('fioErr', 'Введите пароль, удовлетворящий правилам: ФИО с большой буквы');
+          this.printError('fioErr', 'Введите ФИО, удовлетворящий правилам: ФИО с большой буквы');
         } else {
           this.printError('fioErr', '');
           fioErr = false;
