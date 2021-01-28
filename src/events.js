@@ -61,7 +61,7 @@ export default class Event {
         if (regex.test(pass) === false) {
           this.printError(
             'passErr',
-            'Введите пароль, удовлетворяющий правилам: минимум - 8 знаков, одна заглавная буква, одна строчная буква'
+            'Введите пароль, соответствующий правилам: минимум - 8 знаков, одна заглавная буква, одна строчная буква'
           );
         } else {
           this.printError('passErr', '');
@@ -74,7 +74,7 @@ export default class Event {
       } else {
         const regex = /^[А-ЯA-Z][а-яa-zА-ЯA-Z\-]{0,}\s[А-ЯA-Z][а-яa-zА-ЯA-Z\-]{1,}(\s[А-ЯA-Z][а-яa-zА-ЯA-Z\-]{1,})?$/;
         if (regex.test(fio) === false) {
-          this.printError('fioErr', 'Введите ФИО, удовлетворящий правилам: ФИО с большой буквы');
+          this.printError('fioErr', 'Введите ФИО, соответствующее правилам: ФИО с большой буквы');
         } else {
           this.printError('fioErr', '');
           fioErr = false;
@@ -94,7 +94,7 @@ export default class Event {
         // Regular expression for basic email validation
         const regex = /^\S+@\S+\.\S+$/;
         if (regex.test(email) === false) {
-          this.printError('emailErr', 'Введите почту, удовлетворяющую правилам: name@example.com');
+          this.printError('emailErr', 'Введите почту, соответствующую правилам: name@example.com');
         } else {
           this.printError('emailErr', '');
           emailErr = false;
@@ -128,7 +128,7 @@ export default class Event {
         // Regular expression for basic email validation
         const regex = /^\S+@\S+\.\S+$/;
         if (regex.test(email) === false) {
-          this.printError('emailErr', 'Введите почту, удовлетворяющую правилам: example@mail.com');
+          this.printError('emailErr', 'Введите почту, соответствующую правилам: example@mail.com');
         } else {
           this.printError('emailErr', '');
           emailErr = false;

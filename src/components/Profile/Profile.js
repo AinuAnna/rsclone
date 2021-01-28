@@ -264,14 +264,14 @@ export default class Profile extends UI {
     event.preventDefault();
     document.querySelector('#changePass').addEventListener('click', () => {
       if (this.inputsPassword[0].value !== '' && this.inputsPassword[0].value !== this.studentInfo.password) {
-        this.printError('passChangeErr', 'Please enter your real password');
+        this.printError('passChangeErr', 'Вы ввели неверный пароль');
       } else {
         this.printError('passChangeErr', '<p style = color:green; >Вы ввели верный пароль!</p>');
         const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
         if (regex.test(this.inputsPassword[1]) === false) {
           this.printError(
             'passErr',
-            'Введите пароль, удовлетворяющий правилам: минимум - 8 знаков, одна заглавная буква, одна строчная буква'
+            'Введите пароль, соответствующий правилам: минимум - 8 знаков, одна заглавная буква, одна строчная буква'
           );
         }
         if (
