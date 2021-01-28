@@ -22,7 +22,7 @@ export default class Profile extends UI {
     this.submitInfoOnHandler = this.submitInfoOnHandler.bind(this);
     this.submitPasswordOnHandler = this.submitPasswordOnHandler.bind(this);
     this.saveDataUserPopUp();
-    this.changeAuthPopUp();
+    // this.changeAuthPopUp();
     this.firebaseDB = new FirebaseDB();
   }
 
@@ -40,32 +40,38 @@ export default class Profile extends UI {
   }
 
   changeAuthPopUp() {
-    const changeAuthModalPopUp = new Modal(document.getElementById('changeAuthModal'), {});
-    const changeAuthModal = document.getElementById('changeAuthModal');
-    changeAuthModal.addEventListener('show.bs.modal', () => {
-      changeAuthYesBtn.addEventListener('click', () => {
-        this.updatedNewUserInfoFields = { ...this.newUserInfoFields };
-        this.updatedNewUserInfoFields.mail = this.newPrivateUserInfoFields.mail;
-        if (this.inputsPassword[1].value !== '' && this.inputsPassword[0].value !== '') {
-          this.updatedNewUserInfoFields.password = this.newPrivateUserInfoFields.password;
-        }
-        /* Login in Auth and update email and password */
-        this.firebaseDB.updateDataInDB('Users', this.userId, this.updatedNewUserInfoFields);
+    if (
+      this.inputsPassword[0].value !== '' &&
+      this.inputsPassword[1].value !== '' &&
+      this.inputsPassword[0].value === this.studentInfo.password
+    ) {
+      const changeAuthModalPopUp = new Modal(document.getElementById('changeAuthModal'), {});
+      const changeAuthModal = document.getElementById('changeAuthModal');
+      changeAuthModal.addEventListener('show.bs.modal', () => {
+        changeAuthYesBtn.addEventListener('click', () => {
+          this.updatedNewUserInfoFields = { ...this.newUserInfoFields };
+          this.updatedNewUserInfoFields.mail = this.newPrivateUserInfoFields.mail;
+          if (this.inputsPassword[1].value !== '' && this.inputsPassword[0].value !== '') {
+            this.updatedNewUserInfoFields.password = this.newPrivateUserInfoFields.password;
+          }
+          /* Login in Auth and update email and password */
+          this.firebaseDB.updateDataInDB('Users', this.userId, this.updatedNewUserInfoFields);
 
-        if (this.inputsPassword[1].value !== '' && this.inputsPassword[0].value !== '') {
-          auth.signInWithEmailAndPassword(auth.currentUser.email, this.studentInfo.password).then(() => {
-            auth.currentUser.updatePassword(`${this.newPrivateUserInfoFields.password}`);
-            auth.currentUser.updateEmail(`${this.newPrivateUserInfoFields.mail}`);
-          });
-        } else {
-          auth.signInWithEmailAndPassword(auth.currentUser.email, this.studentInfo.password).then(() => {
-            auth.currentUser.updateEmail(`${this.newPrivateUserInfoFields.mail}`);
-          });
-        }
-        changeAuthModalPopUp.hide();
-        auth.signOut();
+          if (this.inputsPassword[1].value !== '' && this.inputsPassword[0].value !== '') {
+            auth.signInWithEmailAndPassword(auth.currentUser.email, this.studentInfo.password).then(() => {
+              auth.currentUser.updatePassword(`${this.newPrivateUserInfoFields.password}`);
+              auth.currentUser.updateEmail(`${this.newPrivateUserInfoFields.mail}`);
+            });
+          } else {
+            auth.signInWithEmailAndPassword(auth.currentUser.email, this.studentInfo.password).then(() => {
+              auth.currentUser.updateEmail(`${this.newPrivateUserInfoFields.mail}`);
+            });
+          }
+          changeAuthModalPopUp.hide();
+          auth.signOut();
+        });
       });
-    });
+    }
   }
 
   renderM() {
@@ -214,10 +220,10 @@ export default class Profile extends UI {
 
   submitPasswordOnHandler(event) {
     event.preventDefault();
-    debugger
+    debugger;
     if (this.inputsPassword[0].value !== '' && this.inputsPassword[0].value !== this.studentInfo.password) {
       /* RENDER ERROR MESSAGE FOR PASSWORD */
-      console.log('1')
+      console.log('1');
     } else {
       if (
         this.inputsPassword[1].value !== '' &&
@@ -238,6 +244,7 @@ export default class Profile extends UI {
         type: this.inputsInfo.find(({ dataset }) => dataset.type === 'role').value,
         description: this.inputsInfo.find(({ dataset }) => dataset.type === 'description').value,
       };
+      this.changeAuthPopUp();
     }
   }
 
