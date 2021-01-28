@@ -216,6 +216,7 @@ export default class Profile extends UI {
     // инпуты для паролей без значений
     this.inputsPassword = arrPassword.map((el) => {
       UI.renderElement(this.formPassword, 'span', el[1], ['class', 'student-profile__info-title']);
+      UI.renderElement(this.formPassword, 'div', null, ['class', 'error'], ['id', 'passChangeErr']);
       return UI.renderElement(
         this.formPassword,
         'input',
@@ -231,6 +232,7 @@ export default class Profile extends UI {
       'Обновить данные',
       ['class', 'btn btn-primary'],
       ['type', 'submit'],
+      ['id', 'changePass'],
       ['data-bs-toggle', 'modal'],
       ['data-bs-target', '#changeAuthModal']
     );
@@ -253,34 +255,38 @@ export default class Profile extends UI {
     event.preventDefault();
   }
 
+  printError(elemId, hintMsg) {
+    document.getElementById(elemId).innerHTML = hintMsg;
+  }
+
   submitPasswordOnHandler(event) {
     event.preventDefault();
-    debugger;
-    if (this.inputsPassword[0].value !== '' && this.inputsPassword[0].value !== this.studentInfo.password) {
-      /* RENDER ERROR MESSAGE FOR PASSWORD */
-      console.log('1');
-    } else {
-      if (
-        this.inputsPassword[1].value !== '' &&
-        this.inputsPassword[0].value === this.studentInfo.password &&
-        this.inputsPassword[0].value !== ''
-      ) {
-        this.newPrivateUserInfoFields = {
-          mail: this.inputEmail.find(({ dataset }) => dataset.type === 'mail').value,
-          password: this.inputsPassword[1].value,
-        };
+    document.querySelector('#changePass').addEventListener('click', () => {
+      if (this.inputsPassword[0].value !== '' && this.inputsPassword[0].value !== this.studentInfo.password) {
+        this.printError('passChangeErr', 'Please enter your real password');
       } else {
-        this.newPrivateUserInfoFields = {
-          mail: this.inputEmail.find(({ dataset }) => dataset.type === 'mail').value,
+        if (
+          this.inputsPassword[1].value !== '' &&
+          this.inputsPassword[0].value === this.studentInfo.password &&
+          this.inputsPassword[0].value !== ''
+        ) {
+          this.newPrivateUserInfoFields = {
+            mail: this.inputEmail.find(({ dataset }) => dataset.type === 'mail').value,
+            password: this.inputsPassword[1].value,
+          };
+        } else {
+          this.newPrivateUserInfoFields = {
+            mail: this.inputEmail.find(({ dataset }) => dataset.type === 'mail').value,
+          };
+        }
+        this.newUserInfoFields = {
+          fullName: this.inputsInfo.find(({ dataset }) => dataset.type === 'name').value,
+          type: this.inputsInfo.find(({ dataset }) => dataset.type === 'role').value,
+          description: this.inputsInfo.find(({ dataset }) => dataset.type === 'description').value,
         };
+        this.changeAuthPopUp();
       }
-      this.newUserInfoFields = {
-        fullName: this.inputsInfo.find(({ dataset }) => dataset.type === 'name').value,
-        type: this.inputsInfo.find(({ dataset }) => dataset.type === 'role').value,
-        description: this.inputsInfo.find(({ dataset }) => dataset.type === 'description').value,
-      };
-      this.changeAuthPopUp();
-    }
+    });
   }
 
   listenerUsers() {
