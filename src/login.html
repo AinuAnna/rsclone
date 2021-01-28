@@ -16,42 +16,12 @@
           <a href="index.html" class="logo">
             <span class="subtitle">Математическое моделирование</span>
           </a>
-            <li class="logged-in" style="display: none;">
-              <a href="#profile" class="grey-text modal-trigger" data-target="modal-account">Account</a>
-            </li>
-            <li class="logged-in" style="display: none;">
-              <a href="#logout" class="grey-text" id="logout">Logout</a>
-            </li>
-            <li class="logged-out" action="/my-url" style="display: none;">
-              <a href="#login" class="grey-text modal-trigger" data-target="modal-login">Login</a>
-              <!-- при нажатии на логин, как и на сигн ап, котрывается попап(или страница, надо решить), после нажатия на который мы попадаем в личный кабинет -->
-            </li>
-            <li class="logged-out" style="display: none;">
-              <a href="#sign-up" class="grey-text modal-trigger" data-target="modal-signup">Sign up</a>
-            </li>
-          </span>
         </ul>
       </div>
     </nav>
-   
-      <!-- ACCOUNT MODAL
-      вместо этой штуки - раздел Профиль(открывается страничка полностью, не модальное окно) -->
-      <div id="modal-account" class="modal">
-        <div class="modal-content center-align">
-          <h4>Account details</h4><br />
-          <div class="account-details"></div>
-        </div>
-      </div>
-  
-      <div id="modal-create" class="modal">
-        <div class="modal-content">
-          <h4>Create Guide</h4><br />
-          <form id="create-form">
-          </form>
-        </div>
-      </div>
-      <div class="login__wrapper">
-    <div class="container" id="login"></div>
+
+    <div class="login__wrapper">
+      <div class="container" id="login"></div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   </body>

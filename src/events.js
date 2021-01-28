@@ -55,11 +55,14 @@ export default class Event {
 
       // Validate password
       if (pass === '') {
-        this.printError('passErr', 'Please enter your password');
+        this.printError('passErr', 'Введите пароль');
       } else {
         const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
         if (regex.test(pass) === false) {
-          this.printError('passErr', 'Please enter a valid password');
+          this.printError(
+            'passErr',
+            'Введите пароль, соответствующий правилам: минимум - 8 знаков, одна заглавная буква, одна строчная буква'
+          );
         } else {
           this.printError('passErr', '');
           passErr = false;
@@ -67,11 +70,11 @@ export default class Event {
       }
       // Validate fio
       if (fio === '') {
-        this.printError('fioErr', 'Please enter your name');
+        this.printError('fioErr', 'Введите Ваше ФИО');
       } else {
         const regex = /^[А-ЯA-Z][а-яa-zА-ЯA-Z\-]{0,}\s[А-ЯA-Z][а-яa-zА-ЯA-Z\-]{1,}(\s[А-ЯA-Z][а-яa-zА-ЯA-Z\-]{1,})?$/;
         if (regex.test(fio) === false) {
-          this.printError('fioErr', 'Please enter a valid name');
+          this.printError('fioErr', 'Введите ФИО, соответствующее правилам: ФИО с большой буквы');
         } else {
           this.printError('fioErr', '');
           fioErr = false;
@@ -79,19 +82,19 @@ export default class Event {
       }
       // Validate info
       if (info === '') {
-        this.printError('infoErr', 'Please enter your info');
+        this.printError('infoErr', 'Введите описание(группа/категория/курс/учреждение образования и т.п.)');
       } else {
         return false;
       }
 
       // Validate email address
       if (email === '') {
-        this.printError('emailErr', 'Please enter your email address');
+        this.printError('emailErr', 'Введите электронную почту');
       } else {
         // Regular expression for basic email validation
         const regex = /^\S+@\S+\.\S+$/;
         if (regex.test(email) === false) {
-          this.printError('emailErr', 'Please enter a valid email address');
+          this.printError('emailErr', 'Введите почту, соответствующую правилам: name@example.com');
         } else {
           this.printError('emailErr', '');
           emailErr = false;
@@ -113,19 +116,19 @@ export default class Event {
 
       // Validate password
       if (pass === '') {
-        this.printError('passErr', 'Please enter your password');
+        this.printError('passErr', 'Введите пароль');
       } else {
         return false;
       }
 
       // Validate email address
       if (email === '') {
-        this.printError('emailErr', 'Please enter your email address');
+        this.printError('emailErr', 'Введите почту');
       } else {
         // Regular expression for basic email validation
         const regex = /^\S+@\S+\.\S+$/;
         if (regex.test(email) === false) {
-          this.printError('emailErr', 'Please enter a valid email address');
+          this.printError('emailErr', 'Введите почту, соответствующую правилам: example@mail.com');
         } else {
           this.printError('emailErr', '');
           emailErr = false;

@@ -217,10 +217,11 @@ export default class Profile extends UI {
     this.inputsPassword = arrPassword.map((el) => {
       UI.renderElement(this.formPassword, 'span', el[1], ['class', 'student-profile__info-title']);
       UI.renderElement(this.formPassword, 'div', null, ['class', 'error'], ['id', 'passChangeErr']);
+      UI.renderElement(this.formPassword, 'div', null, ['class', 'error'], ['id', 'passErr']);
       return UI.renderElement(
         this.formPassword,
         'input',
-        '',
+        null,
         ['class', 'student-profile__input'],
         ['data-type', el[0]]
       );
@@ -237,9 +238,9 @@ export default class Profile extends UI {
       ['data-bs-target', '#changeAuthModal']
     );
 
-    this.formData.addEventListener('submit', this.submitInfoOnHandler);
-    this.formPassword.addEventListener('submit', this.submitPasswordOnHandler);
-    this.formEmail.addEventListener('submit', this.submitEmailOnHandler);
+    this.formData.addEventListener('click', this.submitInfoOnHandler);
+    this.formPassword.addEventListener('click', this.submitPasswordOnHandler);
+    this.formEmail.addEventListener('click', this.submitEmailOnHandler);
   }
 
   submitInfoOnHandler(event) {
@@ -263,8 +264,16 @@ export default class Profile extends UI {
     event.preventDefault();
     document.querySelector('#changePass').addEventListener('click', () => {
       if (this.inputsPassword[0].value !== '' && this.inputsPassword[0].value !== this.studentInfo.password) {
-        this.printError('passChangeErr', 'Please enter your real password');
+        this.printError('passChangeErr', 'Вы ввели неверный пароль');
       } else {
+        this.printError('passChangeErr', '<p style = color:green; >Вы ввели верный пароль!</p>');
+        const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+        if (regex.test(this.inputsPassword[1]) === false) {
+          this.printError(
+            'passErr',
+            'Введите пароль, соответствующий правилам: минимум - 8 знаков, одна заглавная буква, одна строчная буква'
+          );
+        }
         if (
           this.inputsPassword[1].value !== '' &&
           this.inputsPassword[0].value === this.studentInfo.password &&
@@ -284,6 +293,7 @@ export default class Profile extends UI {
           type: this.inputsInfo.find(({ dataset }) => dataset.type === 'role').value,
           description: this.inputsInfo.find(({ dataset }) => dataset.type === 'description').value,
         };
+
         this.changeAuthPopUp();
       }
     });
@@ -314,6 +324,9 @@ export default class Profile extends UI {
       reader.onloadend = () => {
         const imageBuffer = reader.result;
         AVATAR.style.background = `url(${imageBuffer}) center center/cover`;
+        db.collection('Users').doc(this.userId).update({
+          avatar: imageBuffer,
+        });
       };
     };
 
