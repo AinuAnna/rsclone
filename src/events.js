@@ -94,7 +94,7 @@ export default class Event {
         // Regular expression for basic email validation
         const regex = /^\S+@\S+\.\S+$/;
         if (regex.test(email) === false) {
-          this.printError('emailErr', 'Введите почту, удовлетворяющую правилам: example@mail.com');
+          this.printError('emailErr', 'Введите почту, удовлетворяющую правилам: name@example.com');
         } else {
           this.printError('emailErr', '');
           emailErr = false;
