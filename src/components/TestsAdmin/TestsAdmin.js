@@ -139,9 +139,12 @@ export default class TestsAdmin extends UI {
     );
 
     // add titles in option
-    this.listTitleLecture.map(({ id, subtitle }) =>
-      UI.renderElement(selectTitle, 'option', subtitle, ['value', `${subtitle}`], ['data-id', id])
-    );
+    this.listTitleLecture.forEach(({ id, subtitle }) => {
+      console.log(id, subtitle)
+      subtitle.forEach((title) => {
+        UI.renderElement(selectTitle, 'option', title, ['value', `${title}`], ['data-id', id]);
+      });
+    });
 
     const divInputQuestionCont = UI.renderElement(divTitleTestInput, 'div', null, ['class', 'col-md']);
     // container for question

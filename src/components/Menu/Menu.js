@@ -10,6 +10,7 @@ const history = createBrowserHistory();
 export default class Menu extends UI {
   constructor(rootNode) {
     super();
+    this.current = ''
     this.flattenMenu = Object.entries(arrayMENU).reduce(
       (result, [menuGroup, items]) => [...result, ...items.map((item) => ({ ...item, menuGroup }))],
       []
@@ -25,8 +26,9 @@ export default class Menu extends UI {
     const ul = UI.renderElement(this.rootNode, 'ul', null, ['class', `menu__${role}`]);
     document.getElementById('menu-title').innerHTML = role;
     const arr = arrayMENU[role].flat();
-    arr.forEach(({ title, onclick, path }) => {
-      const item = UI.renderElement(ul, 'li', title, ['class', 'name']);
+    arr.forEach(({ title, hovered, path }) => {
+      const classAdd = path === history.location.pathname ? 'sidebar-link_active' : '';
+      const item = UI.renderElement(ul, 'li', title, ['class', `name ${classAdd}`]);
       item.addEventListener('click', (e) => {
         e.preventDefault();
         history.push(path);
