@@ -4,7 +4,7 @@ import { Modal } from 'bootstrap';
 import { firebase } from '@firebase/app';
 import UI from '../UIclass/UIclass';
 import { db, FirebaseDB } from '../../utils/FirebaseDB/FirebaseDB';
-import { saveDataYesBtn, changeAuthYesBtn } from './Profile.constants';
+import { saveDataYesBtn, changeAuthYesBtn, changeEMAILYesBtn } from './Profile.constants';
 import '@firebase/firestore';
 import '@firebase/auth';
 
@@ -22,6 +22,7 @@ export default class Profile extends UI {
     this.submitInfoOnHandler = this.submitInfoOnHandler.bind(this);
     this.submitPasswordOnHandler = this.submitPasswordOnHandler.bind(this);
     this.saveDataUserPopUp();
+    this.changeEMAILPopUp();
     // this.changeAuthPopUp();
     this.firebaseDB = new FirebaseDB();
   }
@@ -36,6 +37,14 @@ export default class Profile extends UI {
         saveDataUserModalPopUp.hide();
         this.render(this.userId);
       });
+    });
+  }
+
+  changeEMAILPopUp() {
+    const changeEMAILModalPopUp = new Modal(document.getElementById('changeEMAILModal'), {});
+    const changeEMAILModal = document.getElementById('changeEMAILModal');
+    changeEMAILModal.addEventListener('show.bs.modal', () => {
+      changeEMAILYesBtn.addEventListener('click', () => {});
     });
   }
 
@@ -166,16 +175,26 @@ export default class Profile extends UI {
       ['id', 'student-profile__password-form']
     );
 
+    this.formEmail = UI.renderElement(
+      left,
+      'form',
+      null,
+      ['class', 'student-profile__email-form'],
+      ['id', 'student-profile__email-form']
+    );
+
     const changeMail = [['mail', 'Эл. Почта', this.studentInfo.mail]];
+
     const arrPassword = [
       ['prev', 'Старый пароль'],
       ['new', 'Новый пароль'],
     ];
+
     // инпут для почты с введенным значением почты
     this.inputEmail = changeMail.map((el) => {
-      UI.renderElement(this.formPassword, 'span', el[1], ['class', 'student-profile__info-title']);
+      UI.renderElement(this.formEmail, 'span', el[1], ['class', 'student-profile__info-title']);
       return UI.renderElement(
-        this.formPassword,
+        this.formEmail,
         'input',
         '',
         ['class', 'student-profile__input'],
@@ -183,6 +202,17 @@ export default class Profile extends UI {
         ['value', el[2]]
       );
     });
+
+    UI.renderElement(
+      this.formEmail,
+      'button',
+      'Обновить данные',
+      ['type', 'submit'],
+      ['data-bs-toggle', 'modal'],
+      ['data-bs-target', '#changeEMAILModal'],
+      ['class', 'btn btn-primary']
+    );
+
     // инпуты для паролей без значений
     this.inputsPassword = arrPassword.map((el) => {
       UI.renderElement(this.formPassword, 'span', el[1], ['class', 'student-profile__info-title']);
@@ -207,6 +237,7 @@ export default class Profile extends UI {
 
     this.formData.addEventListener('submit', this.submitInfoOnHandler);
     this.formPassword.addEventListener('submit', this.submitPasswordOnHandler);
+    this.formEmail.addEventListener('submit', this.submitEmailOnHandler);
   }
 
   submitInfoOnHandler(event) {
@@ -216,6 +247,10 @@ export default class Profile extends UI {
       type: this.inputsInfo.find(({ dataset }) => dataset.type === 'role').value,
       description: this.inputsInfo.find(({ dataset }) => dataset.type === 'description').value,
     };
+  }
+
+  submitEmailOnHandler(event) {
+    event.preventDefault();
   }
 
   submitPasswordOnHandler(event) {
