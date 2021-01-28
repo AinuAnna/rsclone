@@ -7,11 +7,9 @@ import '@firebase/firestore';
 
 import {
   addInputName,
-  addInputEmail,
   addInputRole,
   addInputDescription,
   editInputName,
-  editInputEmail,
   editInputRole,
   editInputDescription,
   deleteYesBtn,
@@ -53,7 +51,6 @@ export default class Admin extends UI {
     const addUserModal = document.getElementById('addUserModal');
     addUserModal.addEventListener('show.bs.modal', () => {
       addInputName.value = '';
-      addInputEmail.value = '';
       addInputRole.value = '';
       addInputDescription.value = '';
     });
@@ -64,13 +61,11 @@ export default class Admin extends UI {
     addYesBtn.addEventListener('click', (e) => {
       e.preventDefault();
       const FULL_NAME = addInputName.value;
-      const MAIL = addInputEmail.value;
       const ROLE = addInputRole.value;
       const DESCRIPTION = addInputDescription.value;
       const USER = {
         description: DESCRIPTION,
         fullName: FULL_NAME,
-        mail: MAIL,
         type: ROLE,
       };
       this.firebaseDB.addDataToDB('Users', USER);
@@ -90,15 +85,12 @@ export default class Admin extends UI {
           EXISTING_DATA.description = OBJECT_DOM[i].innerText;
         } else if (OBJECT_DOM[i].className === 'name') {
           EXISTING_DATA.fullName = OBJECT_DOM[i].innerText;
-        } else if (OBJECT_DOM[i].className === 'mail') {
-          EXISTING_DATA.mail = OBJECT_DOM[i].innerText;
         } else if (OBJECT_DOM[i].className === 'type') {
           EXISTING_DATA.type = OBJECT_DOM[i].innerText;
         }
       }
 
       editInputName.value = EXISTING_DATA.fullName;
-      editInputEmail.value = EXISTING_DATA.mail;
       editInputRole.value = EXISTING_DATA.type;
       editInputDescription.value = EXISTING_DATA.description;
     });
@@ -109,14 +101,12 @@ export default class Admin extends UI {
 
     editYesBtn.addEventListener('click', () => {
       const FULL_NAME = editInputName.value;
-      const MAIL = editInputEmail.value;
       const ROLE = editInputRole.value;
       const DESCRIPTION = editInputDescription.value;
 
       const EDITED_USER = {
         description: DESCRIPTION,
         fullName: FULL_NAME,
-        mail: MAIL,
         type: ROLE,
       };
       this.firebaseDB.updateDataInDB('Users', this.id, EDITED_USER);
@@ -140,7 +130,7 @@ export default class Admin extends UI {
   // eslint-disable-next-line class-methods-use-this
   renderM() {
     const wrapper = UI.renderElement(this.rootNode, 'div', null, ['class', 'users__wrapper']);
-    const tableTitles = ['Аватар', 'ФИО', 'Эл.Почта', 'Роль', 'Описание', 'Действия'];
+    const tableTitles = ['Аватар', 'ФИО', 'Роль', 'Описание', 'Действия'];
     UI.renderElement(wrapper, 'h2', 'Пользователи', ['class', 'users__title']);
     const container = UI.renderElement(wrapper, 'div', null, ['class', 'table-responsive-md']);
     const table = UI.renderElement(container, 'table', null, ['class', 'table']);
@@ -148,7 +138,7 @@ export default class Admin extends UI {
     const trh = UI.renderElement(thead, 'tr');
     tableTitles.forEach((title) => UI.renderElement(trh, 'th', title));
     const tbody = UI.renderElement(table, 'tbody');
-    this.usersArray.forEach(({ fullName, id, mail, type, description, avatar }) => {
+    this.usersArray.forEach(({ fullName, id, type, description, avatar }) => {
       const tr = UI.renderElement(tbody, 'tr', null, ['data-id', id]);
       const tdavatar = UI.renderElement(tr, 'td', null, ['class', 'avatar']);
       if (avatar !== '' && avatar !== undefined) {
@@ -163,7 +153,6 @@ export default class Admin extends UI {
         );
       }
       UI.renderElement(tr, 'td', fullName, ['class', 'name']);
-      UI.renderElement(tr, 'td', mail, ['class', 'mail']);
       UI.renderElement(tr, 'td', type, ['class', 'type']);
       UI.renderElement(tr, 'td', description, ['class', 'description']);
       const svgButtonEdit = UI.renderElement(

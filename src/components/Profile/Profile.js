@@ -17,6 +17,7 @@ export default class Profile extends UI {
     this.userId = null;
     this.studentInfo = null;
     this.newUserInfoFields = null;
+    this.newPrivateUserInfoFields = null;
     this.inputsInfo = null;
     this.submitInfoOnHandler = this.submitInfoOnHandler.bind(this);
     this.submitPasswordOnHandler = this.submitPasswordOnHandler.bind(this);
@@ -32,10 +33,6 @@ export default class Profile extends UI {
       saveDataYesBtn.addEventListener('click', () => {
         /* Update data user info in Users table */
         this.firebaseDB.updateDataInDB('Users', this.userId, this.newUserInfoFields);
-        /* Login in Auth and update email */
-        auth.signInWithEmailAndPassword(auth.currentUser.email, this.studentInfo.password).then(() => {
-          auth.currentUser.updateEmail(`${this.newUserInfoFields.mail}`);
-        });
         saveDataUserModalPopUp.hide();
         this.render(this.userId);
       });
@@ -47,14 +44,26 @@ export default class Profile extends UI {
     const changeAuthModal = document.getElementById('changeAuthModal');
     changeAuthModal.addEventListener('show.bs.modal', () => {
       changeAuthYesBtn.addEventListener('click', () => {
-        // я перенесла, дальше не буду трогать
-        /* Login in Auth and update email */
-        auth.signInWithEmailAndPassword(auth.currentUser.email, this.studentInfo.password).then(() => {
-          auth.currentUser.updateEmail(`${this.newUserInfoFields.mail}`);
-        });
-        // я так понимаю тут же прописывается выход из акка при нажатии на кнопку, скорее всго надо будет вызвать метод класса auth goLogout();
+        this.updatedNewUserInfoFields = { ...this.newUserInfoFields };
+        this.updatedNewUserInfoFields.mail = this.newPrivateUserInfoFields.mail;
+        if (this.inputsPassword[1].value !== '' && this.inputsPassword[0].value !== '') {
+          this.updatedNewUserInfoFields.password = this.newPrivateUserInfoFields.password;
+        }
+        /* Login in Auth and update email and password */
+        this.firebaseDB.updateDataInDB('Users', this.userId, this.updatedNewUserInfoFields);
+
+        if (this.inputsPassword[1].value !== '' && this.inputsPassword[0].value !== '') {
+          auth.signInWithEmailAndPassword(auth.currentUser.email, this.studentInfo.password).then(() => {
+            auth.currentUser.updatePassword(`${this.newPrivateUserInfoFields.password}`);
+            auth.currentUser.updateEmail(`${this.newPrivateUserInfoFields.mail}`);
+          });
+        } else {
+          auth.signInWithEmailAndPassword(auth.currentUser.email, this.studentInfo.password).then(() => {
+            auth.currentUser.updateEmail(`${this.newPrivateUserInfoFields.mail}`);
+          });
+        }
         changeAuthModalPopUp.hide();
-        this.render(this.userId);
+        auth.signOut();
       });
     });
   }
@@ -157,7 +166,7 @@ export default class Profile extends UI {
       ['new', 'Новый пароль'],
     ];
     // инпут для почты с введенным значением почты
-    this.inputsPassword = changeMail.map((el) => {
+    this.inputEmail = changeMail.map((el) => {
       UI.renderElement(this.formPassword, 'span', el[1], ['class', 'student-profile__info-title']);
       return UI.renderElement(
         this.formPassword,
@@ -190,18 +199,46 @@ export default class Profile extends UI {
       ['data-bs-target', '#changeAuthModal']
     );
 
-    this.formPassword.addEventListener('submit', this.submitPasswordOnHandler);
     this.formData.addEventListener('submit', this.submitInfoOnHandler);
+    this.formPassword.addEventListener('submit', this.submitPasswordOnHandler);
   }
 
   submitInfoOnHandler(event) {
     event.preventDefault();
     this.newUserInfoFields = {
       fullName: this.inputsInfo.find(({ dataset }) => dataset.type === 'name').value,
-      mail: this.inputsInfo.find(({ dataset }) => dataset.type === 'mail').value,
       type: this.inputsInfo.find(({ dataset }) => dataset.type === 'role').value,
       description: this.inputsInfo.find(({ dataset }) => dataset.type === 'description').value,
     };
+  }
+
+  submitPasswordOnHandler(event) {
+    event.preventDefault();
+    debugger
+    if (this.inputsPassword[0].value !== '' && this.inputsPassword[0].value !== this.studentInfo.password) {
+      /* RENDER ERROR MESSAGE FOR PASSWORD */
+      console.log('1')
+    } else {
+      if (
+        this.inputsPassword[1].value !== '' &&
+        this.inputsPassword[0].value === this.studentInfo.password &&
+        this.inputsPassword[0].value !== ''
+      ) {
+        this.newPrivateUserInfoFields = {
+          mail: this.inputEmail.find(({ dataset }) => dataset.type === 'mail').value,
+          password: this.inputsPassword[1].value,
+        };
+      } else {
+        this.newPrivateUserInfoFields = {
+          mail: this.inputEmail.find(({ dataset }) => dataset.type === 'mail').value,
+        };
+      }
+      this.newUserInfoFields = {
+        fullName: this.inputsInfo.find(({ dataset }) => dataset.type === 'name').value,
+        type: this.inputsInfo.find(({ dataset }) => dataset.type === 'role').value,
+        description: this.inputsInfo.find(({ dataset }) => dataset.type === 'description').value,
+      };
+    }
   }
 
   listenerUsers() {
@@ -214,13 +251,6 @@ export default class Profile extends UI {
         }
       });
     });
-  }
-
-  submitPasswordOnHandler(event) {
-    event.preventDefault();
-    const infoPassword = {};
-    infoPassword[this.inputsPassword[0].dataset.type] = this.inputsPassword[0].value;
-    infoPassword[this.inputsPassword[1].dataset.type] = this.inputsPassword[1].value;
   }
 
   renderAvatar() {
