@@ -10,3 +10,4 @@ profile.render(uid);
 
 const event = new Event();
 event.renderDrop();
+event.renderValidPass();

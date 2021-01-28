@@ -110,7 +110,7 @@ export default class Auth {
             document.location.href = './main/student/results';
           }
           if (doc.data().type === 'admin') {
-            document.location.href = './main/admin';
+            document.location.href = './main/admin/users';
           }
           if (doc.data().type === 'teacher') {
             document.location.href = './main/teacher/group';

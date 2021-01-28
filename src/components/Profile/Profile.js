@@ -217,6 +217,7 @@ export default class Profile extends UI {
     this.inputsPassword = arrPassword.map((el) => {
       UI.renderElement(this.formPassword, 'span', el[1], ['class', 'student-profile__info-title']);
       UI.renderElement(this.formPassword, 'div', null, ['class', 'error'], ['id', 'passChangeErr']);
+      UI.renderElement(this.formPassword, 'div', null, ['class', 'error'], ['id', 'passErr']);
       return UI.renderElement(
         this.formPassword,
         'input',
@@ -237,9 +238,9 @@ export default class Profile extends UI {
       ['data-bs-target', '#changeAuthModal']
     );
 
-    this.formData.addEventListener('submit', this.submitInfoOnHandler);
-    this.formPassword.addEventListener('submit', this.submitPasswordOnHandler);
-    this.formEmail.addEventListener('submit', this.submitEmailOnHandler);
+    this.formData.addEventListener('click', this.submitInfoOnHandler);
+    this.formPassword.addEventListener('click', this.submitPasswordOnHandler);
+    this.formEmail.addEventListener('click', this.submitEmailOnHandler);
   }
 
   submitInfoOnHandler(event) {
@@ -265,6 +266,7 @@ export default class Profile extends UI {
       if (this.inputsPassword[0].value !== '' && this.inputsPassword[0].value !== this.studentInfo.password) {
         this.printError('passChangeErr', 'Please enter your real password');
       } else {
+        this.printError('passChangeErr', '<p style = color:green; >Looks good!</p>');
         if (
           this.inputsPassword[1].value !== '' &&
           this.inputsPassword[0].value === this.studentInfo.password &&

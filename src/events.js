@@ -137,8 +137,36 @@ export default class Event {
     });
   }
 
+  ruleValidPass() {
+    document.querySelector('#changePass').addEventListener('click', () => {
+      const pass = document.querySelectorAll('#student-profile__input').value;
+      // Defining error variables with a default value
+      let passErr;
+
+      // Validate password
+      if (pass === '') {
+        this.printError('passErr', 'Please enter your password');
+      } else {
+        const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+        if (regex.test(pass) === false) {
+          this.printError('passErr', 'Please enter a valid password');
+        } else {
+          this.printError('passErr', '');
+          passErr = false;
+        }
+      }
+      if (passErr === true) {
+        return false;
+      }
+    });
+  }
+
   renderValidSignUp() {
     this.ruleValidSignUp();
+  }
+
+  renderValidPass() {
+    this.ruleValidPass();
   }
 
   renderValidLogin() {
