@@ -221,7 +221,7 @@ export default class Profile extends UI {
       return UI.renderElement(
         this.formPassword,
         'input',
-        '',
+        null,
         ['class', 'student-profile__input'],
         ['data-type', el[0]]
       );
@@ -266,7 +266,14 @@ export default class Profile extends UI {
       if (this.inputsPassword[0].value !== '' && this.inputsPassword[0].value !== this.studentInfo.password) {
         this.printError('passChangeErr', 'Please enter your real password');
       } else {
-        this.printError('passChangeErr', '<p style = color:green; >Looks good!</p>');
+        this.printError('passChangeErr', '<p style = color:green; >Вы ввели верный пароль!</p>');
+        const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+        if (regex.test(this.inputsPassword[1]) === false) {
+          this.printError(
+            'passErr',
+            'Введите пароль, удовлетворяющий правилам: минимум - 8 знаков, одна заглавная буква, одна строчная буква'
+          );
+        }
         if (
           this.inputsPassword[1].value !== '' &&
           this.inputsPassword[0].value === this.studentInfo.password &&
@@ -286,6 +293,7 @@ export default class Profile extends UI {
           type: this.inputsInfo.find(({ dataset }) => dataset.type === 'role').value,
           description: this.inputsInfo.find(({ dataset }) => dataset.type === 'description').value,
         };
+
         this.changeAuthPopUp();
       }
     });
