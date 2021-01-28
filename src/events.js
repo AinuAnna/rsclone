@@ -115,13 +115,7 @@ export default class Event {
       if (pass === '') {
         this.printError('passErr', 'Please enter your password');
       } else {
-        const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-        if (regex.test(pass) === false) {
-          this.printError('passErr', 'Please enter a valid password');
-        } else {
-          this.printError('passErr', '');
-          passErr = false;
-        }
+        return false;
       }
 
       // Validate email address
