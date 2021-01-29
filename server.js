@@ -11,7 +11,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 
-const port = process.env.port || 4004;
+const port = process.env.PORT || 4004;
 const dirname = path.resolve();
 const app = express();
 const productRouter = express.Router();
