@@ -17,10 +17,11 @@ export default class Profile extends UI {
     this.userId = null;
     this.studentInfo = null;
     this.newUserInfoFields = null;
+    this.emailUserInfoField = null;
     this.newPrivateUserInfoFields = null;
     this.inputsInfo = null;
     this.submitInfoOnHandler = this.submitInfoOnHandler.bind(this);
-    this.submitPasswordOnHandler = this.submitPasswordOnHandler.bind(this);
+    // this.submitPasswordOnHandler = this.submitPasswordOnHandler.bind(this);
     this.saveDataUserPopUp();
     this.changeEMAILPopUp();
     // this.changeAuthPopUp();
@@ -43,12 +44,28 @@ export default class Profile extends UI {
   changeEMAILPopUp() {
     const changeEMAILModalPopUp = new Modal(document.getElementById('changeEMAILModal'), {});
     const changeEMAILModal = document.getElementById('changeEMAILModal');
-    changeEMAILModal.addEventListener('show.bs.modal', () => {
-      changeEMAILYesBtn.addEventListener('click', () => {});
+    changeEMAILModal.addEventListener('show.bs.modal', (event) => {
+      event.preventDefault();
+      this.emailUserInfoField = {
+        mail: this.inputEmail.find(({ dataset }) => dataset.type === 'mail').value,
+      };
+
+      changeEMAILYesBtn.addEventListener('click', () => {
+        this.updatedNewUserInfoFields = { ...this.getCommonUserInfo() };
+        // debugger
+        this.updatedNewUserInfoFields.mail = this.emailUserInfoField.mail;
+        this.firebaseDB.updateDataInDB('Users', this.userId, this.updatedNewUserInfoFields);
+
+        auth.signInWithEmailAndPassword(auth.currentUser.email, this.studentInfo.password).then(() => {
+          auth.currentUser.updateEmail(`${this.emailUserInfoField.mail}`);
+        });
+        auth.signOut();
+        changeEMAILModalPopUp.hide();
+      });
     });
   }
 
-  changeAuthPopUp() {
+  changeAuthPopUpINT() {
     if (
       this.inputsPassword[0].value !== '' &&
       this.inputsPassword[1].value !== '' &&
@@ -58,22 +75,17 @@ export default class Profile extends UI {
       const changeAuthModal = document.getElementById('changeAuthModal');
       changeAuthModal.addEventListener('show.bs.modal', () => {
         changeAuthYesBtn.addEventListener('click', () => {
-          this.updatedNewUserInfoFields = { ...this.newUserInfoFields };
-          this.updatedNewUserInfoFields.mail = this.newPrivateUserInfoFields.mail;
-          if (this.inputsPassword[1].value !== '' && this.inputsPassword[0].value !== '') {
-            this.updatedNewUserInfoFields.password = this.newPrivateUserInfoFields.password;
-          }
+          // this.updatedNewUserInfoFields = { ...this.newUserInfoFields };
+          // this.updatedNewUserInfoFields.mail = this.newPrivateUserInfoFields.mail;
+          // if (this.inputsPassword[1].value !== '' && this.inputsPassword[0].value !== '') {
+          //   this.updatedNewUserInfoFields.password = this.newPrivateUserInfoFields.password;
+          // }
           /* Login in Auth and update email and password */
-          this.firebaseDB.updateDataInDB('Users', this.userId, this.updatedNewUserInfoFields);
+          // this.firebaseDB.updateDataInDB('Users', this.userId, this.updatedNewUserInfoFields);
 
           if (this.inputsPassword[1].value !== '' && this.inputsPassword[0].value !== '') {
             auth.signInWithEmailAndPassword(auth.currentUser.email, this.studentInfo.password).then(() => {
               auth.currentUser.updatePassword(`${this.newPrivateUserInfoFields.password}`);
-              auth.currentUser.updateEmail(`${this.newPrivateUserInfoFields.mail}`);
-            });
-          } else {
-            auth.signInWithEmailAndPassword(auth.currentUser.email, this.studentInfo.password).then(() => {
-              auth.currentUser.updateEmail(`${this.newPrivateUserInfoFields.mail}`);
             });
           }
           changeAuthModalPopUp.hide();
@@ -82,6 +94,98 @@ export default class Profile extends UI {
       });
     }
   }
+
+  // changeAuthPopUp() {
+  //   document.querySelector('#changePass').addEventListener('click', () => {
+  //     if (this.inputsPassword[0].value !== '' && this.inputsPassword[0].value !== this.studentInfo.password) {
+  //       // debugger;
+  //       this.printError('passChangeErr', 'Вы ввели неверный пароль');
+  //     } else {
+  //       // debugger;
+  //       this.printError('passChangeErr', '<p style = color:green; >Вы ввели верный пароль!</p>');
+  //       const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+  //       if (regex.test(this.inputsPassword[1]) === false) {
+  //         this.printError(
+  //           'passErr',
+  //           'Введите пароль, соответствующий правилам: минимум - 8 знаков, одна заглавная буква, одна строчная буква'
+  //         );
+  //       }
+  //       if (this.inputsPassword[1].value !== '') {
+  //         this.printError('passErr', 'Заполните поле Новый пароль');
+  //       } else {
+  //         this.newPrivateUserInfoFields = {
+  //           mail: this.inputEmail.find(({ dataset }) => dataset.type === 'mail').value,
+  //           password: this.inputsPassword[1].value,
+  //         };
+  //         this.newUserInfoFields = this.getCommonUserInfo();
+  //         this.changeAuthPopUpINT();
+  //       }
+  //     }
+  //   });
+
+  // changeAuthPopUpINT() {
+  //   if (
+  //     this.inputsPassword[0].value !== '' &&
+  //     this.inputsPassword[1].value !== '' &&
+  //     this.inputsPassword[0].value === this.studentInfo.password
+  //   ) {
+  //     const changeAuthModalPopUp = new Modal(document.getElementById('changeAuthModal'), {});
+  //     const changeAuthModal = document.getElementById('changeAuthModal');
+  //     changeAuthModal.addEventListener('show.bs.modal', () => {
+  //       changeAuthYesBtn.addEventListener('click', () => {
+  //         // this.updatedNewUserInfoFields = { ...this.newUserInfoFields };
+  //         // this.updatedNewUserInfoFields.mail = this.newPrivateUserInfoFields.mail;
+  //         // if (this.inputsPassword[1].value !== '' && this.inputsPassword[0].value !== '') {
+  //         //   this.updatedNewUserInfoFields.password = this.newPrivateUserInfoFields.password;
+  //         // }
+  //         /* Login in Auth and update email and password */
+  //         // this.firebaseDB.updateDataInDB('Users', this.userId, this.updatedNewUserInfoFields);
+
+  //         if (this.inputsPassword[1].value !== '' && this.inputsPassword[0].value !== '') {
+  //           auth.signInWithEmailAndPassword(auth.currentUser.email, this.studentInfo.password).then(() => {
+  //             auth.currentUser.updatePassword(`${this.newPrivateUserInfoFields.password}`);
+  //           });
+  //         }
+  //         changeAuthModalPopUp.hide();
+  //         auth.signOut();
+  //       });
+  //     });
+  //   }
+  // }
+  // if (
+  //   this.inputsPassword[0].value !== '' &&
+  //   this.inputsPassword[1].value !== '' &&
+  //   this.inputsPassword[0].value === this.studentInfo.password
+  // ) {
+  //   const changeAuthModalPopUp = new Modal(document.getElementById('changeAuthModal'), {});
+  //   const changeAuthModal = document.getElementById('changeAuthModal');
+  //   changeAuthModal.addEventListener('show.bs.modal', () => {
+  //     changeAuthYesBtn.addEventListener('click', () => {
+  //       // this.updatedNewUserInfoFields = { ...this.newUserInfoFields };
+  //       // this.updatedNewUserInfoFields.mail = this.newPrivateUserInfoFields.mail;
+  //       // if (this.inputsPassword[1].value !== '' && this.inputsPassword[0].value !== '') {
+  //       //   this.updatedNewUserInfoFields.password = this.newPrivateUserInfoFields.password;
+  //       // }
+  //       /* Login in Auth and update email and password */
+  //       // this.firebaseDB.updateDataInDB('Users', this.userId, this.updatedNewUserInfoFields);
+
+  //       if (this.inputsPassword[1].value !== '' && this.inputsPassword[0].value !== '') {
+  //         auth.signInWithEmailAndPassword(auth.currentUser.email, this.studentInfo.password).then(() => {
+  //           auth.currentUser.updatePassword(`${this.newPrivateUserInfoFields.password}`);
+  //           auth.currentUser.updateEmail(`${this.newPrivateUserInfoFields.mail}`);
+  //         });
+  //       }
+  //       // else {
+  //       //   auth.signInWithEmailAndPassword(auth.currentUser.email, this.studentInfo.password).then(() => {
+  //       //     auth.currentUser.updateEmail(`${this.newPrivateUserInfoFields.mail}`);
+  //       //   });
+  //       // }
+  //       changeAuthModalPopUp.hide();
+  //       auth.signOut();
+  //     });
+  //   });
+  // }
+  // }
 
   renderM() {
     const wrapper = UI.renderElement(this.rootNode, 'div', null, ['class', 'student-profile__wrapper']);
@@ -202,6 +306,9 @@ export default class Profile extends UI {
         ['value', el[2]]
       );
     });
+    this.emailUserInfoField = {
+      mail: this.inputEmail.find(({ dataset }) => dataset.type === 'mail').value,
+    };
 
     UI.renderElement(
       this.formEmail,
@@ -227,7 +334,7 @@ export default class Profile extends UI {
       );
     });
 
-    UI.renderElement(
+    const changePass = UI.renderElement(
       this.formPassword,
       'button',
       'Обновить данные',
@@ -238,34 +345,12 @@ export default class Profile extends UI {
       ['data-bs-target', '#changeAuthModal']
     );
 
-    this.formData.addEventListener('click', this.submitInfoOnHandler);
-    this.formPassword.addEventListener('click', this.submitPasswordOnHandler);
-    this.formEmail.addEventListener('click', this.submitEmailOnHandler);
-  }
-
-  submitInfoOnHandler(event) {
-    event.preventDefault();
-    this.newUserInfoFields = {
-      fullName: this.inputsInfo.find(({ dataset }) => dataset.type === 'name').value,
-      type: this.inputsInfo.find(({ dataset }) => dataset.type === 'role').value,
-      description: this.inputsInfo.find(({ dataset }) => dataset.type === 'description').value,
-    };
-  }
-
-  submitEmailOnHandler(event) {
-    event.preventDefault();
-  }
-
-  printError(elemId, hintMsg) {
-    document.getElementById(elemId).innerHTML = hintMsg;
-  }
-
-  submitPasswordOnHandler(event) {
-    event.preventDefault();
-    document.querySelector('#changePass').addEventListener('click', () => {
+    changePass.addEventListener('click', () => {
       if (this.inputsPassword[0].value !== '' && this.inputsPassword[0].value !== this.studentInfo.password) {
+        debugger;
         this.printError('passChangeErr', 'Вы ввели неверный пароль');
       } else {
+        debugger;
         this.printError('passChangeErr', '<p style = color:green; >Вы ввели верный пароль!</p>');
         const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
         if (regex.test(this.inputsPassword[1]) === false) {
@@ -274,30 +359,84 @@ export default class Profile extends UI {
             'Введите пароль, соответствующий правилам: минимум - 8 знаков, одна заглавная буква, одна строчная буква'
           );
         }
-        if (
-          this.inputsPassword[1].value !== '' &&
-          this.inputsPassword[0].value === this.studentInfo.password &&
-          this.inputsPassword[0].value !== ''
-        ) {
+        if (this.inputsPassword[1].value !== '') {
+          this.printError('passErr', 'Заполните поле Новый пароль');
+        } else {
           this.newPrivateUserInfoFields = {
             mail: this.inputEmail.find(({ dataset }) => dataset.type === 'mail').value,
             password: this.inputsPassword[1].value,
           };
-        } else {
-          this.newPrivateUserInfoFields = {
-            mail: this.inputEmail.find(({ dataset }) => dataset.type === 'mail').value,
-          };
+          this.newUserInfoFields = this.getCommonUserInfo();
+          this.changeAuthPopUpINT();
         }
-        this.newUserInfoFields = {
-          fullName: this.inputsInfo.find(({ dataset }) => dataset.type === 'name').value,
-          type: this.inputsInfo.find(({ dataset }) => dataset.type === 'role').value,
-          description: this.inputsInfo.find(({ dataset }) => dataset.type === 'description').value,
-        };
-
-        this.changeAuthPopUp();
       }
     });
+
+    this.formData.addEventListener('click', this.submitInfoOnHandler);
+    // this.formPassword.addEventListener('click', (event) => {
+    //   this.submitPasswordOnHandler(event);
+    // });
+    // this.formEmail.addEventListener('click', this.submitEmailOnHandler);
   }
+
+  submitInfoOnHandler(event) {
+    event.preventDefault();
+    this.newUserInfoFields = this.getCommonUserInfo();
+  }
+
+  getCommonUserInfo() {
+    const commonInfo = {
+      fullName: this.inputsInfo.find(({ dataset }) => dataset.type === 'name').value,
+      type: this.inputsInfo.find(({ dataset }) => dataset.type === 'role').value,
+      description: this.inputsInfo.find(({ dataset }) => dataset.type === 'description').value,
+    };
+    return commonInfo;
+  }
+
+  // submitEmailOnHandler(event) {
+  //   event.preventDefault();
+  //   this.emailUserInfoField = {
+  //     mail: this.inputEmail.find(({ dataset }) => dataset.type === 'mail').value,
+  //   };
+  // }
+
+  printError(elemId, hintMsg) {
+    document.getElementById(elemId).innerHTML = hintMsg;
+  }
+
+  // submitPasswordOnHandler(event) {
+  //   // debugger
+  //   event.preventDefault();
+  //   document.querySelector('#changePass').addEventListener('click', () => {
+  //     if (this.inputsPassword[0].value !== '' && this.inputsPassword[0].value !== this.studentInfo.password) {
+  //       debugger
+  //       this.printError('passChangeErr', 'Вы ввели неверный пароль');
+  //     } else {
+  //       debugger
+  //       this.printError('passChangeErr', '<p style = color:green; >Вы ввели верный пароль!</p>');
+  //       const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+  //       if (regex.test(this.inputsPassword[1]) === false) {
+  //         this.printError(
+  //           'passErr',
+  //           'Введите пароль, соответствующий правилам: минимум - 8 знаков, одна заглавная буква, одна строчная буква'
+  //         );
+  //       }
+  //       if (
+  //         this.inputsPassword[1].value !== '' &&
+  //         this.inputsPassword[0].value === this.studentInfo.password &&
+  //         this.inputsPassword[0].value !== ''
+  //       ) {
+  //         this.newPrivateUserInfoFields = {
+  //           mail: this.inputEmail.find(({ dataset }) => dataset.type === 'mail').value,
+  //           password: this.inputsPassword[1].value,
+  //         };
+  //       }
+  //       this.newUserInfoFields = this.getCommonUserInfo();
+
+  //       this.changeAuthPopUp();
+  //     }
+  //   });
+  // }
 
   listenerUsers() {
     db.collection('Users').onSnapshot((snapshot) => {
