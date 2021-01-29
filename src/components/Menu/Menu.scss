@@ -1,10 +1,10 @@
-.sidebar-link_active a{
-  transition: all .6s ease;
-  border-bottom: 4px solid #1a252f;
+.sidebar-link_active a {
+  transition: all 0.6s ease;
+  border-left: 4px solid #f49344;
 }
-.sidebar-link_active .sidebar-item a:hover{
-  svg{
-    color: rgba(233, 236, 239, 0.5);
+.sidebar-link_active .sidebar-item a:hover {
+  svg {
+    color: #f49344;
   }
-  color: rgba(233, 236, 239, 0.5) !important;
+  color: #f49344 !important;
 }

@@ -10,7 +10,7 @@ const history = createBrowserHistory();
 export default class Menu extends UI {
   constructor(rootNode) {
     super();
-    this.current = ''
+    this.current = '';
     this.flattenMenu = Object.entries(arrayMENU).reduce(
       (result, [menuGroup, items]) => [...result, ...items.map((item) => ({ ...item, menuGroup }))],
       []
