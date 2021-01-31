@@ -2,7 +2,6 @@
 /* eslint-disable no-console */
 import '@firebase/firestore';
 import '@firebase/auth';
-import { document } from 'mammoth/mammoth.browser';
 import { auth, db } from '../FirebaseDB/FirebaseDB';
 
 // listen for auth status changes
