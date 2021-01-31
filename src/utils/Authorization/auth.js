@@ -15,40 +15,12 @@ db.settings({ timestampsInSnapshots: true });
 
 export default class Auth {
   AuthStateChanged() {
-    const loggedOutLinks = document.querySelectorAll('.logged-out');
-    const loggedInLinks = document.querySelectorAll('.logged-in');
-    const accountDetails = document.querySelector('.account-details');
-
-    const setupUI = (user) => {
-      if (user) {
-        // account info
-        db.collection('UsersBio')
-          .doc(user.uid)
-          .get()
-          .then((doc) => {
-            const html = `
-        <div>Logged in as ${user.email}</div>
-        <div>${doc.data().bio}</div>
-      `;
-            accountDetails.innerHTML = html;
-          });
-        // toggle user UI elements
-        loggedInLinks.forEach((item) => (item.style.display = 'block'));
-        loggedOutLinks.forEach((item) => (item.style.display = 'none'));
-      } else {
-        // clear account info
-        accountDetails.innerHTML = '';
-        // toggle user elements
-        loggedInLinks.forEach((item) => (item.style.display = 'none'));
-        loggedOutLinks.forEach((item) => (item.style.display = 'block'));
-      }
-    };
-
     auth.onAuthStateChanged((user) => {
       if (user) {
         localStorage.setItem('uidMath', user.uid);
       } else {
-        setupUI();
+        // setupUI();
+        localStorage.removeItem('uidMath');
       }
     });
   }
@@ -93,14 +65,17 @@ export default class Auth {
 
   goLogout() {
     // logout
-    const logout = document.querySelector('#logout');
-    logout.addEventListener('click', () => {
+    const logout = document.querySelectorAll('#logout');
+    logout.addEventListener('click', (user) => {
+      localStorage.removeItem('uidMath', user.uid);
       auth.signOut();
     });
     this.AuthStateChanged();
+    localStorage.clear();
   }
 
   goLogin() {
+    this.AuthStateChanged();
     const checkStatus = (status) => {
       db.collection('Users')
         .doc(status)
@@ -131,6 +106,5 @@ export default class Auth {
         checkStatus(cred.user.uid);
       });
     });
-    this.AuthStateChanged();
   }
 }

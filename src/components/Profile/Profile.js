@@ -65,6 +65,7 @@ export default class Profile extends UI {
         auth.signOut();
         localStorage.removeItem('uidMath');
         changeEMAILModalPopUp.hide();
+        document.location.href = '/login.html';
       });
     });
   }
@@ -82,8 +83,9 @@ export default class Profile extends UI {
           auth.currentUser.updatePassword(`${this.newPrivateUserInfoFields.password}`);
         });
         auth.signOut();
-        localStorage.removeItem('uidMath');
         changeAuthModalPopUp.hide();
+        localStorage.removeItem('uidMath');
+        document.location.href = '/login.html';
       });
     });
   }

@@ -11,4 +11,3 @@ event.renderValidLogin();
 
 const auth = new Auth();
 auth.goLogin();
-auth.goLogout();
