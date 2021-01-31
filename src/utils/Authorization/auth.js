@@ -1,16 +1,10 @@
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-console */
-import { firebase } from '@firebase/app';
-import firebaseConfig from '../FirebaseDB/FirebaseDB.constants';
 import '@firebase/firestore';
 import '@firebase/auth';
+import { document } from 'mammoth/mammoth.browser';
+import { auth, db } from '../FirebaseDB/FirebaseDB';
 
-// update firesto
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
-const auth = firebase.auth();
-db.settings({ timestampsInSnapshots: true });
-// make auth and firestore references
 // listen for auth status changes
 
 export default class Auth {
@@ -63,15 +57,13 @@ export default class Auth {
     });
   }
 
-  goLogout() {
+  static goLogout() {
     // logout
-    const logout = document.querySelectorAll('#logout');
-    logout.addEventListener('click', (user) => {
-      localStorage.removeItem('uidMath', user.uid);
+    const logout = document.querySelector('#logout');
+    logout.addEventListener('click', () => {
       auth.signOut();
+      localStorage.removeItem('uidMath');
     });
-    this.AuthStateChanged();
-    localStorage.clear();
   }
 
   goLogin() {

@@ -1,14 +1,11 @@
 /* eslint-disable class-methods-use-this */
 import './Profile.scss';
 import { Modal } from 'bootstrap';
-import { firebase } from '@firebase/app';
 import UI from '../UIclass/UIclass';
-import { db, FirebaseDB } from '../../utils/FirebaseDB/FirebaseDB';
+import { auth, db, FirebaseDB } from '../../utils/FirebaseDB/FirebaseDB';
 import { saveDataYesBtn, changeAuthYesBtn, changeEMAILYesBtn, patternPassword } from './Profile.constants';
 import '@firebase/firestore';
 import '@firebase/auth';
-
-const auth = firebase.auth();
 
 export default class Profile extends UI {
   constructor(rootNode) {

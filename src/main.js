@@ -1,8 +1,8 @@
 import './sass/style.scss';
-import './utils/FirebaseAuth/FirebaseAuth';
 import Menu from './components/Menu/Menu';
 import Event from './events';
 import Avatar from './components/Avatar/Avatar';
+import Auth from './utils/Authorization/auth';
 
 const event = new Event();
 event.renderToggle();
@@ -12,3 +12,4 @@ avatar.render();
 
 const menu = new Menu(document.getElementById('menu'));
 menu.initRender();
+Auth.goLogout();

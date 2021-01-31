@@ -35,8 +35,8 @@ export default class Lecture extends UI {
     const subtitlesRenderedArr = [];
     this.lectureInfo.forEach(({ id, title, subtitle }) => {
       UI.renderElement(listTitle, 'div', null, ['data-id', id], ['class', 'lecture-admin__div']);
-      const a = UI.renderElement(ol, 'a', null, ['class', 'lecture-admin__a'], ['href', '#']);
-      UI.renderElement(a, 'li', title, ['class', 'lecture-admin__li']);
+      const p = UI.renderElement(ol, 'p', null, ['class', 'lecture-admin__a'], ['href', '#']);
+      UI.renderElement(p, 'li', title, ['class', 'lecture-admin__li']);
 
       subtitle.forEach((value) => {
         const div1 = UI.renderElement(ol, 'div', null, ['data-id', id], ['class', 'lecture-admin__div']);

@@ -7,6 +7,8 @@ import '@firebase/auth';
 
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
+db.settings({ timestampsInSnapshots: true });
+const auth = firebase.auth();
 
 export class FirebaseDB {
   constructor() {
@@ -134,4 +136,4 @@ export class FirebaseDB {
   // }
 }
 
-export { db };
+export { db, auth };
