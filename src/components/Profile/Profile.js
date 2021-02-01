@@ -60,15 +60,18 @@ export default class Profile extends UI {
           auth.currentUser.updateEmail(`${this.emailUserInfoField.mail}`);
         });
         auth.signOut();
-        localStorage.removeItem('uidMath');
         changeEMAILModalPopUp.hide();
-        document.location.href = '/login.html';
+        localStorage.removeItem('uidMath');
+        const toast = new Toast(document.getElementById('ToastsChange'), {});
+        toast.show();
+        setTimeout(() => {
+          document.location.href = '/login.html';
+        }, 3000);
       });
     });
   }
 
   changeAuthPopUp() {
-    // debugger;
     const changeAuthModalPopUp = new Modal(document.getElementById('changeAuthModal'), {});
     const changeAuthModal = document.getElementById('changeAuthModal');
     changeAuthModal.addEventListener('show.bs.modal', () => {
@@ -84,6 +87,9 @@ export default class Profile extends UI {
         localStorage.removeItem('uidMath');
         const toast = new Toast(document.getElementById('ToastsChange'), {});
         toast.show();
+        setTimeout(() => {
+          document.location.href = '/login.html';
+        }, 3000);
       });
     });
   }
