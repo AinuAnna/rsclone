@@ -3,6 +3,7 @@
 import '@firebase/firestore';
 import '@firebase/auth';
 import { auth, db } from '../FirebaseDB/FirebaseDB';
+import { getErrors } from './authErrorEnum';
 
 // listen for auth status changes
 
@@ -52,6 +53,9 @@ export default class Auth {
         )
         .then(() => {
           document.location.href = './main/student/results';
+        })
+        .catch((er) => {
+          document.querySelector('#errServ').innerHTML = getErrors(er.code) || er.message;
         });
     });
   }
@@ -93,9 +97,14 @@ export default class Auth {
       const password = loginForm['input-password'].value;
 
       // log the user in
-      auth.signInWithEmailAndPassword(mail, password).then((cred) => {
-        checkStatus(cred.user.uid);
-      });
+      auth
+        .signInWithEmailAndPassword(mail, password)
+        .then((cred) => {
+          checkStatus(cred.user.uid);
+        })
+        .catch((er) => {
+          document.querySelector('#errServ').innerHTML = getErrors(er.code) || er.message;
+        });
     });
   }
 }

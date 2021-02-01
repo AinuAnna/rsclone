@@ -18,6 +18,7 @@ export default class LoginSignUp extends UI {
       'class',
       'text-muted mb-0',
     ]);
+    UI.renderElement(container, 'div', null, ['class', 'errorServ'], ['id', 'errServ']);
     UI.renderElement(container, 'span', null, ['class', 'clearfix']);
     const form = UI.renderElement(container, 'form', null, ['role', 'form'], ['id', 'form-singup'], ['method', 'POST']);
     const divFormGroup = UI.renderElement(form, 'div', null, ['class', 'form-group']);

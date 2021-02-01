@@ -57,11 +57,11 @@ export default class Event {
       if (pass === '') {
         this.printError('passErr', 'Введите пароль');
       } else {
-        const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+        const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;
         if (regex.test(pass) === false) {
           this.printError(
             'passErr',
-            'Введите пароль, соответствующий правилам: минимум - 8 знаков, одна заглавная буква, одна строчная буква'
+            'Введите пароль, соответствующий правилам: минимум - 6 знаков, одна заглавная буква, одна строчная буква'
           );
         } else {
           this.printError('passErr', '');
