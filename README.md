@@ -12,8 +12,15 @@ and install dependencies
 
 > npm i
 
-write command
+to start application on dev mode write command
 
 > npm run watch
+
+and open application at port **4004**
+
+to start application on prodaction mode write commands
+
+> npm run build
+> npm run startexp
 
 and open application at port **4004**
