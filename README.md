@@ -20,7 +20,7 @@ and open application at port **4004**
 
 to start application on prodaction mode write commands
 
-> npm run build
+> npm run prod
 
 > npm run startexp
 
