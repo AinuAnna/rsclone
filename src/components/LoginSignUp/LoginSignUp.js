@@ -42,14 +42,6 @@ export default class LoginSignUp extends UI {
     ]);
     const divPassword = UI.renderElement(divDFlex, 'div', null, ['class', 'form-group']);
     UI.renderElement(divPassword, 'label', 'Пароль', ['class', 'form-control-label']);
-    const divForget = UI.renderElement(divDFlex, 'div', null, ['class', 'mb-2']);
-    UI.renderElement(
-      divForget,
-      'a',
-      'Забыли пароль?',
-      ['class', 'small text-muted text-underline--dashed border-primary'],
-      ['href', '#!']
-    );
     UI.renderElement(
       divFormGroupMB2,
       'input',
@@ -158,14 +150,6 @@ export default class LoginSignUp extends UI {
     ]);
     const divPassword = UI.renderElement(divDFlex, 'div', null, ['class', 'form-group']);
     UI.renderElement(divPassword, 'label', 'Пароль', ['class', 'form-control-label']);
-    const divForget = UI.renderElement(divDFlex, 'div', null, ['class', 'mb-2']);
-    UI.renderElement(
-      divForget,
-      'a',
-      'Забыли пароль?',
-      ['class', 'small text-muted text-underline--dashed border-primary'],
-      ['href', '#!']
-    );
     UI.renderElement(
       divFormGroupMB2,
       'input',
