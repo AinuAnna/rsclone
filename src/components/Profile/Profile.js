@@ -107,10 +107,11 @@ export default class Profile extends UI {
       null,
       ['class', 'card-body'],
       ['id', 'user-avatar'],
-      ['area-label', 'user avatar']
+      ['area-label', 'user avatar'],
+      ['style', `background: url(${this.studentInfo.avatar})center center/cover`]
     );
-
     UI.renderElement(cardBody, 'input', null, ['id', 'upload'], ['type', 'file'], ['accept', 'image/*']);
+
     const labelButtonAvatar = UI.renderElement(cardBody, 'label', null, ['for', 'upload']);
     UI.renderElement(
       labelButtonAvatar,
