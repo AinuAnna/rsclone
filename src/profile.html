@@ -46,10 +46,11 @@
             </ul>
           </div>
         </nav>
-
+         
         <main class="container">
           <div class="container-fluid p-0">
             <div id="profile"></div>
+            
                          <!-- Modal SAVE-->
                          <div
                          class="modal fade"
@@ -121,18 +122,27 @@
                               </div>
                               <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" id="change-EMAIL-no" data-bs-dismiss="modal">Нет</button>
-                                <button type="button" class="btn btn-primary" id="change-EMAIL-yes" data-dismiss="alert" >Да</button>
+                                <button type="button" class="btn btn-primary" id="change-EMAIL-yes" data-dismiss="alert" data-bs-target = "#successAlert" >Да</button>
                               </div>
                             </div>
-                          </div></div>
-                          <!-- WELL DONE ALERT -->
-                          <div class="alert alert-success alert-dismissible" role="alert">
-                            <h4 class="alert-heading">Ваш пароль успешно изменен!</h4>
-                            <p>Не забудьте при входе в Ваш личный кабинет ввести <strong>новый пароль</strong>. </p>
-                            <hr>
-                            <p class="mb-0">Если возникли проблемы с паролем, обратитесь к администратору. </p>
-                            <button type="button" class="btn-close ms-2" data-mdb-dismiss="alert" aria-label="Close"></button>
-                          </div>
+                          </div></div>         
+                           
+
+                          <div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center" style="margin-top: -450px; margin-left: -100px;">
+                            <div class="toast" id = "ToastsChange" role="alert" aria-live="assertive" aria-atomic="true" data-toggle="toast">
+                                <div class="toast-header">
+                                  <img src="/assets/icon/check.svg" alt="brand-logo" height="12" class="mr-1">
+                                  <strong class="mr-auto">Mathematical modeling</strong>
+                                  <small class="text-muted">just now</small>
+                              </div>
+                              <div class="toast-body" style = "background-color:#a8d2a0; font-size: 16px;">
+                                Вы поменяли пароль, перезойдите в свой личный кабинет с новым паролем!!! Для этого нажмите на кнопку "Выйти"!
+                              </div>
+                            </div>
+                        </div>
+
+                        
+                      
         </main>
 
         <footer class="footer">

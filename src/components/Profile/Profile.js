@@ -1,6 +1,6 @@
 /* eslint-disable class-methods-use-this */
 import './Profile.scss';
-import { Modal, Alert } from 'bootstrap';
+import { Modal, Toast } from 'bootstrap';
 import UI from '../UIclass/UIclass';
 import { auth, db, FirebaseDB } from '../../utils/FirebaseDB/FirebaseDB';
 import { saveDataYesBtn, changeAuthYesBtn, changeEMAILYesBtn, patternPassword } from './Profile.constants';
@@ -82,10 +82,8 @@ export default class Profile extends UI {
         auth.signOut();
         changeAuthModalPopUp.hide();
         localStorage.removeItem('uidMath');
-        const myAlert = document.getElementById('myAlert');
-        myAlert.addEventListener('closed.bs.alert', () => {
-          // do something…
-        });
+        const toast = new Toast(document.getElementById('ToastsChange'), {});
+        toast.show();
       });
     });
   }
@@ -149,7 +147,6 @@ export default class Profile extends UI {
 
     const arrInfo = [
       ['Имя пользователя', 'name', this.studentInfo.fullName],
-      ['Роль', 'role', this.studentInfo.type],
       ['Описание', 'description', this.studentInfo.description],
     ];
 
@@ -300,7 +297,6 @@ export default class Profile extends UI {
   getCommonUserInfo() {
     const commonInfo = {
       fullName: this.inputsInfo.find(({ dataset }) => dataset.type === 'name').value,
-      type: this.inputsInfo.find(({ dataset }) => dataset.type === 'role').value,
       description: this.inputsInfo.find(({ dataset }) => dataset.type === 'description').value,
     };
     return commonInfo;
