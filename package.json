@@ -16,6 +16,7 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage --colors",
     "dev": "webpack --mode development",
+    "prod": "webpack --mode production",
     "watch": "webpack --watch",
     "serve": "nodemon server.js",
     "startexp": "node server.js",
