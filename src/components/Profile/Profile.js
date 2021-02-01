@@ -1,6 +1,6 @@
 /* eslint-disable class-methods-use-this */
 import './Profile.scss';
-import { Modal } from 'bootstrap';
+import { Modal, Alert } from 'bootstrap';
 import UI from '../UIclass/UIclass';
 import { auth, db, FirebaseDB } from '../../utils/FirebaseDB/FirebaseDB';
 import { saveDataYesBtn, changeAuthYesBtn, changeEMAILYesBtn, patternPassword } from './Profile.constants';
@@ -82,7 +82,10 @@ export default class Profile extends UI {
         auth.signOut();
         changeAuthModalPopUp.hide();
         localStorage.removeItem('uidMath');
-        document.location.href = '/login.html';
+        const myAlert = document.getElementById('myAlert');
+        myAlert.addEventListener('closed.bs.alert', () => {
+          // do something…
+        });
       });
     });
   }
