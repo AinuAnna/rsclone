@@ -140,7 +140,6 @@ export default class TestsAdmin extends UI {
 
     // add titles in option
     this.listTitleLecture.forEach(({ id, subtitle }) => {
-      console.log(id, subtitle)
       subtitle.forEach((title) => {
         UI.renderElement(selectTitle, 'option', title, ['value', `${title}`], ['data-id', id]);
       });

@@ -25,3 +25,11 @@ to start application on prodaction mode write commands
 > npm run startexp
 
 and open application at port **4004** (http://localhost:4004)
+
+a little bit about tools, which we used:
+JavaScript, HTML, CSS, Node.js, Express.js framework, Webpack builder and Bootstrap template library.
+Development environment - Visual Studio Code. Database - Firebase.
+
+disadvantage of database - you should pay for some operations and functions.
+
+the rest of the development tools were easy to use and there were no problems with them.

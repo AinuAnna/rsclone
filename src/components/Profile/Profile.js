@@ -88,7 +88,7 @@ export default class Profile extends UI {
     });
   }
 
-  renderM() {
+  renderProfile() {
     this.rootNode.innerHTML = '';
     const wrapper = UI.renderElement(this.rootNode, 'div', null, ['class', 'student-profile__wrapper']);
     UI.renderElement(wrapper, 'h2', 'Мой профиль', ['class', 'student-profile__title']);
@@ -354,7 +354,7 @@ export default class Profile extends UI {
     this.userId = userId;
     this.firebaseDB.getData('Users').then((data) => {
       this.setData(data);
-      this.renderM();
+      this.renderProfile();
       this.renderAvatar();
     });
   }

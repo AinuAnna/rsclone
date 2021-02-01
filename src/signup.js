@@ -4,7 +4,7 @@ import LoginSignUp from './components/LoginSignUp/LoginSignUp';
 import Event from './events';
 
 const loginSignUp = new LoginSignUp(document.getElementById('login'));
-loginSignUp.renderM();
+loginSignUp.renderSignUp();
 
 const event = new Event();
 event.renderValidSignUp();

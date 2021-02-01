@@ -9,7 +9,7 @@ export default class LoginSignUp extends UI {
     this.rootNode = rootNode;
   }
 
-  renderM() {
+  renderSignUp() {
     const wrapper = UI.renderElement(this.rootNode, 'div', null, ['class', 'card shadow zindex-100 mb-0']);
     const container = UI.renderElement(wrapper, 'div', null, ['class', 'card-body px-md-5']);
     const containerMB = UI.renderElement(container, 'div', null, ['class', 'mb-5']);

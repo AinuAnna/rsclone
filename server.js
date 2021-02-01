@@ -1,12 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-console */
 
-// import path from 'path';
-// import express from 'express';
-// import Admin from './src/components/Admin/Admin';
-
-// const admin = new Admin(document.getElementById('container'));
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
@@ -42,11 +36,7 @@ app.get('/profile.html/', (req, res) => {
 app.get('/main/student/profile.html/', (req, res) => {
   res.render(path.resolve(dirname, 'dist', 'profile.html'));
 });
-// app.get('/main/student/results', (req, res) => {
-// res.render(path.resolve(dirname, 'dist', 'profile.html'));
-// res.send('/main/student/results/');
-// console.log(req);
-// });
+
 app.get('/main/admin/profile.html/', (req, res) => {
   res.render(path.resolve(dirname, 'dist', 'profile.html'));
 });

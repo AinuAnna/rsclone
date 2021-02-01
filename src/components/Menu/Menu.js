@@ -47,7 +47,6 @@ export default class Menu extends UI {
   }
 
   initRender() {
-    console.log(history.location.pathname);
     this.renderContent(history.location.pathname);
   }
 }

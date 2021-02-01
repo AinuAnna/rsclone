@@ -1,9 +1,7 @@
 const path = require('path');
 const CopyPlugin = require('copy-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const NodemonPlugin = require('nodemon-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const webpack = require('webpack');
 
 module.exports = {
   entry: {
@@ -34,8 +32,6 @@ module.exports = {
       watch: path.resolve('./src'),
       ext: 'html,js,njk,json,scss',
     }),
-    // new webpack.HotModuleReplacementPlugin(),
-    // new CleanWebpackPlugin(),
     new CopyPlugin({
       // Images
       patterns: [

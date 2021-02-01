@@ -16,7 +16,7 @@ export default class Teacher extends UI {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  renderM() {
+  renderGroup() {
     const wrapper = UI.renderElement(this.rootNode, 'div', null, ['class', 'group__wrapper']);
     const tableTitles = ['Отделение', 'Курс', 'Номер', 'Описание', 'Участники', 'Действия'];
     UI.renderElement(wrapper, 'h2', 'Группы', ['class', 'group__title']);
@@ -34,7 +34,7 @@ export default class Teacher extends UI {
       UI.renderElement(tr, 'td', description, ['class', 'description']);
       const participantsTR = UI.renderElement(tr, 'td', null, ['class', 'participants']);
       UI.renderElement(participantsTR, 'a', participants, ['class', 'participants']);
-      const svgButtonEdit = UI.renderElement(
+      UI.renderElement(
         tr,
         'a',
         `<svg width="22" height="23" viewBox="0 0 22 23" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -45,7 +45,7 @@ export default class Teacher extends UI {
         ['data-bs-target', '#editUserModal'],
         ['data-bs-userid', id]
       );
-      const svgButtonDelete = UI.renderElement(
+      UI.renderElement(
         tr,
         'a',
         `<svg width="21" height="23" viewBox="0 0 21 23" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -98,7 +98,7 @@ export default class Teacher extends UI {
     this.firebaseDB.getData('Groups').then((data) => {
       this.setData(data);
       this.rootNode.innerHTML = '';
-      this.renderM();
+      this.renderGroup();
     });
   }
 }

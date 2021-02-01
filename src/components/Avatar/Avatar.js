@@ -1,3 +1,4 @@
+/* eslint-disable prefer-destructuring */
 /* eslint-disable class-methods-use-this */
 import UI from '../UIclass/UIclass';
 import { FirebaseDB } from '../../utils/FirebaseDB/FirebaseDB';

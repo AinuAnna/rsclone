@@ -128,7 +128,7 @@ export default class Admin extends UI {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  renderM() {
+  renderAdminTable() {
     const wrapper = UI.renderElement(this.rootNode, 'div', null, ['class', 'users__wrapper']);
     const tableTitles = ['Аватар', 'ФИО', 'Роль', 'Описание', 'Действия'];
     UI.renderElement(wrapper, 'h2', 'Пользователи', ['class', 'users__title']);
@@ -155,7 +155,7 @@ export default class Admin extends UI {
       UI.renderElement(tr, 'td', fullName, ['class', 'name']);
       UI.renderElement(tr, 'td', type, ['class', 'type']);
       UI.renderElement(tr, 'td', description, ['class', 'description']);
-      const svgButtonEdit = UI.renderElement(
+      UI.renderElement(
         tr,
         'a',
         `<svg width="15" height="15" viewBox="0 0 22 23" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -167,7 +167,7 @@ export default class Admin extends UI {
         ['data-bs-userid', id],
         ['class', 'button-svg']
       );
-      const svgButtonDelete = UI.renderElement(
+      UI.renderElement(
         tr,
         'a',
         `<svg width="15" height="15" viewBox="0 0 21 23" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -181,7 +181,7 @@ export default class Admin extends UI {
       );
     });
     UI.renderElement(table, 'tbody');
-    const ButtonAddUser = UI.renderElement(
+    UI.renderElement(
       wrapper,
       'a',
       'Добавить пользователя',
@@ -208,7 +208,7 @@ export default class Admin extends UI {
     this.firebaseDB.getUsers().then((data) => {
       this.setData(data);
       this.rootNode.innerHTML = '';
-      this.renderM();
+      this.renderAdminTable();
     });
   }
 
