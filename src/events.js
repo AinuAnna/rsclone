@@ -159,7 +159,7 @@ export default class Event {
   focus() {
     const login = document.querySelector('#loginClick');
     login.addEventListener('click', () => {
-      document.getElementById('input-email').focus();
+      document.querySelector('#cardFocus').focus();
     });
   }
 
