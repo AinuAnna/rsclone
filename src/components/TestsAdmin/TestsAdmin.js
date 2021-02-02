@@ -396,15 +396,15 @@ export default class TestsAdmin extends UI {
 
   render() {
     this.mounted = true;
+    this.firebaseDB.getLecture().then((lectures) => {
+      this.setDataListTitle(lectures);
+    });
     this.firebaseDB.getTests().then((data) => {
       this.groupTests = data;
       const uniqueTestsCollections = [...new Map(data.map((item) => [item.title, item])).values()];
       this.setData(uniqueTestsCollections);
       this.rootNode.innerHTML = '';
       this.renderTestTitles();
-    });
-    this.firebaseDB.getLecture().then((lectures) => {
-      this.setDataListTitle(lectures);
     });
   }
 
