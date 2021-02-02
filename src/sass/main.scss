@@ -50,6 +50,9 @@ footer {
 .display-4 {
   color: #313a46;
   font-weight: 800;
+  @media (max-width: 768px) {
+    font-size: 32px !important;
+  }
 }
 .lead {
   padding-top: 1rem;
