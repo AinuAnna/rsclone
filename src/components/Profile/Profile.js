@@ -351,6 +351,12 @@ export default class Profile extends UI {
     });
   }
 
+  renderUserName() {
+    const username = document.querySelector('#userName');
+    const divUserName = UI.renderElement(username, 'span', ' 👽 ', ['class', 'student-profile__username']);
+    UI.renderElement(divUserName, 'span', this.studentInfo.fullName, ['class', 'student-profile__username']);
+  }
+
   setData(data) {
     this.studentInfo = data.find(({ id }) => id === this.userId);
   }
@@ -361,6 +367,7 @@ export default class Profile extends UI {
     this.firebaseDB.getData('Users').then((data) => {
       this.setData(data);
       this.renderProfile();
+      this.renderUserName();
       this.renderAvatar();
     });
   }
