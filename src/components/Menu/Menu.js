@@ -24,8 +24,16 @@ export default class Menu extends UI {
   renderMenu(role) {
     this.rootNode.innerHTML = '';
     const ul = UI.renderElement(this.rootNode, 'ul', null, ['class', `menu__${role}`]);
-    document.getElementById('menu-title').innerHTML = role;
+    const titleRole = document.getElementById('menu-title');
+    titleRole.innerHTML = role;
     const arr = arrayMENU[role].flat();
+    if (role === 'admin') {
+      titleRole.innerHTML = `Администратор`;
+    } else if (role === 'teacher') {
+      titleRole.innerHTML = `Преподаватель`;
+    } else if (role === 'student') {
+      titleRole.innerHTML = `Студент`;
+    }
     arr.forEach(({ title, hovered, path }) => {
       const classAdd = path === history.location.pathname ? 'sidebar-link_active' : '';
       const item = UI.renderElement(ul, 'li', title, ['class', `name ${classAdd}`]);

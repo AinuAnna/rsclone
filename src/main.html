@@ -239,6 +239,76 @@
               </div>
             </div>
             </div>
+
+             <!-- Modal DELETE GROUP-->
+             <div
+             class="modal fade"
+             id="deleteGroupModal"
+             data-bs-backdrop="static"
+             data-bs-keyboard="false"
+             tabindex="-1"
+             aria-labelledby="deleteGroupModalLabel"
+             aria-hidden="true"
+           >
+             <div class="modal-dialog">
+               <div class="modal-content">
+                 <div class="modal-header">
+                   <h5 class="modal-title" id="deleteGroupModalLabel">Удаление группы</h5>
+                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                 </div>
+                 <div class="modal-body">Вы действительно хотите удалить эту группу?</div>
+                 <div class="modal-footer">
+                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Нет</button>
+                   <button type="button" class="btn btn-primary" id="delete-group-yes">Да</button>
+                 </div>
+               </div>
+             </div></div>
+           
+              <!-- Modal EDIT GROUP-->
+            <div
+            class="modal fade"
+            id="editGroupModal"
+            data-bs-backdrop="static"
+            data-bs-keyboard="false"
+            tabindex="-1"
+            aria-labelledby="editGroupModalLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="editGroupModalLabel">Редактирование группы</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                  <div class="mb-3">
+                    <label for="exampleInputName" class="form-label">Цикловая комиссия</label>
+                    <input type="text" class="form-control" id="editInputName">
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputEmail" class="form-label">Курс</label>
+                    <input type="email" class="form-control" id="editInputEmail">
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputRole" class="form-label">Номер</label>
+                    <input type="text" class="form-control" id="editInputRole">
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputDescription" class="form-label">Описание</label>
+                    <input type="text" class="form-control" id="editInputDescription">
+                  </div>
+                  <div>Сохранить изменения?</div>
+                  </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Нет</button>
+                  <button type="button" class="btn btn-primary" id="edit-group-yes">Да</button>
+                </div>
+              </div>
+            </div>
+            </div>
+
+
               <!-- Modal EDIT-->
             <div
             class="modal fade"
