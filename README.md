@@ -40,3 +40,10 @@
 💔disadvantage of database - you should pay for some operations and functions.
 
 💖the rest of the development tools were easy to use and there were no problems with them.
+
+✅e-mail for cross-check(admin):
+
+- test.crosscheck@gmail.com
+- test123Tests
+
+📧for role student - signup with e-mail and password what you want
