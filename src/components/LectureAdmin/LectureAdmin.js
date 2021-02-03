@@ -166,7 +166,7 @@ export default class LectureAdmin extends UI {
       'class',
       'lecture-admin__items-add',
     ]);
-
+    UI.renderElement(documentAdd, 'p', '*только документы с расширением .docx', ['class', 'text-muted']);
     /* file path Input */
     UI.renderElement(
       documentAdd,

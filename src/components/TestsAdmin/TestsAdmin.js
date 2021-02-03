@@ -118,6 +118,10 @@ export default class TestsAdmin extends UI {
 
     // container with fields(title test, question, option)
     const titleAddTests = UI.renderElement(form, 'div', 'Добавление тестов:', ['class', 'tests-admin__title-add']);
+    UI.renderElement(titleAddTests, 'div', '*максимальное количество вопросов - 9, 1 вопрос - 1 балл', [
+      'class',
+      'text-muted',
+    ]);
 
     const titleAdd = UI.renderElement(titleAddTests, 'div', 'Введите название теста:', [
       'class',
