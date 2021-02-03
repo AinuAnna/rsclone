@@ -48,3 +48,10 @@
 🎞️demo version of the project
 
 [go to YouTube](https://www.youtube.com/watch?v=44PNdYB5JU0)
+
+✅e-mail for cross-check(admin):
+
+- test.crosscheck@gmail.com
+- test123Tests
+
+📧for role student - signup with e-mail and password what you want
