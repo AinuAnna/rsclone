@@ -1,0 +1,10 @@
+.sidebar-link_active a {
+  transition: all 0.6s ease;
+  border-left: 4px solid #f49344;
+}
+.sidebar-link_active .sidebar-item a:hover {
+  svg {
+    color: #f49344;
+  }
+  color: #f49344 !important;
+}

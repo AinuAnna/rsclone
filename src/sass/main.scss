@@ -1,0 +1,114 @@
+.logo {
+  .subtitle {
+    color: #98a6ad;
+    &:hover {
+      color: #f49344;
+    }
+  }
+}
+.container {
+  height: 100%;
+}
+.mb-3 {
+  margin: 3%;
+}
+footer {
+  padding: 1rem 0.875rem;
+  border-top: 1px solid #98a6ad;
+  li {
+    display: inline-block;
+    margin-right: 0.5rem;
+  }
+  .text-right {
+    text-align: right;
+  }
+  a {
+    color: #98a6ad;
+    text-decoration: none;
+
+    &:hover {
+      color: #f49344;
+    }
+  }
+  .footer__RS-logo {
+    width: 5rem;
+    height: 2rem;
+    padding: 2px;
+  }
+  .footer__RS-logo:hover {
+    opacity: 0.8;
+  }
+}
+.btn-primary {
+  display: block;
+  margin: 20px auto;
+  min-width: 200px;
+}
+.grey-text {
+  padding-left: 3rem;
+}
+.display-4 {
+  color: #313a46;
+  font-weight: 800;
+  @media (max-width: 768px) {
+    font-size: 32px !important;
+  }
+}
+.lead {
+  padding-top: 1rem;
+  color: #8391a2;
+}
+.btn-main-go {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16rem;
+  height: 2.5rem;
+}
+
+.header-1 {
+  height: 1000px;
+}
+
+.mycontent {
+  padding-top: 8rem;
+}
+
+.card {
+  .display-4 {
+    font-size: 24.5px;
+  }
+  h2 {
+    color: #f49344;
+  }
+}
+.card-body {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+.form-control-label {
+  color: #8391a2;
+}
+.login {
+  &__wrapper {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+}
+.font-weight-bold {
+  margin-left: 6px;
+}
+.error {
+  color: brown;
+}
+.errorServ {
+  color: brown;
+  font-size: 15px;
+  padding-bottom: 20px;
+}
+.card-hover:hover {
+  -webkit-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  transform: scale(1.1);
+  transition: 0.5s ease;
+}
