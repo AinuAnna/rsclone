@@ -1,0 +1,61 @@
+.tests-admin {
+  &__wrapper {
+    padding: 16px 0 64px 32px;
+    background-color: #fff;
+  }
+  &__title {
+    color: #6c757d;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 49px;
+    text-align: left;
+    margin-bottom: 26px;
+  }
+  &__container {
+    @media (max-width: 600px) {
+      flex-wrap: wrap;
+      flex-direction: column-reverse;
+      align-items: start;
+    }
+    &__button {
+      max-width: 203px;
+      padding: 10px 22px;
+    }
+  }
+  &__btn-go {
+    display: block;
+    margin: 20px auto;
+    min-width: 200px;
+    min-height: 30px;
+  }
+  &__items-add {
+    margin: 20px;
+  }
+  &__items-add-option {
+    margin-bottom: 20px;
+    margin-left: 40px;
+  }
+  &__divInputs {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  &__add-option {
+    margin-top: 20px;
+  }
+  &__btn-del-test,
+  &__svg-button-del {
+    cursor: pointer;
+    padding-left: 10px;
+    &:hover {
+      opacity: 0.6;
+    }
+  }
+}
+a:not([href]):not([class]),
+a:not([href]):not([class]) {
+  margin-left: 10px;
+  &:hover {
+    opacity: 0.6;
+  }
+}

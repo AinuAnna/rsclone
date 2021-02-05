@@ -1,0 +1,23 @@
+{
+  "extends": ["airbnb/base", "eslint-config-prettier"],
+  "plugins": ["eslint-plugin-prettier"],
+  "rules": {
+    "no-console": 2,
+    "no-plusplus": "off",
+    "prettier/prettier": [
+      "error",
+      {
+        "trailingComma": "es5",
+        "singleQuote": true,
+        "printWidth": 120,
+        "tabWidth": 2,
+        "endOfLine": "auto"
+      }
+    ]
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "jest": true
+  }
+}
